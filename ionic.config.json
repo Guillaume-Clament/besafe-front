@@ -1,0 +1,7 @@
+{
+  "name": "beSafe",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

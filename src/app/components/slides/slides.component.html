@@ -1,0 +1,42 @@
+<ion-content>
+  <div class="onboard-main">
+    <!-- gradient -->
+    <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button color="primary" (click)="goNext()">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <div class="onboard-top">
+      <ion-toolbar transparent>
+        <ion-button
+          slot="start"
+          color="primary"
+          (click)="goBack()"
+          fill="clear"
+        >
+          <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+        </ion-button>
+        <ion-button slot="end" color="dark" (click)="skip()" fill="clear">
+          Skip
+        </ion-button>
+      </ion-toolbar>
+    </div>
+    <div class="onboard-bot">
+      <ion-slides pager="true" #mainSlides>
+        <ion-slide *ngFor="let slide of onboardSlides">
+          <div class="onb-card">
+            <div class="onb-img">
+              <img src="../../../assets/{{ slide.img }}.svg" alt="" />
+            </div>
+            <div class="onb-desc ion-text-center">
+              <h4 class="ion-text-capitalize ion-no-margin">
+                {{ slide.title }}
+              </h4>
+              <p class="ion-no-margin">{{ slide.desc }}</p>
+            </div>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+</ion-content>
