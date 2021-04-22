@@ -74,6 +74,22 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** facebook **/
+  --ion-color-facebook: #3b5999;
+  --ion-color-facebook-rgb: 59, 89, 153;
+  --ion-color-facebook-contrast: #ffffff;
+  --ion-color-facebook-contrast-rgb: 255, 255, 255;
+  --ion-color-facebook-shade: #324b81;
+  --ion-color-facebook-tint: #476bb8;
+
+  /** google **/
+  --ion-color-google: #cd201f;
+  --ion-color-google-rgb: 245, 61, 61;
+  --ion-color-google-contrast: #ffffff;
+  --ion-color-google-contrast-rgb: 255, 255, 255;
+  --ion-color-google-shade: #cd201f;
+  --ion-color-google-tint: #cd201f;
 }
 
 /*@media (prefers-color-scheme: dark) {*/
@@ -234,6 +250,23 @@ body[color-theme="dark"] {
 }
 /*}*/
 
+.ion-color-facebook {
+  --ion-color-base: var(--ion-color-facebook) !important;
+  --ion-color-base-rgb: var(--ion-color-facebook-rgb) !important;
+  --ion-color-contrast: var(--ion-color-facebook-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-facebook-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-facebook-shade) !important;
+  --ion-color-tint: var(--ion-color-facebook-tint) !important;
+}
+.ion-color-google {
+  --ion-color-base: var(--ion-color-google) !important;
+  --ion-color-base-rgb: var(--ion-color-google-rgb) !important;
+  --ion-color-contrast: var(--ion-color-google-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-google-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-google-shade) !important;
+  --ion-color-tint: var(--ion-color-google-tint) !important;
+}
+
 .center {
   padding-top: 26px;
   text-align: center;
@@ -241,8 +274,8 @@ body[color-theme="dark"] {
 
 .gradient {
   // background: linear-gradient(to top, #ffffff 0%, #99ccff 100%);
-  height: 100%;
-  background: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
+  height: 50%;
+  background: linear-gradient(0deg, #abdcff 10%, #22AFF1 100%);
 }
 
 .onboard-main {
@@ -250,13 +283,15 @@ body[color-theme="dark"] {
     .swiper-pagination.swiper-pagination-bullets {
       left: auto !important;
       right: auto;
-      text-align: left !important;
+      text-align: center !important;
+      top: 85%;
     }
     .swiper-pagination-bullets {
       opacity: 1;
     }
   }
 }
+
 
 .ios {
   ion-slides {

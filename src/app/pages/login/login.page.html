@@ -1,9 +1,49 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="logo">
+    <!--<ion-icon color="light" name="shield-checkmark-outline"></ion-icon>-->
+    <!--<img src="../../assets/logo_GrisBleu.png">-->
+    <img src="../../assets/logo_BleuFonce.png">
+  </div>
+<div class="padding">
+  <ion-item >
+    <ion-label color="dark">Email</ion-label>
+    <ion-input color="medium" type="mail" placeholder="Adresse email"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label color="dark">Mot de passe</ion-label>
+    <ion-input color="medium" type="password" placeholder="Mot de passe"></ion-input>
+  </ion-item>
 
+  <ion-item lines="none">
+    <ion-button color="dark" slot="end" fill="clear">J'ai oublié mon mot de passe</ion-button>
+  </ion-item>
+  <br>
+<div class="connexion">
+  <ion-button expand="block" shape="round">Me connecter</ion-button>
+</div>
+<br>
+<!--<ion-button color="tertiary" expand="block" shape="round">Inscription</ion-button>-->
+
+<div class="connectezvous">
+<ion-item lines="none">
+  <ion-label color="dark" text-center>Ou connectez-vous avec</ion-label>
+</ion-item>
+</div>
+  <div class="flex">
+    <ion-button color="dark" shape="round" fill="outline">
+      <ion-icon slot="start" name="logo-facebook"></ion-icon>
+      Facebook
+    </ion-button>
+    <ion-button color="dark" shape="round" fill="outline">
+      <ion-icon slot="start" name="logo-google"></ion-icon>
+      Google
+    </ion-button>
+  </div>
+  <br>
+  <ion-item lines="none">
+    <ion-button color="dark" fill="clear">Je n'ai pas de compte</ion-button>
+  </ion-item>
+
+</div>
 </ion-content>
