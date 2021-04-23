@@ -24,3 +24,21 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ @font-face {
+    font-family: 'SF UI Display Light';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./assets/fonts/sf-ui-display-light-58646b33e0551.woff');
+}
+
+@font-face {
+    font-family: 'SF UI Display Semibold';
+    font-style: normal;
+    font-weight: bold;
+    src: url('./assets/fonts/sf-ui-display-semibold-58646eddcae92.woff');
+}
+
+* {
+    font-family: 'SF UI Display Light';
+}
