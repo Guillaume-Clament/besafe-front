@@ -11,11 +11,14 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomePageModule),
-  },  {
-    path: 'onboarding',
-    loadChildren: () => import('./pages/onboarding/onboarding.module').then( m => m.OnboardingPageModule)
   },
-
+  {
+    path: 'onboarding',
+    loadChildren: () =>
+      import('./pages/onboarding/onboarding.module').then(
+        (m) => m.OnboardingPageModule
+      ),
+  },
 ];
 @NgModule({
   imports: [
