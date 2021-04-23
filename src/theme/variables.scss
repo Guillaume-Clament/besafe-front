@@ -75,21 +75,90 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  /** facebook **/
-  --ion-color-facebook: #3b5999;
-  --ion-color-facebook-rgb: 59, 89, 153;
-  --ion-color-facebook-contrast: #ffffff;
-  --ion-color-facebook-contrast-rgb: 255, 255, 255;
-  --ion-color-facebook-shade: #324b81;
-  --ion-color-facebook-tint: #476bb8;
+  /** Dark blue **/
+  --ion-color-darkblue: #102754;
+  --ion-color-darkblue-rgb: 16, 39, 84;
+  --ion-color-darkblue-contrast: #ffffff;
+  --ion-color-darkblue-contrast-rgb: 255, 255, 255;
+  --ion-color-darkblue-shade: #0e224a;
+  --ion-color-darkblue-tint: #283d65;
 
-  /** google **/
-  --ion-color-google: #cd201f;
-  --ion-color-google-rgb: 245, 61, 61;
-  --ion-color-google-contrast: #ffffff;
-  --ion-color-google-contrast-rgb: 255, 255, 255;
-  --ion-color-google-shade: #cd201f;
-  --ion-color-google-tint: #cd201f;
+  /** Purple **/
+  --ion-color-purple: #453cc9;
+  --ion-color-purple-rgb: 69, 60, 201;
+  --ion-color-purple-contrast: #ffffff;
+  --ion-color-purple-contrast-rgb: 255, 255, 255;
+  --ion-color-purple-shade: #3d35b1;
+  --ion-color-purple-tint: #5850ce;
+
+  /** Light blue **/
+  --ion-color-lightblue: #22aff1;
+  --ion-color-lightblue-rgb: 34, 175, 241;
+  --ion-color-lightblue-contrast: #000000;
+  --ion-color-lightblue-contrast-rgb: 0, 0, 0;
+  --ion-color-lightblue-shade: #1e9ad4;
+  --ion-color-lightblue-tint: #38b7f2;
+
+  /** Pale blue **/
+  --ion-color-paleblue: #d4e8ff;
+  --ion-color-paleblue-rgb: 212, 232, 255;
+  --ion-color-paleblue-contrast: #000000;
+  --ion-color-paleblue-contrast-rgb: 0, 0, 0;
+  --ion-color-paleblue-shade: #bbcce0;
+  --ion-color-paleblue-tint: #d8eaff;
+
+  /** White **/
+  --ion-color-white: #ffffff;
+  --ion-color-white-rgb: 255, 255, 255;
+  --ion-color-white-contrast: #000000;
+  --ion-color-white-contrast-rgb: 0, 0, 0;
+  --ion-color-white-shade: #e0e0e0;
+  --ion-color-white-tint: #ffffff;
+}
+
+.ion-color-darkblue {
+  --ion-color-base: var(--ion-color-darkblue);
+  --ion-color-base-rgb: var(--ion-color-darkblue-rgb);
+  --ion-color-contrast: var(--ion-color-darkblue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-darkblue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-darkblue-shade);
+  --ion-color-tint: var(--ion-color-darkblue-tint);
+}
+
+.ion-color-purple {
+  --ion-color-base: var(--ion-color-purple);
+  --ion-color-base-rgb: var(--ion-color-purple-rgb);
+  --ion-color-contrast: var(--ion-color-purple-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-purple-contrast-rgb);
+  --ion-color-shade: var(--ion-color-purple-shade);
+  --ion-color-tint: var(--ion-color-purple-tint);
+}
+
+.ion-color-lightblue {
+  --ion-color-base: var(--ion-color-lightblue);
+  --ion-color-base-rgb: var(--ion-color-lightblue-rgb);
+  --ion-color-contrast: var(--ion-color-lightblue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-lightblue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-lightblue-shade);
+  --ion-color-tint: var(--ion-color-lightblue-tint);
+}
+
+.ion-color-paleblue {
+  --ion-color-base: var(--ion-color-paleblue);
+  --ion-color-base-rgb: var(--ion-color-paleblue-rgb);
+  --ion-color-contrast: var(--ion-color-paleblue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-paleblue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-paleblue-shade);
+  --ion-color-tint: var(--ion-color-paleblue-tint);
+}
+
+.ion-color-white {
+  --ion-color-base: var(--ion-color-white);
+  --ion-color-base-rgb: var(--ion-color-white-rgb);
+  --ion-color-contrast: var(--ion-color-white-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-white-contrast-rgb);
+  --ion-color-shade: var(--ion-color-white-shade);
+  --ion-color-tint: var(--ion-color-white-tint);
 }
 
 /*@media (prefers-color-scheme: dark) {*/
@@ -275,7 +344,7 @@ body[color-theme="dark"] {
 .gradient {
   // background: linear-gradient(to top, #ffffff 0%, #99ccff 100%);
   height: 50%;
-  background: linear-gradient(0deg, #abdcff 10%, #22AFF1 100%);
+  background: linear-gradient(0deg, #abdcff 10%, #22aff1 100%);
 }
 
 .onboard-main {
@@ -297,3 +366,20 @@ body[color-theme="dark"] {
     padding-bottom: 26% !important;
   }
 }
+<<<<<<< HEAD
+=======
+
+@font-face {
+  font-family: "SF UI Display Light";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/sf-ui-display-light-58646b33e0551.woff");
+}
+
+@font-face {
+  font-family: "SF UI Display Semibold";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../assets/fonts/sf-ui-display-semibold-58646eddcae92.woff");
+}
+>>>>>>> 1396c0e7fe60bc46c7897daee8fb9e058737976a
