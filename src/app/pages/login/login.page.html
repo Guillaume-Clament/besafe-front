@@ -6,20 +6,22 @@
   </div>
   <div class="padding">
     <ion-item>
-      <ion-label color="dark" position="floating">Adresse email</ion-label>
-      <ion-input></ion-input>
+      <ion-label color="darkblue" position="floating">Adresse email</ion-label>
+      <ion-input color="medium"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label color="dark" position="floating">Mot de passe</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-label color="darkblue" position="floating">Mot de passe</ion-label>
+      <ion-input color="medium" type="password"></ion-input>
     </ion-item>
 
+    <div class="underline">
     <ion-item lines="none">
-      <ion-button color="dark" slot="end" fill="clear"
+      <ion-button color="dark" slot="end" fill="clear" color="darkblue"
         >J'ai oublié mon mot de passe</ion-button
       >
     </ion-item>
+    </div>
     <br />
     <div class="connexion">
       <ion-button expand="block" shape="round" color="darkblue"
@@ -29,24 +31,26 @@
     <br />
     <!--<ion-button color="tertiary" expand="block" shape="round">Inscription</ion-button>-->
 
-    <div class="connectezvous">
+    <div>
       <ion-item lines="none">
-        <ion-label color="dark" text-center>Ou connectez-vous avec</ion-label>
+        <ion-label class="connectezvous" color="dark" text-center>Ou connectez-vous avec</ion-label>
       </ion-item>
     </div>
     <div class="flex">
-      <ion-button color="dark" shape="round" fill="outline">
+      <ion-button color="darkblue" shape="round" fill="outline">
         <ion-icon slot="start" name="logo-facebook"></ion-icon>
         Facebook
       </ion-button>
-      <ion-button color="dark" shape="round" fill="outline">
+      <ion-button color="darkblue" shape="round" fill="outline">
         <ion-icon slot="start" name="logo-google"></ion-icon>
         Google
       </ion-button>
     </div>
     <br />
-    <ion-item lines="none">
-      <ion-button color="dark" fill="clear">Je n'ai pas de compte</ion-button>
-    </ion-item>
+    <div class="underline">
+      <ion-button expand="block" shape="round" fill="clear" color="darkblue"
+        >Je n'ai pas de compte</ion-button
+      >
+    </div>
   </div>
 </ion-content>

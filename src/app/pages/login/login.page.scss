@@ -19,7 +19,7 @@ ion-item {
 
 .logo {
   position: relative;
-  height: 40%;
+  height: 30%;
 }
 
 .logo ion-icon {
@@ -31,7 +31,7 @@ ion-item {
 }
 
 .logo img {
-  height: 70%;
+  height: 65%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -46,10 +46,19 @@ ion-button {
 ion-label {
   --color: white;
   font-family: SF UI Display Light !important;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 ion-input {
   font-family: SF UI Display Light !important;
   font-size: 0.9em;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.connectezvous {
+  display: flex;
+  justify-content: center;
 }
