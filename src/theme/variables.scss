@@ -292,9 +292,22 @@ body[color-theme="dark"] {
   }
 }
 
-
 .ios {
   ion-slides {
     padding-bottom: 26% !important;
   }
+}
+
+@font-face {
+  font-family: 'SF UI Display Light';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/sf-ui-display-light-58646b33e0551.woff');
+}
+
+@font-face {
+  font-family: 'SF UI Display Semibold';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/sf-ui-display-semibold-58646eddcae92.woff');
 }

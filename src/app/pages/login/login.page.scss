@@ -20,7 +20,7 @@ ion-item {
 
 .logo {
     position: relative;
-    height: 250px;
+    height: 40%;
 }
 
 .logo ion-icon{
@@ -42,8 +42,17 @@ ion-item {
 ion-button{
     --color: white;
     --background: #102754;
+    font-family:SF UI Display Light !important;
+    font-size:0.8em;
 }
 
 ion-label{
     --color: white;
+    font-family:SF UI Display Light !important;
+    font-size:0.9em;
+}
+ 
+ion-input {
+    font-family:SF UI Display Light !important;
+    font-size:0.9em;
 }
