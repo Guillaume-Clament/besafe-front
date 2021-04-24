@@ -1,0 +1,35 @@
+ion-avatar img {
+  width: 200% !important;
+  height: 200% !important;
+  max-width: 10000px !important; //any size
+  max-height: 10000px !important; //any size
+  border-radius: 20px;
+  margin-top: 27%;
+}
+
+ion-card {
+  height: 25%;
+  max-height: 10000px !important;
+  border-radius: 25px;
+  --background: darkBlue;
+}
+
+.padding {
+  padding: 2%;
+  padding-top: 7%;
+  height: 100%;
+}
+
+.cardText {
+  margin-left: 40%;
+  ion-card-title {
+    position: absolute;
+    margin-top: -17px;
+    color: white;
+  }
+  ion-card-content {
+    position: absolute;
+    margin-top: -17px;
+    color: white;
+  }
+}
