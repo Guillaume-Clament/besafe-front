@@ -1,0 +1,48 @@
+@-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+.container {
+  -webkit-animation: scale-up-center 1.5s cubic-bezier(0.39, 0.575, 0.565, 1)
+    both;
+  animation: scale-up-center 1.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  img {
+    height: 100px;
+    margin-top: 60%;
+  }
+}
+
+ion-content {
+  /**--ion-background-color: linear-gradient(#5a9ae4, #ffffff);**/
+  --ion-background-color: linear-gradient(180deg, #51baeba6, #ffffff);
+  /*background: linear-gradient(0deg, #abdcff 10%, #22AFF1 100%);*/
+}
+
+.logo {
+  position: relative;
+  height: 30%;
+}
+
+.logo img {
+  height: 65%;
+  position: absolute;
+  //   top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

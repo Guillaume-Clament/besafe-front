@@ -7,9 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./splash.page.scss'],
 })
 export class SplashPage implements OnInit {
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.router.navigate(['/welcome']);
+  constructor(private router: Router) {
+    setTimeout(() => {
+      this.router.navigate(['welcome']);
+    }, 2000);
   }
+
+  ngOnInit() {}
 }
