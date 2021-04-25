@@ -8,20 +8,20 @@ ion-avatar img {
 }
 
 ion-card {
-  height: 25%;
+  height: 23%;
   max-height: 10000px !important;
   border-radius: 25px;
-  --background: darkBlue;
+  // --background: darkBlue;
 }
 
 .padding {
-  padding: 2%;
+  padding: 4%;
   padding-top: 7%;
   height: 100%;
 }
 
 .cardText {
-  margin-left: 40%;
+  margin-left: 140px;
   ion-card-title {
     position: absolute;
     margin-top: -17px;
@@ -32,4 +32,23 @@ ion-card {
     margin-top: -17px;
     color: white;
   }
+}
+
+ion-button {
+  font-family: SF UI Display Light !important;
+  font-size: 0.8em;
+  padding-left: 15px;
+  padding-right: 15px;
+  --border-radius: 10px;
+}
+
+ion-label {
+  --color: white;
+  font-family: SF UI Display Light !important;
+  font-size: 0.8em;
+}
+
+ion-input {
+  font-family: SF UI Display Light !important;
+  font-size: 0.9em;
 }
