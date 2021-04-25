@@ -9,7 +9,7 @@ ion-avatar img {
 
 ion-card {
   height: 23%;
-  max-height: 10000px !important;
+  max-height: 1000px !important;
   border-radius: 25px;
   // --background: darkBlue;
 }
@@ -51,4 +51,11 @@ ion-label {
 ion-input {
   font-family: SF UI Display Light !important;
   font-size: 0.9em;
+}
+
+.details {
+  ion-button {
+    margin-bottom: 10px;
+    --border-radius: 50px;
+  }
 }

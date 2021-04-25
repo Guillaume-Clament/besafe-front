@@ -48,5 +48,53 @@
         <ion-card-content>@arady</ion-card-content>
       </div>
     </ion-card>
+    <div class="reglages">
+      <ion-label
+        color="dark"
+        style="font-size: 0.9em !important; font-weight: bolder !important"
+        >Réglages</ion-label
+      >
+      <ion-list>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="mic"></ion-icon>
+          <ion-label> Accès au microphone </ion-label>
+          <ion-toggle
+            color="lightblue"
+            (ionChange)="micToggle($event)"
+            id="micToggle"
+            slot="end"
+          ></ion-toggle>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          <ion-label> Accès au microphone </ion-label>
+          <ion-toggle
+            color="lightblue"
+            (ionChange)="camToggle($event)"
+            id="camToggle"
+            slot="end"
+          ></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </div>
+    <ion-card color="grey">
+      <ion-card-header>
+        <ion-card-subtitle>Mon domicile</ion-card-subtitle>
+        <div class="cardText">
+          <ion-card-title>Aly RADY</ion-card-title>
+        </div>
+      </ion-card-header>
+      <div class="cardText">
+        <ion-card-content>@arady</ion-card-content>
+      </div>
+    </ion-card>
+    <div class="details">
+      <ion-button expand="block" shape="round" color="darkblue" fill="outline"
+        >Mes raccourcis</ion-button
+      >
+      <ion-button expand="block" shape="round" color="darkblue" fill="outline"
+        >Demander infos compte</ion-button
+      >
+    </div>
   </div>
 </ion-content>
