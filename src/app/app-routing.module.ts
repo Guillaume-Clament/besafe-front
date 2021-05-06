@@ -19,6 +19,13 @@ const routes: Routes = [
         (m) => m.OnboardingPageModule
       ),
   },
+  {
+    path: 'carte',
+    loadChildren: () =>
+      import('./pages/carte/carte.module').then(
+        (m) => m.CartePageModule
+      ),
+  },
 ];
 @NgModule({
   imports: [
