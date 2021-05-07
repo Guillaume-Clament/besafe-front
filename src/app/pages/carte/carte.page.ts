@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx'
+import { ModalController } from '@ionic/angular';
+import { ItineraireModalPageModule } from 'src/app/itineraire-modal/itineraire-modal.module';
+import { ItineraireModalPage } from 'src/app/itineraire-modal/itineraire-modal.page';
 
 declare var google: any;
 @Component({
@@ -11,10 +14,18 @@ export class CartePage {
   map:any;
 
   constructor(
-    private geo: Geolocation
+    private geo: Geolocation, 
+    private modalCtrl: ModalController
   ) { 
   }
 
+  async showModal(){
+    const modal = await this.modalCtrl.create({
+      component: ItineraireModalPage
+    })
+    await modal.present();
+  }
+  
   ionViewDidEnter(){
     this.geo.getCurrentPosition().then((res) => {
       this.map = new google.maps.Map(document.getElementById("map"),{
