@@ -2,15 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DrawerComponent } from './drawer/drawer.component';
 import { IonicModule } from '@ionic/angular';
-import { MenuComponent } from './menu/menu.component';
-
 
 @NgModule({
-  declarations: [DrawerComponent, MenuComponent],
+  declarations: [DrawerComponent],
   imports: [
     CommonModule,
     IonicModule
   ],
-  exports: [DrawerComponent, MenuComponent]
+  exports: [DrawerComponent]
 })
 export class SharedComponentsModule { }

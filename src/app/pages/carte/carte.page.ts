@@ -85,7 +85,7 @@ export class CartePage {
     this.geo.getCurrentPosition().then((res) => {
       this.map = new google.maps.Map(document.getElementById("map"),{
         center : { lat: res.coords.latitude, lng: res.coords.longitude },
-        zoom: 18,
+        zoom: 17,
       });
 
       var marker = new google.maps.Marker({
