@@ -1,16 +1,21 @@
-
-<ion-content [fullscreen]="true">
-
-  <div id="map" style="height: 100%;"></div>
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="showModal()">
-      <ion-icon name="search-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-</ion-content>
-
-<ion-footer>
-  Menu
-</ion-footer>
+<ion-app>
+  <ion-content [fullscreen]="true" scrollY="false">
+  
+    <div id="map" style="height: 100%;"></div>
+  
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="showModal()">
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+    <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click)="drawer.toggleDrawer()"></div>
+    <ion-button (click)="drawer.toggleDrawer()" expand="full"></ion-button>
+    <app-drawer (openStateChanged)="toggleBackdrop($event)" #drawer></app-drawer>
+  
+  </ion-content>
+  
+  <ion-footer style="height: 10%">
+    <app-menu></app-menu>
+  </ion-footer>
+</ion-app>

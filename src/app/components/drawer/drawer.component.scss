@@ -1,0 +1,41 @@
+.drawer{
+    position: absolute;
+    box-shadow: rgba(0,0,0,0.12) 0px 4px 8px;
+    width: 100%;
+    border-radius: 20px;
+    bottom: calc(-76vh +  env(safe-area-inset-bottom));
+    height: 83vh;
+    z-index: 11;
+    background: #ffff;
+}
+
+.drawer-pull{
+    background: #cccc;
+    height: 15px;
+    width: 60px;
+    border-radius: 2px;
+}
+
+.ion-icon{
+    font-size: 45px;
+}
+
+.btn-micro{
+    border-radius: 100%;
+    height: 30px;
+}
+
+.btn-video{
+    border-radius: 100%;
+    height: 30px;
+}
+
+.btn-appel{
+    border-radius: 100%;
+    height: 30px;
+}
+
+.btn-alarme{
+    border-radius: 100%;
+    height: 30px;
+}

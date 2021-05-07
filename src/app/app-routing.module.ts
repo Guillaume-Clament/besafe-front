@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HomePageModule } from './home/home.module';
 
 const routes: Routes = [
   {
@@ -25,10 +26,11 @@ const routes: Routes = [
       import('./pages/carte/carte.module').then(
         (m) => m.CartePageModule
       ),
-  },  {
+  },
+  {
     path: 'itineraire-modal',
     loadChildren: () => import('./itineraire-modal/itineraire-modal.module').then( m => m.ItineraireModalPageModule)
-  },
+  }
 
 ];
 @NgModule({

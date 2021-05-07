@@ -8,6 +8,7 @@ import { CartePageRoutingModule } from './carte-routing.module';
 
 import { CartePage } from './carte.page';
 import { ItineraireModalPageModule } from 'src/app/itineraire-modal/itineraire-modal.module';
+import { SharedComponentsModule } from 'src/app/components/shared-components.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ItineraireModalPageModule } from 'src/app/itineraire-modal/itineraire-m
     FormsModule,
     IonicModule,
     CartePageRoutingModule,
-    ItineraireModalPageModule
+    ItineraireModalPageModule,
+    SharedComponentsModule
   ],
   declarations: [CartePage]
 })
