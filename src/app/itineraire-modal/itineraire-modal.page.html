@@ -10,7 +10,7 @@
 
 <ion-content>  
   <ion-toolbar>
-    <ion-searchbar (ionChange)="search($event)" [value]="selectedAdress"></ion-searchbar> 
+    <ion-searchbar placeholder="Rechercher une destination" (ionChange)="search($event)" [value]="selectedAdress"></ion-searchbar> 
   </ion-toolbar>
   <div>
     <ion-list lines="none" *ngIf="addresses.length > 0">
@@ -20,4 +20,6 @@
       </ion-item>
     </ion-list>
   </div>
+
+  <ion-button class="valider-itineraire" color="success" expand="block" shape="round">Valider</ion-button>
 </ion-content>
