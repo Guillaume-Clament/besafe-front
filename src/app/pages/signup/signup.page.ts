@@ -2,6 +2,7 @@ import { Component, ContentChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonInput, PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,14 +17,27 @@ export class SignupPage implements OnInit {
   constructor(
     private pickerCtrl: PickerController,
     private router: Router,
-    private alerteCtrl: AlertController
+    private alerteCtrl: AlertController,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
   }
 
-  signUp(email, password){
-    
+  async signUp(form):Promise<void>{
+    this.authService.signUpUser(form.value.email, form.value.password)
+    .then(
+      () => {
+        this.router.navigateByUrl('carte');
+      },
+      async error => {
+        const alert = await this.alerteCtrl.create({
+          message: error.message,
+          buttons: [{text:'ok', role:'cancel'}],
+        });
+        await alert.present();
+      }
+    );
   }
 
   togglePassword(): void{
