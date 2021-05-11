@@ -5,48 +5,46 @@
     <img src="../../assets/logo_BleuFonce.png" />
   </div>
   <div class="padding">
-    <ion-item>
-      <ion-label color="darkblue" position="floating">Adresse email</ion-label>
-      <ion-input color="medium"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="darkblue" position="floating">Mot de passe</ion-label>
-      <ion-input color="medium" type="password"></ion-input>
-    </ion-item>
-
-    <div class="underline">
-    <ion-item lines="none">
-      <ion-button color="dark" slot="end" fill="clear" color="darkblue"
-        >J'ai oublié mon mot de passe</ion-button
-      >
-    </ion-item>
-    </div>
-    <br />
-    <div class="connexion">
-      <ion-button expand="block" shape="round" color="darkblue"
-        >Se connecter</ion-button
-      >
-    </div>
-    <br />
-    <!--<ion-button color="tertiary" expand="block" shape="round">Inscription</ion-button>-->
-
-    <div>
-      <ion-item lines="none">
-        <ion-label class="connectezvous" color="dark" text-center>Ou connectez-vous avec</ion-label>
+    <form #form="ngForm" (ngSubmit)="login(form)">
+      <ion-item>
+        <ion-label color="darkblue" position="floating">Adresse email</ion-label>
+        <ion-input name="email" type="text" color="medium" ngModel required></ion-input>
       </ion-item>
-    </div>
-    <div class="flex">
-      <ion-button color="darkblue" shape="round" fill="outline">
-        <ion-icon slot="start" name="logo-facebook"></ion-icon>
-        Facebook
-      </ion-button>
-      <ion-button color="darkblue" shape="round" fill="outline">
-        <ion-icon slot="start" name="logo-google"></ion-icon>
-        Google
-      </ion-button>
-    </div>
-    <br />
+      <ion-item>
+        <ion-label color="darkblue" position="floating">Mot de passe</ion-label>
+        <ion-input name="password" ngModel required color="medium" type="password"></ion-input>
+      </ion-item>
+    </form>
+      
+      <div class="underline">
+      <ion-item lines="none">
+        <ion-button color="dark" slot="end" fill="clear" color="darkblue"
+          >J'ai oublié mon mot de passe</ion-button
+        >
+      </ion-item>
+      </div>
+      <br />
+      <div class="connexion">
+        <ion-button expand="block" shape="round" color="darkblue" type="submit" [disabled]="form.invalid" (click)="login(form)">Se connecter</ion-button>
+      </div>
+      <br />
+
+      <div>
+        <ion-item lines="none">
+          <ion-label class="connectezvous" color="dark" text-center>Ou connectez-vous avec</ion-label>
+        </ion-item>
+      </div>
+      <div class="flex">
+        <ion-button color="darkblue" shape="round" fill="outline">
+          <ion-icon slot="start" name="logo-facebook"></ion-icon>
+          Facebook
+        </ion-button>
+        <ion-button color="darkblue" shape="round" fill="outline">
+          <ion-icon slot="start" name="logo-google"></ion-icon>
+          Google
+        </ion-button>
+      </div>
+      <br />
     <div class="underline">
       <ion-button expand="block" shape="round" fill="clear" color="darkblue"
         >Je n'ai pas de compte</ion-button

@@ -28,7 +28,7 @@ export class SignupPage implements OnInit {
     this.authService.signUpUser(form.value.email, form.value.password)
     .then(
       () => {
-        this.router.navigateByUrl('carte');
+        this.router.navigateByUrl('home/carte');
       },
       async error => {
         const alert = await this.alerteCtrl.create({
