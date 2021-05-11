@@ -10,6 +10,14 @@
 
 <ion-content>  
   <ion-toolbar>
-    <ion-searchbar></ion-searchbar> 
+    <ion-searchbar (ionChange)="search($event)" [value]="selectedAdress"></ion-searchbar> 
   </ion-toolbar>
+  <div>
+    <ion-list lines="none" *ngIf="addresses.length > 0">
+      <ion-item button *ngFor="let address of addresses" (click)="onSelect(address)">
+        <ion-icon name = "pin"></ion-icon>
+        {{address}}
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

@@ -1,5 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
+import { Feature, MapboxService } from '../services/mapbox.service';
+
 
 @Component({
   selector: 'app-itineraire-modal',
@@ -7,11 +11,12 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./itineraire-modal.page.scss'],
 })
 export class ItineraireModalPage implements OnInit {
-  @Input() start: any;
-  @Input() destination; any;
-
+  addresses: string[] = [];
+  selectedAdress = null;
+  
   constructor(
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private mapBoxService: MapboxService
   ) { }
 
   async close(){
@@ -23,4 +28,21 @@ export class ItineraireModalPage implements OnInit {
   ngOnInit() {
   }
 
+  search(event:any){
+    const searchTerm = event.target.value.toLowerCase();
+    if (searchTerm && searchTerm.length > 0){
+      this.mapBoxService
+        .search_word(searchTerm)
+        .subscribe((features: Feature[]) => {
+          this.addresses = features.map(feat => feat.place_name);
+        });
+    } else {
+      this.addresses = [];
+    }
+  }
+
+  onSelect(address:any){
+    this.selectedAdress = address;
+    this.addresses = [];
+  }
 }
