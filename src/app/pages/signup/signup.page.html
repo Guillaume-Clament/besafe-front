@@ -1,9 +1,42 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>signup</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
 
+  <br/>
+  <br/>
+  <br/>
+  <div class="signup-options">
+    <a class="underline">Modifier image</a>
+  </div>
+
+  <br/>
+
+  <div class="padding">
+    <ion-item>
+      <ion-label color="darkblue" position="floating">Pseudo</ion-label>
+      <ion-input color="medium"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="darkblue" position="floating">Adresse email</ion-label>
+      <ion-input color="medium"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="darkblue" position="floating">Mot de passe</ion-label>
+      <ion-input color="medium"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="darkblue" position="floating">Date de naissance</ion-label>
+      <ion-input color="medium" type="password"></ion-input>
+    </ion-item>
+
+    <br/>
+    <br/>
+  </div>
+
+  <div class="signup-options">
+    <ion-button expand="block" shape="round" color="darkblue" (onclick)="signUp()">M'inscrire</ion-button>
+    <br/>
+    <a class="underline" [routerLink]="['/login']" >J'ai déjà un compte</a>
+  </div>
 </ion-content>

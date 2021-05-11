@@ -30,7 +30,14 @@ const routes: Routes = [
   {
     path: 'itineraire-modal',
     loadChildren: () => import('./itineraire-modal/itineraire-modal.module').then( m => m.ItineraireModalPageModule)
-  }
+  },
+  {
+    path: 'signup',
+    loadChildren: () =>
+      import('./pages/signup/signup.module').then(
+        (m) => m.SignupPageModule
+      ),
+  },
 
 ];
 @NgModule({
