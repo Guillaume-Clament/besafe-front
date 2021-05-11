@@ -3,6 +3,8 @@
   <br/>
   <br/>
   <br/>
+  <br/>
+  <br/>
   <div class="signup-options">
     <a class="underline">Modifier image</a>
   </div>
@@ -10,32 +12,43 @@
   <br/>
 
   <div class="padding">
-    <ion-item>
-      <ion-label color="darkblue" position="floating">Pseudo</ion-label>
-      <ion-input color="medium"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="darkblue" position="floating">Adresse email</ion-label>
-      <ion-input color="medium"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="darkblue" position="floating">Mot de passe</ion-label>
-      <ion-input color="medium"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="darkblue" position="floating">Date de naissance</ion-label>
-      <ion-input color="medium" type="password"></ion-input>
-    </ion-item>
-
+    <form #form="ngForm" (ngSubmit)="signUp(form)">
+      <ion-row>
+        <ion-item>
+          <ion-label color="darkblue" position="floating">Pseudo</ion-label>
+          <ion-input color="medium"></ion-input>
+        </ion-item>
+      </ion-row>
+      
+      <ion-row>
+        <ion-item>
+          <ion-label color="darkblue" position="floating">Adresse email</ion-label>
+          <ion-input type="text" color="medium"></ion-input>
+        </ion-item>
+      </ion-row>
+      
+      <ion-row>
+        <ion-item>
+          <ion-label color="darkblue" position="floating">Mot de passe</ion-label>
+          <ion-input color="medium" type="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+          <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+        </ion-item>
+      </ion-row>
+      
+      <ion-row>
+        <ion-item>
+          <ion-label color="darkblue" position="floating">Date de naissance</ion-label>
+          <ion-input id='birthdate' color="medium" type="birthdate"></ion-input>
+      </ion-item>
+    </ion-row>
+  </form>
+    
     <br/>
     <br/>
   </div>
 
   <div class="signup-options">
-    <ion-button expand="block" shape="round" color="darkblue" (onclick)="signUp()">M'inscrire</ion-button>
+    <ion-button expand="block" shape="round" color="darkblue" type="submit">M'inscrire</ion-button>
     <br/>
     <a class="underline" [routerLink]="['/login']" >J'ai déjà un compte</a>
   </div>
