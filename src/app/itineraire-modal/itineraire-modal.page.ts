@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, Injectable, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { Feature, MapboxService } from '../services/mapbox.service';
 
@@ -16,7 +16,8 @@ export class ItineraireModalPage implements OnInit {
   
   constructor(
     private modalCtrl: ModalController,
-    private mapBoxService: MapboxService
+    private mapBoxService: MapboxService,
+    private navCtrl: NavController
   ) { }
 
   async close(){
@@ -44,5 +45,10 @@ export class ItineraireModalPage implements OnInit {
   onSelect(address:any){
     this.selectedAdress = address;
     this.addresses = [];
+  }
+
+  pushPage(){
+    this.modalCtrl.dismiss();
+    this.navCtrl.navigateForward(`/carte/${this.selectedAdress}`);
   }
 }

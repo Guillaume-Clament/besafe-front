@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx'
-import { IonSearchbar, Platform, ModalController, NavController, AlertController } from '@ionic/angular';
+import { IonSearchbar, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ItineraireModalPage } from 'src/app/itineraire-modal/itineraire-modal.page';
 import { filter } from 'rxjs/operators';
+import { ActivatedRoute } from "@angular/router";
 
 declare var google: any;
 @Component({
@@ -17,20 +18,30 @@ export class CartePage {
   map:any;
   currentMapTrack = null;
   backdropVisible = false;
+  destination = null;
+  start="Marseille";
 
   isTracking = false;
   trackedRoute = [];
   previousTracks = [];
 
   positionSuscription: Subscription;
+  directionsService = new google.maps.DirectionsService;
+  directionDisplay = new google.maps.DirectionsRenderer;
 
   constructor(
     private geo: Geolocation, 
     private modalCtrl: ModalController, 
-    private navCtrl: NavController,
-    private plt: Platform,
-    private alertCtrl: AlertController
+    private route: ActivatedRoute
   ) { 
+    this.start = new google.maps.LatLng(this.geo.getCurrentPosition().then((res) => {
+      lat: res.coords.latitude;
+      lng: res.coords.longitude
+    }));
+    this.route.params.subscribe(params => {
+      this.destination = params['id']; 
+      this.calculateAndDisplayRoute(this.start, this.destination);
+    });
   }
 
   toggleBackdrop(isVisible){
@@ -46,9 +57,23 @@ export class CartePage {
     })
     await modal.present();
     modal.onDidDismiss()
-    .then( res => alert(JSON.stringify(res)) )
   }
   
+  calculateAndDisplayRoute(start, destinationFromModal){
+    const that = this;
+    this.directionsService.route({
+      origin: start,
+      destination: destinationFromModal,
+      travelMode: 'DRIVING'
+    }, (response,status) =>{
+      if (status === 'OK'){
+        that.directionDisplay.setDirections(response);
+      } else {
+        window.alert('ERREUR : ' + status);
+      }
+    });
+  }
+
   loadHistoricRoutes(){
     /*
     this.storage.get('routes').then(data => {
