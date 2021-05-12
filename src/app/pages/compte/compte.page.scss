@@ -1,16 +1,16 @@
-ion-avatar img {
-  width: 200% !important;
-  height: 200% !important;
-  max-width: 10000px !important; //any size
-  max-height: 10000px !important; //any size
-  border-radius: 20px;
-  margin-top: 27%;
-}
-
 ion-card {
   height: 23%;
   max-height: 1000px !important;
   border-radius: 25px;
+  padding-bottom: 48%;
+  ion-avatar img {
+    width: 200% !important;
+    height: 200% !important;
+    max-width: 10000px !important; //any size
+    max-height: 10000px !important; //any size
+    border-radius: 20px;
+    margin-top: 27%;
+  }
   // --background: darkBlue;
 }
 
