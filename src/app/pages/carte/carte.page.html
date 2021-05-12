@@ -8,6 +8,11 @@
         <ion-icon name="search-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab>
+    <ion-fab vertical="top" horizontal="start" slot="fixed">
+      <ion-fab-button (click)="calculateAndDisplayRoute()">
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   
     <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click)="drawer.toggleDrawer()"></div>
     <ion-button (click)="drawer.toggleDrawer()" expand="full"></ion-button>
