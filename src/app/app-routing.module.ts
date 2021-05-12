@@ -28,13 +28,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'carte/:id',
-    loadChildren: () =>
-      import('./pages/carte/carte.module').then(
-        (m) => m.CartePageModule
-      ),
-  },
-  {
     path: 'itineraire-modal',
     loadChildren: () => import('./itineraire-modal/itineraire-modal.module').then( m => m.ItineraireModalPageModule)
   },

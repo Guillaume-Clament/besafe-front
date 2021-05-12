@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ItineraireModalPage } from 'src/app/itineraire-modal/itineraire-modal.page';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { NavParamService } from 'src/app/services/navparam.service';
 
 declare var google: any;
 @Component({
@@ -26,33 +27,17 @@ export class CartePage implements AfterViewInit {
   constructor(
     private geo: Geolocation,
     private modalCtrl: ModalController,
-    private route: ActivatedRoute,
-    private navCtrl: NavController
+    private navService: NavParamService,
   ) {
-    this.route.params.subscribe((params) => {
-      this.destination = params['id'];
-      console.log(this.destination);
-    });
+    this.geo.getCurrentPosition().then((res) => {
+      this.map = new google.maps.Map(document.getElementById('map'), {
+        MyLocation: new google.maps.LatLng(res.coords.latitude, res.coords.longitude),
+      });
+    })
   }
 
   ngAfterViewInit() {
-    if (this.destination != '' && this.MyLocation != '') {
-      if (
-        this.MyLocation === 'undefined' ||
-        this.MyLocation === 'null' ||
-        this.MyLocation === ''
-      ) {
-        window.alert(
-          'Attention, nous ne pouvons pas accéder à votre géolocalisation.'
-        );
-      } else if (this.destination === 'undefined') {
-        window.alert('Erreur dans la saisie de votre adresse de destination.');
-      } else {
-        this.calculateAndDisplayRoute();
-      }
-    } else {
-      return;
-    }
+
   }
 
   toggleBackdrop(isVisible) {
@@ -67,12 +52,11 @@ export class CartePage implements AfterViewInit {
     modal.onDidDismiss();
   }
 
-  calculateAndDisplayRoute() {
+  calculateAndDisplayRoute(directionFromForm: string) {
     let that = this;
     var post;
-    var latitude;
-    var longitude;
-    var loc:String;
+    var latitude:number;
+    var longitude:number;
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 7,
       center: { lat: 41.85, lng: -87.65 },
@@ -86,15 +70,11 @@ export class CartePage implements AfterViewInit {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          map.setCenter(pos);
-          latitude = '' + pos.lat;
-          longitude = '' + pos.lng;
           post = pos;
-          that.MyLocation = new google.maps.LatLng(pos.lat, pos.lng);
-          loc = '70 Avenue de Rangueil, Toulouse';
-          console.log(pos.lat + ' ' + pos.lng);
-          //console.log(this.destination);
-          console.log(loc);
+          latitude = pos.lat;
+          longitude = pos.lng;
+          map.setCenter(pos);
+          that.MyLocation = new google.maps.LatLng(latitude, longitude);
         },
         function () {}
       );
@@ -102,10 +82,13 @@ export class CartePage implements AfterViewInit {
       // Browser doesn't support Geolocation
     }
 
+    console.log('source ' + that.MyLocation);
+    console.log('destination ' + this.navService.getNavData());
+
     this.directionsService.route(
       {
-        origin: loc,
-        destination: '75 Avenue de Rangueil, Toulouse',
+        origin: that.MyLocation,
+        destination: this.navService.getNavData(),
         travelMode: 'DRIVING',
       },
       function (response, status) {

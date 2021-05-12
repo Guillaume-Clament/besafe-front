@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { Feature, MapboxService } from '../services/mapbox.service';
+import { NavParamService } from '../services/navparam.service';
 
 @Component({
   selector: 'app-itineraire-modal',
@@ -14,7 +15,8 @@ export class ItineraireModalPage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private mapBoxService: MapboxService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private navService: NavParamService,
   ) {}
 
   async close() {
@@ -47,8 +49,8 @@ export class ItineraireModalPage implements OnInit {
     if (this.selectedAdress === null) {
       return;
     } else {
+      this.navService.setNavaData(this.selectedAdress);
       this.modalCtrl.dismiss();
-      this.navCtrl.navigateForward(`carte/${this.selectedAdress}`);
     }
   }
 }

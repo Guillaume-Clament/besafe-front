@@ -25,6 +25,7 @@
     "@ionic-native/app-version": "^5.32.1",
     "@ionic-native/core": "^5.32.1",
     "@ionic-native/geolocation": "^5.27.0",
+    "@ionic-native/native-geocoder": "^5.33.0",
     "@ionic/angular": "^5.5.2",
     "@ionic/storage": "^3.0.4",
     "cordova-plugin-app-version": "^0.1.12",
