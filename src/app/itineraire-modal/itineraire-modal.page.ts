@@ -1,7 +1,5 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
-import { environment } from 'src/environments/environment';
 import { Feature, MapboxService } from '../services/mapbox.service';
 
 
@@ -48,7 +46,11 @@ export class ItineraireModalPage implements OnInit {
   }
 
   pushPage(){
-    this.modalCtrl.dismiss();
-    this.navCtrl.navigateForward(`/carte/${this.selectedAdress}`);
+    if (this.selectedAdress === null){
+      return;
+    } else {
+      this.modalCtrl.dismiss();
+      this.navCtrl.navigateForward(`/carte/${this.selectedAdress}`);
+    }
   }
 }

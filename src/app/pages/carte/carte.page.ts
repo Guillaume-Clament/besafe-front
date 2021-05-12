@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx'
-import { IonSearchbar, ModalController } from '@ionic/angular';
+import { IonSearchbar, ModalController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ItineraireModalPage } from 'src/app/itineraire-modal/itineraire-modal.page';
 import { filter } from 'rxjs/operators';
@@ -12,36 +12,40 @@ declare var google: any;
   templateUrl: './carte.page.html',
   styleUrls: ['./carte.page.scss'],
 })
-export class CartePage {
-  @ViewChild('search', {static:false}) search: IonSearchbar;
-  //@ViewChild('map') mapElement: ElementRef;
+export class CartePage implements AfterViewInit {
+  @ViewChild('map') mapElement: ElementRef;
   map:any;
-  currentMapTrack = null;
   backdropVisible = false;
-  destination = null;
-  start="Marseille";
-
-  isTracking = false;
-  trackedRoute = [];
-  previousTracks = [];
+  destination: any = '';
+  MyLocation: any;
 
   positionSuscription: Subscription;
-  directionsService = new google.maps.DirectionsService;
-  directionDisplay = new google.maps.DirectionsRenderer;
 
   constructor(
     private geo: Geolocation, 
     private modalCtrl: ModalController, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private navCtrl: NavController
   ) { 
-    this.start = new google.maps.LatLng(this.geo.getCurrentPosition().then((res) => {
-      lat: res.coords.latitude;
-      lng: res.coords.longitude
-    }));
+    
     this.route.params.subscribe(params => {
       this.destination = params['id']; 
-      this.calculateAndDisplayRoute(this.start, this.destination);
     });
+  }
+  
+  ngAfterViewInit() {
+    if (this.destination != '' && this.MyLocation != ''){
+      if (this.MyLocation === "undefined" || this.MyLocation === "null" || this.MyLocation === ''){
+        window.alert("Attention, nous ne pouvons pas accéder à votre géolocalisation.");
+      } else if (this.destination === "undefined"){
+        window.alert("Erreur dans la saisie de votre adresse de destination.")
+      } else {
+        console.log(this.MyLocation);
+        this.calculateAndDisplayRoute();
+      }
+    } else {
+      return;
+    }
   }
 
   toggleBackdrop(isVisible){
@@ -50,63 +54,55 @@ export class CartePage {
 
   async showModal(){
     const modal = await this.modalCtrl.create({
-      component: ItineraireModalPage, 
-      componentProps: { 
-        destination: 'Marseille'
-      }
+      component: ItineraireModalPage
     })
     await modal.present();
-    modal.onDidDismiss()
+    modal.onDidDismiss();
   }
   
-  calculateAndDisplayRoute(start, destinationFromModal){
-    const that = this;
-    this.directionsService.route({
-      origin: start,
-      destination: destinationFromModal,
-      travelMode: 'DRIVING'
-    }, (response,status) =>{
-      if (status === 'OK'){
-        that.directionDisplay.setDirections(response);
-      } else {
-        window.alert('ERREUR : ' + status);
-      }
+  calculateAndDisplayRoute() {
+    let that = this;
+    let directionsService = new google.maps.DirectionsService;
+    let directionsDisplay = new google.maps.DirectionsRenderer;
+    const map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 7,
+      center: {lat: 41.85, lng: -87.65}
     });
-  }
+    directionsDisplay.setMap(map);
+    
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        map.setCenter(pos);
+        that.MyLocation = new google.maps.LatLng(pos);
+        console.log(that.MyLocation);
 
-  loadHistoricRoutes(){
-    /*
-    this.storage.get('routes').then(data => {
-      if (data){
-        this.previousTracks = data;
-      }
-    });
-    */
-  }
+      }, function() {
+
+      });
+    } else {
+      // Browser doesn't support Geolocation
+    }
+
+    directionsService.route({
+    origin: this.MyLocation,
+    destination: this.destination,
+    travelMode: 'DRIVING'
+  }, function(response, status) {
+    if (status === 'OK') {
+      console.log('source : ' + this.MyLocation + ' / destination : ' + this.destination);
+      directionsDisplay.setDirections(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+      console.log('source : ' + this.MyLocation + ' / destination : ' + this.destination);
+    }
+  });
+}
 
   ionViewDidEnter(){
-    /*
-    let mapOptions = {
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      mapTypeControl: false, 
-      streetViewControl: false,
-      fullScreenControl: false
-      
-    };
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    this.geo.getCurrentPosition().then(pos => {
-      let latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-      this.map.setCenter(latLng);
-      this.map.setZoom(16);
-    });
-    
-    this.plt.ready().then(() => {
-      this.loadHistoricRoutes();
-    });
-    
-    */
-
     this.geo.getCurrentPosition().then((res) => {
       this.map = new google.maps.Map(document.getElementById("map"),{
         center : { lat: res.coords.latitude, lng: res.coords.longitude },
@@ -125,50 +121,5 @@ export class CartePage {
     
   }
 
-  startDrawing(){
-    this.isTracking = true; 
-    this.positionSuscription = this.geo.watchPosition()
-    .pipe( 
-      filter(p => p.coords !== undefined)
-    )
-    .subscribe(data => {
-      setTimeout(() =>{
-        this.trackedRoute.push({lat : data.coords.latitude, lng : data.coords.longitude});
-        this.redrawPath(this.trackedRoute);
-      })
-    })
-  }
-
-  redrawPath(path){
-    if (this.currentMapTrack){
-      this.currentMapTrack.setMap(null);
-    }
-
-    if (path.length > 1){
-      this.currentMapTrack = new google.maps.Polyline({
-        path: path, 
-        geodesic: true, 
-        strokeColor: '#ff00ff',
-        strokeOpacity: 1.0,
-        strokeWeight: 3
-      });
-    }
-
-    this.currentMapTrack.setMap(this.map);
-  }
-
-  stopTracking(){
-    let newRoute = { finished: new Date().getTime(), path: this.trackedRoute};
-    this.previousTracks.push(newRoute);
-    //this.storage.set('routes', this.previousTracks);
-
-    this.isTracking = false;
-    this.positionSuscription.unsubscribe();
-    this.currentMapTrack.setMap(null);
-  }
-
-  showHistoryRoute(route){
-    this.redrawPath(route);
-  }
 
 }
