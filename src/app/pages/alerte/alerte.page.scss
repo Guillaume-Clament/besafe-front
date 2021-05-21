@@ -1,0 +1,70 @@
+ion-card {
+  height: 28%;
+  //max-height: 1000px !important;
+  border-radius: 25px;
+  //padding-bottom: 48%;
+  display: table;
+}
+.alerte {
+  display: flex;
+  .question {
+    //max-height: 1000% !important;
+    height: 160%;
+    width: 40%;
+    //bottom: 1000px;
+  }
+
+  .code {
+    height: 160%;
+    width: 40%;
+    /*     margin-top: -45% !important;
+    margin-left: 35% !important; */
+
+    //max-height: 1000% !important;
+  }
+}
+.padding {
+  padding: 4%;
+  padding-top: 7%;
+  height: 100%;
+}
+
+.cardText {
+  margin-left: 140px;
+  ion-card-title {
+    position: absolute;
+    margin-top: -17px;
+    color: white;
+  }
+  ion-card-content {
+    position: absolute;
+    margin-top: -17px;
+    color: white;
+  }
+}
+
+ion-button {
+  font-family: SF UI Display Light !important;
+  font-size: 0.8em;
+  padding-left: 15px;
+  padding-right: 15px;
+  --border-radius: 10px;
+}
+
+ion-label {
+  --color: white;
+  font-family: SF UI Display Light !important;
+  font-size: 0.8em;
+}
+
+ion-input {
+  font-family: SF UI Display Light !important;
+  font-size: 0.9em;
+}
+
+.details {
+  ion-button {
+    margin-bottom: 10px;
+    --border-radius: 50px;
+  }
+}
