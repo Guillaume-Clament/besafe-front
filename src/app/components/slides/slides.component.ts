@@ -7,8 +7,10 @@ import { IonSlides } from '@ionic/angular';
   templateUrl: './slides.component.html',
   styleUrls: ['./slides.component.scss'],
 })
+
 export class SlidesComponent implements OnInit {
-  @ViewChild('mainSlides', { static: true }) slides: IonSlides;
+    @ViewChild(IonSlides) slides: IonSlides;
+  
 
   constructor() { }
 
