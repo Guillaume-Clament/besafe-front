@@ -1,43 +1,49 @@
-.onboard-main {
-  padding: 5%;
+ion-slides {
   height: 100%;
-  ion-fab {
-    bottom: 35px;
-    right: 28px;
-  }
-  .onboard-top {
-    // margin-top: 5%;
-    margin-left: -20px;
-    ion-toolbar {
-      --background: transparent;
-      --ion-color-base: transparent !important;
-    }
+}
 
-    ion-button {
-      text-transform: capitalize;
-      font-size: 1em;
-      font-weight: bold;
-    }
-  }
-  .onboard-bot {
-    ion-slides {
-      padding-bottom: 22%;
-    }
-    .onb-img {
-      margin: 9% 0 8%;
-      img {
-        height: 250px;
-        width: 100%;
-      }
-    }
-    h4 {
-      font: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 4%;
-    }
-    p {
-      font-size: 0.9rem;
-      padding: 2% 5%;
-    }
-  }
+ion-slide {
+  display: block;
+}
+
+ion-slide img {
+  padding: 15%;
+  height: 55%;
+}
+
+.slider-text {
+  padding-top: 20%;
+}
+
+.slider-text h2 {
+  font-family: 'SF UI Display Semibold';
+  color: darkblue;
+}
+
+.navigator {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
+.swiper-pagination {
+  width: 50% !important;
+  left: 25% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-pagination-bullet {
+  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+}
+
+.swiper-pagination-bullet-active {
+  width: 12px;
+  height: 12px;
+  background: transparent;
+  border: 2px solid var(--bullet-background-active);
 }
