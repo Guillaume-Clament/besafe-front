@@ -11,6 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -19,6 +24,9 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   providers: [
     Geolocation,

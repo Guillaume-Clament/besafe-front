@@ -19,31 +19,36 @@ export class SignupPage implements OnInit {
     private router: Router,
     private alerteCtrl: AlertController,
     private authService: AuthService
-  ) { }
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  async signUp(form): Promise<void> {
+    this.authService
+      .signUpUser({
+        pseudo: form.value.pseudo,
+        email: form.value.email,
+        password: form.value.password,
+        dateNaissance: form.value.dateNaissance,
+      })
+      .then(
+        () => {
+          this.router.navigateByUrl('home/carte');
+        },
+        async (error) => {
+          const alert = await this.alerteCtrl.create({
+            message: error.message,
+            buttons: [{ text: 'ok', role: 'cancel' }],
+          });
+          await alert.present();
+        }
+      );
   }
 
-  async signUp(form):Promise<void>{
-    this.authService.signUpUser(form.value.email, form.value.password)
-    .then(
-      () => {
-        this.router.navigateByUrl('home/carte');
-      },
-      async error => {
-        const alert = await this.alerteCtrl.create({
-          message: error.message,
-          buttons: [{text:'ok', role:'cancel'}],
-        });
-        await alert.present();
-      }
-    );
-  }
-
-  togglePassword(): void{
+  togglePassword(): void {
     this.showPassword = !this.showPassword;
 
-    if(this.passwordToggleIcon == 'eye'){
+    if (this.passwordToggleIcon == 'eye') {
       this.passwordToggleIcon = 'eye-off';
     } else {
       this.passwordToggleIcon = 'eye';

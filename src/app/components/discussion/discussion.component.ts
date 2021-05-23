@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { AuthService, Message } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-groupe',
-  templateUrl: './groupe.page.html',
-  styleUrls: ['./groupe.page.scss'],
+  selector: 'app-discussion',
+  templateUrl: './discussion.component.html',
+  styleUrls: ['./discussion.component.scss'],
 })
-export class GroupePage implements OnInit {
+export class DiscussionComponent implements OnInit {
   @ViewChild(IonContent) content: IonContent;
 
   messages: Observable<Message[]>;
