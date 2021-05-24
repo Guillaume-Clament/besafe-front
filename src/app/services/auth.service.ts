@@ -9,6 +9,14 @@ export interface User {
   uid: string;
   email: string;
 }
+
+export interface FirebaseUser {
+  uid: string;
+  email: string;
+  pseudo: string;
+  dateNaissance: string;
+}
+
 export interface Message {
   createdAt: firebase.firestore.FieldValue;
   id: string;
@@ -89,13 +97,13 @@ export class AuthService {
   getUsers() {
     return this.afs
       .collection('utilisateurs')
-      .valueChanges({ idField: 'uid' }) as Observable<User[]>;
+      .valueChanges({ idField: 'uid' }) as Observable<FirebaseUser[]>;
   }
 
-  getUserForMsg(msgFromId, users: User[]): string {
+  getUserForMsg(msgFromId, users: FirebaseUser[]): string {
     for (let usr of users) {
       if (usr.uid == msgFromId) {
-        return usr.email;
+        return usr.pseudo;
       }
     }
     return 'Deleted';
