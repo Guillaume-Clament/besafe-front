@@ -4,9 +4,14 @@
   <br />
   <br />
   <br />
-  
+
   <div class="underline">
-    <ion-button href="#" expand="block" shape="round" fill="clear" color="darkblue"
+    <ion-button
+      href="#"
+      expand="block"
+      shape="round"
+      fill="clear"
+      color="darkblue"
       >Photo de profil</ion-button
     >
   </div>
@@ -60,37 +65,40 @@
         <ion-label color="darkblue" position="floating"
           >Date de naissance</ion-label
         >
-        <ion-input
-          id="birthdate"
-          color="medium"
-          type="birthdate"
-          name="dateNaissance"
+        <ion-datetime
+          displayFormat="DD/MM/YYYY"
+          min="1950-01-01"
+          max="2015-12-31"
           ngModel
           required
-        ></ion-input>
+        ></ion-datetime>
       </ion-item>
     </form>
 
     <br />
     <br />
-  
 
-  <div class="signup-options">
-    <ion-button
-      expand="block"
-      shape="round"
-      color="darkblue"
-      type="submit"
-      [disabled]="form.invalid"
-      (click)="signUp(form)"
-      >M'inscrire</ion-button
-    >
-    <br />
-    <div class="underline">
-      <ion-button href="/login" expand="block" shape="round" fill="clear" color="darkblue"
-        >J'ai déjà un compte</ion-button
+    <div class="signup-options">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="darkblue"
+        type="submit"
+        [disabled]="form.invalid"
+        (click)="signUp(form)"
+        >M'inscrire</ion-button
       >
+      <br />
+      <div class="underline">
+        <ion-button
+          href="/login"
+          expand="block"
+          shape="round"
+          fill="clear"
+          color="darkblue"
+          >J'ai déjà un compte</ion-button
+        >
+      </div>
     </div>
-  </div>
   </div>
 </ion-content>
