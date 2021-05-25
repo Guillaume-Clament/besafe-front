@@ -4,8 +4,11 @@
   <br />
   <br />
   <br />
-  <div class="signup-options">
-    <a class="underline">Modifier image</a>
+  
+  <div class="underline">
+    <ion-button href="#" expand="block" shape="round" fill="clear" color="darkblue"
+      >Photo de profil</ion-button
+    >
   </div>
 
   <br />
@@ -46,11 +49,11 @@
           type="password"
           [type]="showPassword ? 'text' : 'password'"
         ></ion-input>
-        <ion-icon
+        <!--<ion-icon
           slot="end"
           [name]="passwordToggleIcon"
           (click)="togglePassword()"
-        ></ion-icon>
+        ></ion-icon> -->
       </ion-item>
 
       <ion-item>
@@ -70,7 +73,7 @@
 
     <br />
     <br />
-  </div>
+  
 
   <div class="signup-options">
     <ion-button
@@ -83,6 +86,11 @@
       >M'inscrire</ion-button
     >
     <br />
-    <a class="underline" [routerLink]="['/login']">J'ai déjà un compte</a>
+    <div class="underline">
+      <ion-button href="/login" expand="block" shape="round" fill="clear" color="darkblue"
+        >J'ai déjà un compte</ion-button
+      >
+    </div>
+  </div>
   </div>
 </ion-content>

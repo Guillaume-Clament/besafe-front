@@ -1,10 +1,14 @@
 ion-content {
-    --ion-background-color: linear-gradient(180deg, #51baeba6, #ffffff);
+    //--ion-background-color: linear-gradient(180deg, #51baeba6, #ffffff);
 }
 
 ion-item {
     --ion-background-color: transparent !important;
   }
+
+.padding {
+  padding: 5%;
+}
 
 .signup-options{
     text-align: center;
@@ -14,6 +18,18 @@ ion-item {
     text-decoration: underline;
 }
 
-.padding {
-  padding: 5%;
+ion-button {
+  font-family: SF UI Display Light !important;
+  font-size: 0.9em;
+}
+
+ion-label {
+  --color: white;
+  font-family: SF UI Display Light !important;
+  font-size: 0.8em;
+}
+
+ion-input {
+  font-family: SF UI Display Light !important;
+  font-size: 0.9em;
 }
