@@ -44,7 +44,11 @@ const routes: Routes = [
       import('./pages/signup/signup.module').then(
         (m) => m.SignupPageModule
       ),
+  },  {
+    path: 'modify-compte',
+    loadChildren: () => import('./pages/modify-compte/modify-compte.module').then( m => m.ModifyComptePageModule)
   }
+
 
 
 ];
