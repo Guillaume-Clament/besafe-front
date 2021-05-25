@@ -17,14 +17,6 @@ export interface FirebaseUser {
   dateNaissance: string;
 }
 
-export interface Message {
-  createdAt: firebase.firestore.FieldValue;
-  id: string;
-  from: string;
-  msg: string;
-  fromName: string;
-  myMsg: boolean;
-}
 @Injectable({
   providedIn: 'root',
 })
@@ -64,48 +56,5 @@ export class AuthService {
 
   logOutUser(): Promise<void> {
     return firebase.auth().signOut();
-  }
-
-  addChatMessage(msg) {
-    return this.afs.collection('messages').add({
-      msg: msg,
-      from: this.currentUser.uid,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-  }
-
-  getChatMessages() {
-    let users = [];
-
-    return this.getUsers().pipe(
-      switchMap((res) => {
-        users = res;
-        return this.afs
-          .collection('messages', (ref) => ref.orderBy('createdAt'))
-          .valueChanges({ idField: 'id' }) as Observable<Message[]>;
-      }),
-      map((messages) => {
-        for (let m of messages) {
-          m.fromName = this.getUserForMsg(m.from, users);
-          m.myMsg = this.currentUser.uid == m.from;
-        }
-        return messages;
-      })
-    );
-  }
-
-  getUsers() {
-    return this.afs
-      .collection('utilisateurs')
-      .valueChanges({ idField: 'uid' }) as Observable<FirebaseUser[]>;
-  }
-
-  getUserForMsg(msgFromId, users: FirebaseUser[]): string {
-    for (let usr of users) {
-      if (usr.uid == msgFromId) {
-        return usr.pseudo;
-      }
-    }
-    return 'Deleted';
   }
 }
