@@ -58,7 +58,7 @@ export class AuthService {
     });
   }
 
-  resetPassword(email: string, password: string): Promise<void> {
+  resetPassword(email: string): Promise<void> {
     return firebase.auth().sendPasswordResetEmail(email);
   }
 

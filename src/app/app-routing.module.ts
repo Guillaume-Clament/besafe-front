@@ -37,7 +37,11 @@ const routes: Routes = [
       import('./pages/signup/signup.module').then(
         (m) => m.SignupPageModule
       ),
+  },  {
+    path: 'password-reset',
+    loadChildren: () => import('./pages/password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
   }
+
 
 
 ];
