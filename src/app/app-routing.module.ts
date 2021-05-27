@@ -21,6 +21,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then(
+        (m) => m.LoginPageModule
+      ),
+  },
+  {
     path: 'carte',
     loadChildren: () =>
       import('./pages/carte/carte.module').then(
@@ -37,9 +44,18 @@ const routes: Routes = [
       import('./pages/signup/signup.module').then(
         (m) => m.SignupPageModule
       ),
-  },  {
+  },
+  {
     path: 'password-reset',
     loadChildren: () => import('./pages/password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
+  },
+  {
+    path: 'modify-compte',
+    loadChildren: () => import('./pages/modify-compte/modify-compte.module').then( m => m.ModifyComptePageModule)
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   }
 
 

@@ -4,8 +4,16 @@
   <br />
   <br />
   <br />
-  <div class="signup-options">
-    <a class="underline">Modifier image</a>
+
+  <div class="underline">
+    <ion-button
+      href="#"
+      expand="block"
+      shape="round"
+      fill="clear"
+      color="darkblue"
+      >Photo de profil</ion-button
+    >
   </div>
 
   <br />
@@ -46,43 +54,51 @@
           type="password"
           [type]="showPassword ? 'text' : 'password'"
         ></ion-input>
-        <ion-icon
+        <!--<ion-icon
           slot="end"
           [name]="passwordToggleIcon"
           (click)="togglePassword()"
-        ></ion-icon>
+        ></ion-icon> -->
       </ion-item>
 
       <ion-item>
         <ion-label color="darkblue" position="floating"
           >Date de naissance</ion-label
         >
-        <ion-input
-          id="birthdate"
-          color="medium"
-          type="birthdate"
-          name="dateNaissance"
+        <ion-datetime
+          displayFormat="DD/MM/YYYY"
+          min="1950-01-01"
+          max="2015-12-31"
           ngModel
           required
-        ></ion-input>
+        ></ion-datetime>
       </ion-item>
     </form>
 
     <br />
     <br />
-  </div>
 
-  <div class="signup-options">
-    <ion-button
-      expand="block"
-      shape="round"
-      color="darkblue"
-      type="submit"
-      [disabled]="form.invalid"
-      (click)="signUp(form)"
-      >M'inscrire</ion-button
-    >
-    <br />
-    <a class="underline" [routerLink]="['/login']">J'ai déjà un compte</a>
+    <div class="signup-options">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="darkblue"
+        type="submit"
+        [disabled]="form.invalid"
+        (click)="signUp(form)"
+        >M'inscrire</ion-button
+      >
+      <br />
+      <div class="underline">
+        <ion-button
+          href="/login"
+          expand="block"
+          shape="round"
+          fill="clear"
+          color="darkblue"
+          >J'ai déjà un compte</ion-button
+        >
+      </div>
+    </div>
   </div>
 </ion-content>

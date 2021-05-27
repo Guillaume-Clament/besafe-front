@@ -1,100 +1,37 @@
 <ion-content>
-  <div class="padding">
-    <ion-card color="darkblue">
-      <ion-card-header>
-        <ion-card-title
-          ><ion-avatar> <img src="../../../assets/avatar.jpg" /> </ion-avatar
-        ></ion-card-title>
-        <div class="cardText">
-          <ion-card-title>Aly RADY</ion-card-title>
-        </div>
-      </ion-card-header>
-      <div class="cardText">
-        <ion-card-content>@arady</ion-card-content>
+  <div class="background padding">
+    <div class="top">
+      <ion-avatar> <img src="../../../assets/avatar.jpg" /> </ion-avatar>
+      <div class="inner">
+        <h1>Aly RADY</h1>
+        <h2>@alyRady</h2>
       </div>
-    </ion-card>
-    <div>
-      <ion-label
-        color="dark"
-        style="font-size: 0.9em !important; font-weight: bolder !important"
-        >Mes informations</ion-label
-      >
-      <ion-item>
-        <ion-label color="darkblue" position="floating"
-          >Adresse email</ion-label
-        >
-        <ion-input color="medium"></ion-input>
+    </div>
+    <div class="main">
+      <p>adresse@mail.com</p>
+      <p>autre.adresse@mail.com</p>
+      <a href="../modify-compte/">Modifier mon profil</a>
+      <ion-item href="https://www.ionicframework.com" lines="none">
+        <ion-avatar class="ion-text-center">
+          <ion-icon name="warning-outline"></ion-icon>
+        </ion-avatar>
+        <ion-label>Mes Alertes</ion-label>
+        <p class="ion-text-wrap ion-no-padding">Awesome Subtitle</p>
       </ion-item>
-
-      <ion-item>
-        <ion-label color="darkblue" position="floating">Mot de passe</ion-label>
-        <ion-input color="medium" type="password"></ion-input>
+      <ion-item href="https://www.ionicframework.com" lines="none">
+        <ion-avatar class="ion-text-center">
+          <ion-icon name="people-outline"></ion-icon>
+        </ion-avatar>
+        <ion-label class="ion-text-nowrap"> Mes Anges </ion-label>
+        <p class="ion-text-wrap ion-no-padding">Awesome Subtitle</p>
       </ion-item>
-    </div>
-    <br />
-    <div>
-      <ion-button expand="block" shape="round" color="darkblue"
-        >Ajouter un ami</ion-button
-      >
-    </div>
-    <ion-card style="background-color:#C4C4C4 !important">
-      <ion-card-header>
-        <ion-card-subtitle color="dark">Mes anges</ion-card-subtitle>
-        <div class="cardText">
-          <ion-card-title>Aly RADY</ion-card-title>
-        </div>
-      </ion-card-header>
-      <div class="cardText">
-        <ion-card-content>@arady</ion-card-content>
-      </div>
-    </ion-card>
-    <div class="reglages">
-      <ion-label
-        color="dark"
-        style="font-size: 0.9em !important; font-weight: bolder !important"
-        >Réglages</ion-label
-      >
-      <ion-list>
-        <ion-item lines="none">
-          <ion-icon slot="start" name="mic"></ion-icon>
-          <ion-label> Accès au microphone </ion-label>
-          <ion-toggle
-            color="lightblue"
-            (ionChange)="micToggle($event)"
-            id="micToggle"
-            slot="end"
-          ></ion-toggle>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-icon slot="start" name="camera"></ion-icon>
-          <ion-label> Accès au microphone </ion-label>
-          <ion-toggle
-            color="lightblue"
-            (ionChange)="camToggle($event)"
-            id="camToggle"
-            slot="end"
-          ></ion-toggle>
-        </ion-item>
-      </ion-list>
-    </div>
-    <ion-card style="background-color:#C4C4C4 !important">
-      <ion-card-header>
-        <ion-card-subtitle color="dark">Mon domicile</ion-card-subtitle>
-        <div class="cardText">
-          <ion-card-title>Aly RADY</ion-card-title>
-        </div>
-      </ion-card-header>
-      <div class="cardText">
-        <ion-card-content>@arady</ion-card-content>
-      </div>
-    </ion-card>
-    <div class="details">
-      <ion-button expand="block" shape="round" color="darkblue" fill="outline"
-        >Mes raccourcis</ion-button
-      >
-      <ion-button expand="block" shape="round" color="darkblue" fill="outline"
-        >Demander infos compte</ion-button
-      >
+      <ion-item href="https://www.ionicframework.com" lines="none">
+        <ion-avatar class="ion-text-center">
+          <ion-icon name="home-outline"></ion-icon>
+        </ion-avatar>
+        <ion-label class="ion-text-nowrap"> Mon Domicile </ion-label>
+        <p class="ion-text-wrap ion-no-padding">Awesome Subtitle</p>
+      </ion-item>
     </div>
   </div>
 </ion-content>

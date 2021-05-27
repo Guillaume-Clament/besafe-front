@@ -28,11 +28,11 @@
   }
 }
 
-ion-content {
-  /**--ion-background-color: linear-gradient(#5a9ae4, #ffffff);**/
-  --ion-background-color: linear-gradient(180deg, #51baeba6, #ffffff);
-  /*background: linear-gradient(0deg, #abdcff 10%, #22AFF1 100%);*/
-}
+// ion-content {
+//   /**--ion-background-color: linear-gradient(#5a9ae4, #ffffff);**/
+//   --ion-background-color: linear-gradient(180deg, #51baeba6, #ffffff);
+//   /*background: linear-gradient(0deg, #abdcff 10%, #22AFF1 100%);*/
+// }
 
 .logo {
   position: relative;
@@ -45,4 +45,13 @@ ion-content {
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+h1 {
+  color: var(--ion-color-darkblue);
+  position: relative;
+  //top: 160%;
+  font-weight: bold;
+  font-size: 40px;
+  padding-top: 95%;
 }
