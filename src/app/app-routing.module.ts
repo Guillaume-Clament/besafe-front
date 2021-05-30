@@ -55,7 +55,11 @@ const routes: Routes = [
       import('./pages/modify-compte/modify-compte.module').then(
         (m) => m.ModifyComptePageModule
       ),
+  },  {
+    path: 'discussion',
+    loadChildren: () => import('./pages/discussion/discussion.module').then( m => m.DiscussionPageModule)
   },
+
 ];
 @NgModule({
   imports: [

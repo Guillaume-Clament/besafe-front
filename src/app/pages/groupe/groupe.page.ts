@@ -10,21 +10,7 @@ import { ChatService, Message } from 'src/app/services/chat.service';
   styleUrls: ['./groupe.page.scss'],
 })
 export class GroupePage implements OnInit {
-  @ViewChild(IonContent) content: IonContent;
+  constructor() {}
 
-  messages: Observable<Message[]>;
-  newMsg = '';
-
-  constructor(private router: Router, private chatService: ChatService) {}
-
-  ngOnInit() {
-    this.messages = this.chatService.getChatMessages();
-  }
-
-  sendMessage() {
-    this.chatService.addChatMessage(this.newMsg).then(() => {
-      this.newMsg = '';
-      this.content.scrollToBottom;
-    });
-  }
+  ngOnInit() {}
 }

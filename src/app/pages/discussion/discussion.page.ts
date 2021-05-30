@@ -2,27 +2,26 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 import { Observable } from 'rxjs';
-import { AuthService, Message } from 'src/app/services/auth.service';
+import { ChatService, Message } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-discussion',
-  templateUrl: './discussion.component.html',
-  styleUrls: ['./discussion.component.scss'],
+  templateUrl: './discussion.page.html',
+  styleUrls: ['./discussion.page.scss'],
 })
-export class DiscussionComponent implements OnInit {
+export class DiscussionPage implements OnInit {
   @ViewChild(IonContent) content: IonContent;
 
   messages: Observable<Message[]>;
   newMsg = '';
-
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private router: Router, private chatService: ChatService) {}
 
   ngOnInit() {
-    this.messages = this.authService.getChatMessages();
+    this.messages = this.chatService.getChatMessages();
   }
 
   sendMessage() {
-    this.authService.addChatMessage(this.newMsg).then(() => {
+    this.chatService.addChatMessage(this.newMsg).then(() => {
       this.newMsg = '';
       this.content.scrollToBottom;
     });
