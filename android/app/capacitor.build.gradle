@@ -10,9 +10,13 @@ android {
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
 
-
+    implementation "com.google.android.gms:play-services-tagmanager:+"
+    implementation "com.google.firebase:firebase-core:+"
+    implementation "com.google.firebase:firebase-messaging:+"
+    implementation "com.google.firebase:firebase-config:+"
+    implementation "com.google.firebase:firebase-perf:+"
 }
-
+apply from: "../../node_modules/cordova-plugin-firebase/src/android/build.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

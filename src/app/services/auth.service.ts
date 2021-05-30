@@ -28,6 +28,10 @@ export class AuthService {
     });
   }
 
+  getEmail() {
+    return this.currentUser.email;
+  }
+
   loginUser(
     email: string,
     password: string

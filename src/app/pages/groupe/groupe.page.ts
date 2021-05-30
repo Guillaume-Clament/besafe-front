@@ -10,7 +10,11 @@ import { ChatService, Message } from 'src/app/services/chat.service';
   styleUrls: ['./groupe.page.scss'],
 })
 export class GroupePage implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  onClick() {
+    this.router.navigate(['/discussion']);
+  }
 }

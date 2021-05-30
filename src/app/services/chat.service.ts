@@ -31,6 +31,7 @@ export interface Message {
   providedIn: 'root',
 })
 export class ChatService {
+  userPseudo: string = null;
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
@@ -74,6 +75,7 @@ export class ChatService {
   getUserForMsg(msgFromId, users: FirebaseUser[]): string {
     for (let usr of users) {
       if (usr.uid == msgFromId) {
+        this.userPseudo = usr.pseudo;
         return usr.pseudo;
       }
     }
