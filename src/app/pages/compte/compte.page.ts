@@ -9,13 +9,31 @@ import { Observable } from 'rxjs';
   styleUrls: ['./compte.page.scss'],
 })
 export class ComptePage implements OnInit {
-  currentEmail: string = null;
+  currentEmail: string = '';
+  currentPseudo: string = '';
+  currentUid: string = '';
+  users: Observable<FirebaseUser[]>;
   constructor(
     private chatService: ChatService,
     private authService: AuthService
   ) {
+    this.currentUid = this.authService.currentUser.uid;
     this.currentEmail = this.authService.getEmail();
+    this.users = this.authService.getFireUsers();
+    /* console.log(this.users);
+    console.log(this.authService.getUser());
+    //this.currentPseudo = this.authService.getUser().pseudo;
+    console.log(this.currentPseudo); */
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    /* this.users.forEach((user) => {
+      for (let u of user) {
+        if (u.uid == this.currentUid) {
+          this.currentPseudo = u.pseudo;
+          console.log(u);
+        }
+      }
+    }); */
+  }
 }

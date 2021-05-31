@@ -4,7 +4,9 @@
       <ion-avatar> <img src="../../../assets/avatar.jpg" /> </ion-avatar>
       <div class="inner">
         <h1>Aly RADY</h1>
-        <h2>@{{currentEmail}}</h2>
+        <div *ngFor="let u of users | async">
+          <h2 *ngIf="u.uid == currentUid">@{{u.pseudo}}</h2>
+        </div>
       </div>
     </div>
     <div class="main">

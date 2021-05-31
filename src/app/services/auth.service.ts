@@ -22,10 +22,45 @@ export interface FirebaseUser {
 })
 export class AuthService {
   currentUser: User = null;
+  firebaseUser: FirebaseUser = null;
+  fireUsers: Observable<FirebaseUser[]>;
   constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) {
     this.afAuth.onAuthStateChanged((user) => {
       this.currentUser = user;
     });
+  }
+
+  getFireUsers() {
+    let users = [];
+    return this.getUsers().pipe(
+      switchMap((res) => {
+        users = res;
+        console.log(users);
+        return this.afs
+          .collection('utilisateurs')
+          .valueChanges({ idField: 'uid' }) as Observable<FirebaseUser[]>;
+      }),
+      map((utilisateurs) => {
+        for (let u of utilisateurs) {
+          console.log(u);
+          if (u.uid == this.currentUser.uid) {
+            console.log(u);
+            this.firebaseUser = u;
+          }
+        }
+        return utilisateurs;
+      })
+    );
+  }
+
+  getUser() {
+    return this.firebaseUser;
+  }
+
+  getUsers() {
+    return this.afs
+      .collection('utilisateurs')
+      .valueChanges({ idField: 'uid' }) as Observable<FirebaseUser[]>;
   }
 
   getEmail() {
