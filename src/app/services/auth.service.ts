@@ -35,16 +35,13 @@ export class AuthService {
     return this.getUsers().pipe(
       switchMap((res) => {
         users = res;
-        console.log(users);
         return this.afs
           .collection('utilisateurs')
           .valueChanges({ idField: 'uid' }) as Observable<FirebaseUser[]>;
       }),
       map((utilisateurs) => {
         for (let u of utilisateurs) {
-          console.log(u);
           if (u.uid == this.currentUser.uid) {
-            console.log(u);
             this.firebaseUser = u;
           }
         }
