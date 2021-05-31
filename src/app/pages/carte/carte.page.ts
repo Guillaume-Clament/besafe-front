@@ -14,15 +14,15 @@ declare var google: any;
   styleUrls: ['./carte.page.scss'],
 })
 export class CartePage implements AfterViewInit {
-  @ViewChild('map') mapElement: ElementRef;
+  @ViewChild('map', {read: ElementRef, static: false}) mapElement: ElementRef;
   map: any;
   backdropVisible = false;
   destination: any = '';
   MyLocation: any;
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
-
   positionSuscription: Subscription;
+  markers: any[];
 
   constructor(
     private geo: Geolocation,
@@ -130,9 +130,17 @@ export class CartePage implements AfterViewInit {
           },
           map: this.map,
         });
+        this.markers.push(this.map);
+        let position = new google.maps.LatLng(res.coords.latitude, res.coords.longitude);
+        let mapMarker = new google.maps.Marker({
+            position: position,
+            latitude: res.coords.latitude, 
+            longitude: res.coords.longitude
+        })
       })
       .catch((e) => {
         console.log(e);
       });
   }
+
 }
