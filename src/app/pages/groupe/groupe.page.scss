@@ -1,0 +1,33 @@
+ion-card {
+    height: 23%;
+    max-height: 1000px !important;
+    border-radius: 25px;
+    padding-bottom: 48%;
+    ion-avatar img {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 10000px !important; //any size
+      max-height: 10000px !important; //any size
+      border-radius: 50px;
+      margin-top: 15%;
+    }
+    // --background: darkBlue;
+}
+
+ion-col{
+    border: 1px solid black;
+}
+
+ion-card-content{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.avatar-align-center{
+    display: flex;
+    justify-content: center;
+}
+
+.heure-dernier-message{
+    text-align: end;
+}
