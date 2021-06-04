@@ -8,7 +8,11 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card color="darkblue" *ngFor="let groupe of groupes" (click)="goToDiscussion(groupe)">
+  <ion-card
+    color="darkblue"
+    *ngFor="let groupe of groupes"
+    (click)="goToDiscussion(groupe)"
+  >
     <ion-card-header>
       <ion-grid>
         <ion-row>
@@ -16,10 +20,10 @@
             <ion-avatar> {{ groupe.photo }} </ion-avatar>
           </ion-col>
           <ion-col size="6">
-            <h4> {{ groupe.nom }} </h4>
+            <h4>{{ groupe.nom }}</h4>
           </ion-col>
           <ion-col size="3">
-            <p class="heure-dernier-message">00:00</p>
+            <p class="heure-dernier-message">{{groupe.dateEnvoie}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -27,7 +31,6 @@
     <ion-card-content>
       <p>{{ groupe.derniermessage }}</p>
     </ion-card-content>
-    
   </ion-card>
 </ion-content>
 

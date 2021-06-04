@@ -25,5 +25,6 @@ export class DiscussionPage implements OnInit {
       this.newMsg = '';
       this.content.scrollToBottom;
     });
+    // ajouter message dans listeMessage du groupe
   }
 }

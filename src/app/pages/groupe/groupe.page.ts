@@ -14,24 +14,34 @@ import { ChatService, Message } from 'src/app/services/chat.service';
 })
 export class GroupePage implements OnInit {
   groupes = [];
-  constructor(private router: Router, public firestore: AngularFirestore) {
+  messages: Observable<Message[]>;
+  date: Date;
+  constructor(
+    private router: Router,
+    public firestore: AngularFirestore,
+    private afs: AngularFirestore,
+    private chatService: ChatService
+  ) {
     this.getGroupes();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   onClick() {
     this.router.navigate(['/discussion']);
   }
 
   getGroupes() {
-    this.firestore.collection('groupes').snapshotChanges(['added', 'removed', 'modified']).subscribe(groupes => {
-      groupes.forEach(groupe => {
-        // récupération du dernier message
-        var listeMessages = groupe.payload.doc.data()['listeMessages'];
-        var dernierMessage = "Nouveau groupe !";
-        if (listeMessages) {
-          /*console.log(listeMessages[listeMessages.length-1].id);
+    this.firestore
+      .collection('groupes')
+      .snapshotChanges(['added', 'removed', 'modified'])
+      .subscribe((groupes) => {
+        groupes.forEach((groupe) => {
+          // récupération du dernier message
+          var listeMessages = groupe.payload.doc.data()['listeMessages'];
+          var dernierMessage = 'Nouveau groupe !';
+          if (listeMessages) {
+            /*console.log(listeMessages[listeMessages.length-1].id);
           var refMessage = this.firestore.collection('messages').doc(listeMessages[listeMessages.length-1].id);
           
           var docRef = this.firestore.collection("messages").doc(refMessage.toString());
@@ -47,23 +57,37 @@ export class GroupePage implements OnInit {
           });
 
           console.log(refMessage2);*/
-          dernierMessage = listeMessages[listeMessages.length-1].id;
-        }
-
-        this.groupes.push({
-          id: groupe.payload.doc.id,
-          photo: groupe.payload.doc.data()['photo'],
-          nom: groupe.payload.doc.data()['nom'],
-          derniermessage: dernierMessage          
-        })
+            dernierMessage = listeMessages[listeMessages.length - 1].id;
+            this.messages = this.chatService.getChatMessages();
+            this.messages.forEach((message) => {
+              message.forEach((m) => {
+                if (m.id == dernierMessage) {
+                  this.date = new Date(m.createdAt['seconds'] * 1000);
+                  dernierMessage = m.msg;
+                  this.groupes.push({
+                    id: groupe.payload.doc.id,
+                    photo: groupe.payload.doc.data()['photo'],
+                    nom: groupe.payload.doc.data()['nom'],
+                    derniermessage: dernierMessage,
+                    dateEnvoie: this.date.toLocaleString(),
+                  });
+                }
+              });
+            });
+          } else {
+            this.groupes.push({
+              id: groupe.payload.doc.id,
+              photo: groupe.payload.doc.data()['photo'],
+              nom: groupe.payload.doc.data()['nom'],
+              derniermessage: dernierMessage,
+            });
+          }
+        });
       });
-    });
   }
 
   goToDiscussion(idgroupe: any) {
     //this.router.navigate(['/discussion/']);
     //this.router.navigateByUrl('discussion/'+idgroupe.id);
-
-
   }
 }
