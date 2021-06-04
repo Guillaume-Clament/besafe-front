@@ -55,9 +55,14 @@ const routes: Routes = [
       import('./pages/modify-compte/modify-compte.module').then(
         (m) => m.ModifyComptePageModule
       ),
-  },  {
+  },
+  {
     path: 'discussion',
     loadChildren: () => import('./pages/discussion/discussion.module').then( m => m.DiscussionPageModule)
+  },
+  {
+    path: 'fin-alerte',
+    loadChildren: () => import('./pages/fin-alerte/fin-alerte.module').then( m => m.FinAlertePageModule)
   },
 
 ];

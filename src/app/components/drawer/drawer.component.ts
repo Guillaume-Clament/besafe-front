@@ -1,4 +1,5 @@
 import { Component, ElementRef, Output, ViewChild, EventEmitter, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GestureController, Platform } from '@ionic/angular';
 
 @Component({
@@ -14,11 +15,13 @@ export class DrawerComponent implements AfterViewInit {
   openHeight = 0;
 
   constructor(private plt: Platform,
+    private router: Router,
     private gestureCtrl: GestureController) { }
 
   async ngAfterViewInit() {
     const drawer = this.drawer.nativeElement;
     this.openHeight = (this.plt.height() / 100) * 70;
+    
 
     const gesture = await this.gestureCtrl.create({
       el: drawer,
@@ -28,6 +31,7 @@ export class DrawerComponent implements AfterViewInit {
         console.log(ev);
         if (ev.deltaY < -this.openHeight) return;
         drawer.style.transform = `translateY(${ev.deltaY}px)`;
+        if(ev.deltaY > 200) this.router.navigateByUrl('fin-alerte');
       },
       onEnd: ev => {
         if (ev.deltaY <-50 && this.isOpen){
@@ -50,7 +54,6 @@ export class DrawerComponent implements AfterViewInit {
   toggleDrawer(){
     const drawer = this.drawer.nativeElement;
     this.openState.emit(!this.isOpen);
-
     if (!this.isOpen){
       drawer.style.transition = '.4s ease-out';
       drawer.style.transform = '';
