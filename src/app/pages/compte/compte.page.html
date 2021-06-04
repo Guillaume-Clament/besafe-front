@@ -12,6 +12,13 @@
     <div class="main">
       <p>{{currentEmail}}</p>
       <a href="../modify-compte/">Modifier mon profil</a>
+      <ion-item>
+        <ion-avatar class="ion-text-center">
+          <ion-icon name="moon"></ion-icon>
+        </ion-avatar>
+        <ion-label>Mode Sombre </ion-label>
+        <ion-toggle (ionChange)="themeToggle($event)" id="themeToggle" slot="end"></ion-toggle>
+      </ion-item>
       <ion-item href="https://www.ionicframework.com" lines="none">
         <ion-avatar class="ion-text-center">
           <ion-icon name="warning-outline"></ion-icon>
@@ -33,6 +40,7 @@
         <ion-label class="ion-text-nowrap"> Mon Domicile </ion-label>
         <p class="ion-text-wrap ion-no-padding">Awesome Subtitle</p>
       </ion-item>
+
     </div>
   </div>
 </ion-content>
