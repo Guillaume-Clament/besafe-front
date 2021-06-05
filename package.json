@@ -24,7 +24,7 @@
     "@capacitor/core": "^2.4.7",
     "@capacitor/ios": "^2.4.7",
     "@ionic-native/app-version": "^5.32.1",
-    "@ionic-native/core": "^5.33.1",
+    "@ionic-native/core": "^5.33.0",
     "@ionic-native/fingerprint-aio": "^5.33.0",
     "@ionic-native/geolocation": "^5.27.0",
     "@ionic-native/native-geocoder": "^5.33.0",
@@ -34,17 +34,12 @@
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-sqlite-storage": "^6.0.0",
     "firebase": "^8.6.2",
-    "natives": "^1.1.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-<<<<<<< Updated upstream
     "@angular-devkit/build-angular": "^12.0.1",
-=======
-    "@angular-devkit/build-angular": "^0.901.15",
->>>>>>> Stashed changes
     "@angular-eslint/builder": "2.0.2",
     "@angular-eslint/eslint-plugin": "2.0.2",
     "@angular-eslint/eslint-plugin-template": "2.0.2",

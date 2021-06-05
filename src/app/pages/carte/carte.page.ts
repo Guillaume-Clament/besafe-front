@@ -13,14 +13,8 @@ declare var google: any;
   templateUrl: './carte.page.html',
   styleUrls: ['./carte.page.scss'],
 })
-<<<<<<< Updated upstream
 export class CartePage implements AfterViewInit {
   @ViewChild('map', {read: ElementRef, static: false}) mapElement: ElementRef;
-=======
-export class CartePage {
-  @ViewChild('map') mapElement: ElementRef;
-  Geocoder
->>>>>>> Stashed changes
   map: any;
   backdropVisible = false;
   destination: any = '';
@@ -39,20 +33,11 @@ export class CartePage {
       this.map = new google.maps.Map(document.getElementById('map'), {
         MyLocation: new google.maps.LatLng(res.coords.latitude, res.coords.longitude),
       });
-<<<<<<< Updated upstream
-=======
-      const latlng={
-        lat: res.coords.latitude, lng: res.coords.longitude
-      }
-      /*
-      geocoder.geocode( {'location': latlng}, (results: google.maps.GeocoderResult[]) => {
-        this.navService.setGeo(results[0].formatted_address);
-      })
-      */
-      
-      //this.navService.setGeo('(' + res.coords.latitude + ', ' + res.coords.longitude + ')');
->>>>>>> Stashed changes
     })
+  }
+
+  ngAfterViewInit() {
+
   }
 
   toggleBackdrop(isVisible) {
