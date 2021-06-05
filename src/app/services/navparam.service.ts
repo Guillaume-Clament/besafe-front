@@ -7,7 +7,21 @@ import { isNullOrUndefined } from 'util';
 export class NavParamService {
 
   navData:any;
+  navGeo:any;
   constructor() { }
+
+  setGeo(geoObj){
+    this.navGeo = geoObj;
+  }
+
+  geoNavGeo(){
+    if (this.navGeo === 'undefined'
+        || this.navGeo === null){
+      return 0;
+    } else {
+      return this.navGeo;
+    }
+  }
 
   setNavaData(navObj){
     this.navData = navObj;

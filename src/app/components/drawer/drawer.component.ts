@@ -1,6 +1,9 @@
 import { Component, ElementRef, Output, ViewChild, EventEmitter, AfterViewInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { GestureController, Platform } from '@ionic/angular';
+import { CartePage } from 'src/app/pages/carte/carte.page';
+import { NavParamService } from 'src/app/services/navparam.service';
 
 @Component({
   selector: 'app-drawer',
@@ -16,7 +19,11 @@ export class DrawerComponent implements AfterViewInit {
 
   constructor(private plt: Platform,
     private router: Router,
-    private gestureCtrl: GestureController) { }
+    private gestureCtrl: GestureController, 
+    private firestore: AngularFirestore, 
+    private navService: NavParamService,
+    private cartePage: CartePage
+  ) { }
 
   async ngAfterViewInit() {
     const drawer = this.drawer.nativeElement;
@@ -63,5 +70,14 @@ export class DrawerComponent implements AfterViewInit {
       drawer.style.transform = `translateY(${-this.openHeight}px)`;
       this.isOpen = true;
     }
+  }
+
+  emettreAlerte(){
+    this.firestore
+      .collection('trajet-alerte')
+      .add({ 
+        heure: "" + new Date().toISOString(),
+        localisation : "" + this.navService.geoNavGeo(),
+      });
   }
 }

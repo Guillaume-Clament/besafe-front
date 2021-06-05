@@ -6,6 +6,8 @@ import { ItineraireModalPage } from 'src/app/itineraire-modal/itineraire-modal.p
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { NavParamService } from 'src/app/services/navparam.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 declare var google: any;
 @Component({
@@ -15,6 +17,7 @@ declare var google: any;
 })
 export class CartePage implements AfterViewInit {
   @ViewChild('map') mapElement: ElementRef;
+  Geocoder
   map: any;
   backdropVisible = false;
   destination: any = '';
@@ -27,13 +30,26 @@ export class CartePage implements AfterViewInit {
   constructor(
     private geo: Geolocation,
     private modalCtrl: ModalController,
-    private navService: NavParamService,
+    private navService: NavParamService
   ) {
+    const geocoder = new google.maps.Geocoder();
     this.geo.getCurrentPosition().then((res) => {
+      var post;
+      var latitude:number;
+      var longitude:number;
       this.map = new google.maps.Map(document.getElementById('map'), {
-        MyLocation: new google.maps.LatLng(res.coords.latitude, res.coords.longitude),
+        MyLocation: new google.maps.LatLng(res.coords.latitude, res.coords.longitude)
       });
+      const latlng={
+        lat: res.coords.latitude, lng: res.coords.longitude
+      }
+      geocoder.geocode( {'location': latlng}, (results: google.maps.GeocoderResult[]) => {
+        this.navService.setGeo(results[0].formatted_address);
+      }
+      )
+      //this.navService.setGeo('(' + res.coords.latitude + ', ' + res.coords.longitude + ')');
     })
+    
   }
 
   ngAfterViewInit() {
@@ -52,7 +68,7 @@ export class CartePage implements AfterViewInit {
     modal.onDidDismiss();
   }
 
-  calculateAndDisplayRoute(directionFromForm: string) {
+  calculateAndDisplayRoute() {
     let that = this;
     var post;
     var latitude:number;
@@ -81,10 +97,10 @@ export class CartePage implements AfterViewInit {
     } else {
       // Browser doesn't support Geolocation
     }
-
+    
     console.log('source ' + that.MyLocation);
     console.log('destination ' + this.navService.getNavData());
-
+    
     this.directionsService.route(
       {
         origin: that.MyLocation,
