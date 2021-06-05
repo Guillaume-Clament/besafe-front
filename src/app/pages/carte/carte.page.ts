@@ -112,6 +112,17 @@ export class CartePage implements AfterViewInit {
         }
       }
     );
+<<<<<<< Updated upstream
+=======
+    this.firestore
+      .collection('trajet')
+      .add({
+        user: this.authService.currentUser.uid,
+        start: this.navService.geoNavGeo(),
+        heure: new Date().toISOString(),
+        destination: this.navService.getNavData()
+      })
+>>>>>>> Stashed changes
   }
 
   ionViewDidEnter() {
@@ -122,7 +133,7 @@ export class CartePage implements AfterViewInit {
           center: { lat: res.coords.latitude, lng: res.coords.longitude },
           zoom: 17,
         });
-
+        
         var marker = new google.maps.Marker({
           position: {
             lat: res.coords.latitude,
