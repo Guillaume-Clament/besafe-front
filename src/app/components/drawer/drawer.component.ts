@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { GestureController, Platform } from '@ionic/angular';
 import { CartePage } from 'src/app/pages/carte/carte.page';
+import { AuthService } from 'src/app/services/auth.service';
 import { NavParamService } from 'src/app/services/navparam.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { NavParamService } from 'src/app/services/navparam.service';
 export class DrawerComponent implements AfterViewInit {
   @ViewChild('drawer', {read: ElementRef}) drawer: ElementRef;
   @Output('openStateChanged') openState: EventEmitter<boolean> = new EventEmitter();
-
+  currentUid: string = '';
   isOpen = false;
   openHeight = 0;
 
@@ -22,8 +23,11 @@ export class DrawerComponent implements AfterViewInit {
     private gestureCtrl: GestureController, 
     private firestore: AngularFirestore, 
     private navService: NavParamService,
-    private cartePage: CartePage
-  ) { }
+    private cartePage: CartePage,
+    private authService: AuthService
+  ) { 
+    this.currentUid = this.authService.currentUser.uid;
+  }
 
   async ngAfterViewInit() {
     const drawer = this.drawer.nativeElement;
@@ -76,6 +80,7 @@ export class DrawerComponent implements AfterViewInit {
     this.firestore
       .collection('trajet-alerte')
       .add({ 
+        user: this.authService.currentUser.uid,
         heure: "" + new Date().toISOString(),
         localisation : "" + this.navService.geoNavGeo(),
       });

@@ -30,7 +30,9 @@ export class CartePage implements AfterViewInit {
   constructor(
     private geo: Geolocation,
     private modalCtrl: ModalController,
-    private navService: NavParamService
+    private navService: NavParamService,
+    private firestore: AngularFirestore,
+    private authService: AuthService
   ) {
     const geocoder = new google.maps.Geocoder();
     this.geo.getCurrentPosition().then((res) => {
@@ -128,6 +130,13 @@ export class CartePage implements AfterViewInit {
         }
       }
     );
+    this.firestore
+      .collection('trajet')
+      .add({ 
+        user: this.authService.currentUser.uid,
+        start: this.navService.geoNavGeo(),
+        destination: this.navService.getNavData()
+      })
   }
 
   ionViewDidEnter() {
