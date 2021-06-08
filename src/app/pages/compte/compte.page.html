@@ -3,8 +3,8 @@
     <div class="top">
       <ion-avatar> <img src="../../../assets/avatar.jpg" /> </ion-avatar>
       <div class="inner">
-        <h1>Aly RADY</h1>
         <div *ngFor="let u of users | async">
+          <h1 *ngIf="u.uid == currentUid">{{u.prenom}} {{u.nom}}</h1>
           <h2 *ngIf="u.uid == currentUid">@{{u.pseudo}}</h2>
         </div>
       </div>
