@@ -17,7 +17,7 @@ declare var google: any;
 })
 export class CartePage implements AfterViewInit {
   @ViewChild('map') mapElement: ElementRef;
-  Geocoder
+  Geocoder;
   map: any;
   backdropVisible = false;
   destination: any = '';
@@ -37,26 +37,29 @@ export class CartePage implements AfterViewInit {
     const geocoder = new google.maps.Geocoder();
     this.geo.getCurrentPosition().then((res) => {
       var post;
-      var latitude:number;
-      var longitude:number;
+      var latitude: number;
+      var longitude: number;
       this.map = new google.maps.Map(document.getElementById('map'), {
-        MyLocation: new google.maps.LatLng(res.coords.latitude, res.coords.longitude)
+        MyLocation: new google.maps.LatLng(
+          res.coords.latitude,
+          res.coords.longitude
+        ),
       });
-      const latlng={
-        lat: res.coords.latitude, lng: res.coords.longitude
-      }
-      geocoder.geocode( {'location': latlng}, (results: google.maps.GeocoderResult[]) => {
-        this.navService.setGeo(results[0].formatted_address);
-      }
-      )
+      const latlng = {
+        lat: res.coords.latitude,
+        lng: res.coords.longitude,
+      };
+      geocoder.geocode(
+        { location: latlng },
+        (results: google.maps.GeocoderResult[]) => {
+          this.navService.setGeo(results[0].formatted_address);
+        }
+      );
       //this.navService.setGeo('(' + res.coords.latitude + ', ' + res.coords.longitude + ')');
-    })
-    
+    });
   }
 
-  ngAfterViewInit() {
-
-  }
+  ngAfterViewInit() {}
 
   toggleBackdrop(isVisible) {
     this.backdropVisible = isVisible;
@@ -73,8 +76,8 @@ export class CartePage implements AfterViewInit {
   calculateAndDisplayRoute() {
     let that = this;
     var post;
-    var latitude:number;
-    var longitude:number;
+    var latitude: number;
+    var longitude: number;
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 7,
       center: { lat: 41.85, lng: -87.65 },
@@ -99,10 +102,10 @@ export class CartePage implements AfterViewInit {
     } else {
       // Browser doesn't support Geolocation
     }
-    
+
     console.log('source ' + that.MyLocation);
     console.log('destination ' + this.navService.getNavData());
-    
+
     this.directionsService.route(
       {
         origin: that.MyLocation,
@@ -130,13 +133,11 @@ export class CartePage implements AfterViewInit {
         }
       }
     );
-    this.firestore
-      .collection('trajet')
-      .add({ 
-        user: this.authService.currentUser.uid,
-        start: this.navService.geoNavGeo(),
-        destination: this.navService.getNavData()
-      })
+    this.firestore.collection('trajet').add({
+      user: this.authService.currentUser.uid,
+      start: this.navService.geoNavGeo(),
+      destination: this.navService.getNavData(),
+    });
   }
 
   ionViewDidEnter() {
