@@ -28,6 +28,8 @@ export class SignupPage implements OnInit {
       .signUpUser({
         pseudo: form.value.pseudo,
         email: form.value.email,
+        nom: form.value.nom,
+        prenom: form.value.prenom,
         password: form.value.password,
         dateNaissance: form.value.dateNaissance,
       })

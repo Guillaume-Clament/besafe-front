@@ -13,6 +13,8 @@ export interface User {
 export interface FirebaseUser {
   uid: string;
   email: string;
+  nom : string;
+  prenom: string;
   pseudo: string;
   dateNaissance: string;
 }
@@ -71,7 +73,7 @@ export class AuthService {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
-  async signUpUser({ pseudo, email, password, dateNaissance }) {
+  async signUpUser({ pseudo, email, nom, prenom, password, dateNaissance }) {
     const credential = await this.afAuth.createUserWithEmailAndPassword(
       email,
       password
@@ -82,6 +84,8 @@ export class AuthService {
       uid,
       pseudo: pseudo,
       email: credential.user.email,
+      nom: nom,
+      prenom: prenom,
       dateNaissance: dateNaissance,
     });
   }
