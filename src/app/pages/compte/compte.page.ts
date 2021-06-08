@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService, Message } from 'src/app/services/chat.service';
 import { AuthService, User, FirebaseUser } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-compte',
@@ -15,7 +16,8 @@ export class ComptePage implements OnInit {
   users: Observable<FirebaseUser[]>;
   constructor(
     private chatService: ChatService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {
     this.currentUid = this.authService.currentUser.uid;
     this.currentEmail = this.authService.getEmail();
@@ -34,5 +36,10 @@ export class ComptePage implements OnInit {
     } else {
       document.body.setAttribute('color-theme', 'light');
     }
+  }
+
+  logOut(){
+    this.authService.logOutUser();
+    this.router.navigate(['/login']);
   }
 }
