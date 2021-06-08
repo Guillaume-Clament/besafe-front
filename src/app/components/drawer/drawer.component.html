@@ -1,14 +1,15 @@
 <div class="drawer" #drawer>
   <div class="ion-text-center">
     <ion-button fill="clear" expand="full" (click)="toggleDrawer()">
-        <div class="drawer-pull"></div>
+      <div class="drawer-pull"></div>
     </ion-button>
   </div>
 
   <ion-content>
+    <img id="imageUpload" [src]="photo" hidden="true" />
     <ion-grid>
       <ion-row>
-        <ion-col style="text-align: center;">
+        <ion-col style="text-align: center">
           <ion-icon name="checkmark-outline"></ion-icon>
         </ion-col>
       </ion-row>
@@ -17,28 +18,38 @@
           Vos anges ont tous été notifiés
         </ion-col>
       </ion-row>
-      <br/><br/>
-      <ion-row text-align="left" style="font-weight: bold; font-size: 18px">Actions supplémentaires</ion-row>
-      <br/>
+      <br /><br />
+      <ion-row text-align="left" style="font-weight: bold; font-size: 18px"
+        >Actions supplémentaires</ion-row
+      >
+      <br />
       <ion-row>
         <ion-col size="5" style="text-align: center" id="micro">
           <ion-button class="btn-micro" (click)="emettreAlerte()"></ion-button>
         </ion-col>
         <ion-col size="1"></ion-col>
         <ion-col size="5" style="text-align: center" id="video">
-          <ion-button class="btn-video" (click)="emettreAlerte()"></ion-button>
+          <ion-button class="btn-video" (click)="ouvrirCamera()"></ion-button>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="5" style="text-align: center; font-size: 12px" id="micro">
+        <ion-col
+          size="5"
+          style="text-align: center; font-size: 12px"
+          id="micro"
+        >
           Faire un enregistrement audio
         </ion-col>
         <ion-col size="1"></ion-col>
-        <ion-col size="5" style="text-align: center; font-size: 12px" id="video">
+        <ion-col
+          size="5"
+          style="text-align: center; font-size: 12px"
+          id="video"
+        >
           Enregistrer une vidéo
         </ion-col>
       </ion-row>
-      <br/>
+      <br />
       <ion-row>
         <ion-col size="5" style="text-align: center" id="micro">
           <ion-button class="btn-appel" (click)="emettreAlerte()"></ion-button>
@@ -49,16 +60,22 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="5" style="text-align: center; font-size: 12px" id="appel">
+        <ion-col
+          size="5"
+          style="text-align: center; font-size: 12px"
+          id="appel"
+        >
           Appeler la police
         </ion-col>
         <ion-col size="1"></ion-col>
-        <ion-col size="5" style="text-align: center; font-size: 12px" id="alarme">
+        <ion-col
+          size="5"
+          style="text-align: center; font-size: 12px"
+          id="alarme"
+        >
           Mettre une alarme
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-content>
-
-  
 </div>
