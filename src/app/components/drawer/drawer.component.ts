@@ -18,6 +18,9 @@ import {
   CameraDirection,
 } from '@capacitor/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { File, FileEntry } from '@ionic-native/file';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { Media, MediaObject } from '@ionic-native/media';
 
 @Component({
   selector: 'app-drawer',
@@ -117,7 +120,7 @@ export class DrawerComponent implements AfterViewInit {
       const microphone = context.createMediaStreamSource(stream);
       const filter = context.createBiquadFilter();
       microphone.connect(filter);
-      filter.connect(context.destination)})}, 1000);
+      filter.connect(context.destination)})}, 500);
   }
   
   emettreSonAlerte(){

@@ -3,22 +3,28 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonSearchbar, ModalController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ItineraireModalPage } from 'src/app/itineraire-modal/itineraire-modal.page';
-import { filter } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
 import { NavParamService } from 'src/app/services/navparam.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { GoogleMap, GoogleMapsEvent } from '@ionic-native/google-maps';
 declare var google: any;
+const image = {
+  url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+}
+const photo = {
+  url: 'assets/marker-1.jpg',
+  scaledSize: new google.maps.Size(50, 50),
+}
+
 @Component({
   selector: 'app-carte',
   templateUrl: './carte.page.html',
   styleUrls: ['./carte.page.scss'],
 })
 export class CartePage implements AfterViewInit {
-  @ViewChild('map') mapElement: ElementRef;
+  map: GoogleMap;
+  @ViewChild('map', {read: ElementRef, static:false}) mapElement: ElementRef;
   Geocoder;
-  map: any;
   backdropVisible = false;
   destination: any = '';
   MyLocation: any;
@@ -26,6 +32,23 @@ export class CartePage implements AfterViewInit {
   directionsDisplay = new google.maps.DirectionsRenderer();
 
   positionSuscription: Subscription;
+  infoWindows = [];
+  markers = [
+    [
+      "Place du Capitole",
+      43.604652,
+      1.444209,
+      photo,
+      "Lucie",
+    ], 
+    [
+      "Chupitos",
+      43.6008071, 
+      1.4436933,
+      image,
+      "Matthias",
+    ]
+  ];
 
   constructor(
     private geo: Geolocation,
@@ -36,9 +59,6 @@ export class CartePage implements AfterViewInit {
   ) {
     const geocoder = new google.maps.Geocoder();
     this.geo.getCurrentPosition().then((res) => {
-      var post;
-      var latitude: number;
-      var longitude: number;
       this.map = new google.maps.Map(document.getElementById('map'), {
         MyLocation: new google.maps.LatLng(
           res.coords.latitude,
@@ -48,14 +68,14 @@ export class CartePage implements AfterViewInit {
       const latlng = {
         lat: res.coords.latitude,
         lng: res.coords.longitude,
-      };
+      };/*
       geocoder.geocode(
         { location: latlng },
         (results: google.maps.GeocoderResult[]) => {
           this.navService.setGeo(results[0].formatted_address);
         }
-      );
-      //this.navService.setGeo('(' + res.coords.latitude + ', ' + res.coords.longitude + ')');
+      );*/
+      this.navService.setGeo('(' + res.coords.latitude + ', ' + res.coords.longitude + ')');
     });
   }
 
@@ -148,17 +168,30 @@ export class CartePage implements AfterViewInit {
           center: { lat: res.coords.latitude, lng: res.coords.longitude },
           zoom: 17,
         });
-
-        var marker = new google.maps.Marker({
-          position: {
-            lat: res.coords.latitude,
-            lng: res.coords.longitude,
-          },
-          map: this.map,
-        });
+      this.addMarkersToMap(this.markers); 
       })
       .catch((e) => {
         console.log(e);
       });
+  }
+
+  addMarkersToMap(markers){
+    var i;
+    for (i = 0; i < markers.length; i++){
+      let mapMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(markers[i][1], markers[i][2]),
+        title: markers[i][4],
+        latitude: markers[i][1], 
+        longitude: markers[i][2],
+        icon: markers[i][3],
+        map: this.map,
+      });
+      var infoWindow = new google.maps.InfoWindow({
+        content: "Ceci est la position de " + markers[i][4],
+      });
+      mapMarker.addListener('click', () => {
+        infoWindow.open(this.map, mapMarker);
+      });
+    }
   }
 }
