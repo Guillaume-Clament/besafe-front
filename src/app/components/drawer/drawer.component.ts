@@ -13,6 +13,7 @@ import { CartePage } from 'src/app/pages/carte/carte.page';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavParamService } from 'src/app/services/navparam.service';
 import { ModalController } from '@ionic/angular';
+
 import {
   Plugins,
   CameraResultType,
@@ -35,6 +36,7 @@ export class DrawerComponent implements AfterViewInit {
   isOpen = false;
   openHeight = 0;
   photo: SafeResourceUrl;
+  phoneNumber = '0649279659';
 
   constructor(
     private plt: Platform,
@@ -103,7 +105,14 @@ export class DrawerComponent implements AfterViewInit {
     });
   }
 
+  appelerNumero(){
+    this.emettreAlerte();
+    console.log('appel');
+    window.open(`tel:${this.phoneNumber}`, '_system');
+  }
+
   async ouvrirCamera() {
+    this.emettreAlerte();
     const image = await Plugins.Camera.getPhoto({
       quality: 100,
       allowEditing: false,
