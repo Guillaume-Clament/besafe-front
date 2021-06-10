@@ -9,24 +9,22 @@ import {
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { GestureController, Platform } from '@ionic/angular';
-import { CartePage } from 'src/app/pages/carte/carte.page';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavParamService } from 'src/app/services/navparam.service';
-import { ModalController } from '@ionic/angular';
-
 import {
   Plugins,
   CameraResultType,
   CameraSource,
-  Camera,
   CameraDirection,
 } from '@capacitor/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
+const MEDIA_FOLDER_NAME = 'my_media';
+
 @Component({
   selector: 'app-drawer',
   templateUrl: './drawer.component.html',
-  styleUrls: ['./drawer.component.scss'],
+  styleUrls: ['./drawer.component.scss']
 })
 export class DrawerComponent implements AfterViewInit {
   @ViewChild('drawer', { read: ElementRef }) drawer: ElementRef;
@@ -36,18 +34,18 @@ export class DrawerComponent implements AfterViewInit {
   isOpen = false;
   openHeight = 0;
   photo: SafeResourceUrl;
+  //num à changer
   phoneNumber = '0649279659';
-
+  estEnregistre: boolean = false;
+  
   constructor(
     private plt: Platform,
     private router: Router,
     private gestureCtrl: GestureController,
     private firestore: AngularFirestore,
     private navService: NavParamService,
-    private cartePage: CartePage,
     private authService: AuthService,
-    private sanitizer: DomSanitizer,
-    private modalCtrl: ModalController
+    private sanitizer: DomSanitizer
   ) {
     this.currentUid = this.authService.currentUser.uid;
   }
@@ -111,6 +109,19 @@ export class DrawerComponent implements AfterViewInit {
     window.open(`tel:${this.phoneNumber}`, '_system');
   }
 
+  enregistrerAudio(){
+    this.emettreAlerte();
+    window.AudioContext = window.AudioContext;
+    const context = new AudioContext();
+    this.estEnregistre = true;
+    setTimeout( () => {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+      const microphone = context.createMediaStreamSource(stream);
+      const filter = context.createBiquadFilter();
+      microphone.connect(filter);
+      filter.connect(context.destination)})}, 1000);
+  }
+  
   async ouvrirCamera() {
     this.emettreAlerte();
     const image = await Plugins.Camera.getPhoto({
