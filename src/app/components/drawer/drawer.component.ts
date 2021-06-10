@@ -19,8 +19,6 @@ import {
 } from '@capacitor/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-const MEDIA_FOLDER_NAME = 'my_media';
-
 @Component({
   selector: 'app-drawer',
   templateUrl: './drawer.component.html',
@@ -37,7 +35,7 @@ export class DrawerComponent implements AfterViewInit {
   //num à changer
   phoneNumber = '0649279659';
   estEnregistre: boolean = false;
-  
+
   constructor(
     private plt: Platform,
     private router: Router,
@@ -122,6 +120,14 @@ export class DrawerComponent implements AfterViewInit {
       filter.connect(context.destination)})}, 1000);
   }
   
+  emettreSonAlerte(){
+    this.emettreAlerte();
+    let audio = new Audio('assets/phone-ringtone.mp3');
+    setTimeout( () => {
+      audio.play();
+    }, 500);
+  }
+
   async ouvrirCamera() {
     this.emettreAlerte();
     const image = await Plugins.Camera.getPhoto({
