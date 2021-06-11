@@ -67,6 +67,14 @@ const routes: Routes = [
     path: 'validation-trajet',
     loadChildren: () => import('./pages/validation-trajet/validation-trajet.module').then( m => m.ValidationTrajetPageModule)
   },
+  {
+    path: 'code-secret',
+    loadChildren: () => import('./pages/code-secret/code-secret.module').then( m => m.CodeSecretPageModule)
+  },
+  {
+    path: 'question-secrete',
+    loadChildren: () => import('./pages/question-secrete/question-secrete.module').then( m => m.QuestionSecretePageModule)
+  },
 
 
 ];
