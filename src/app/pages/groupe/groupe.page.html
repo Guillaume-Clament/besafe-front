@@ -4,6 +4,9 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="creerGroupe()"><ion-icon name="add-outline"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -33,7 +36,3 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-
-<ion-button (click)="onClick()" expand="block" fill="clear" shape="round">
-  Click me
-</ion-button>

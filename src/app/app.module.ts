@@ -14,7 +14,10 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,11 +30,14 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [
     Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    FingerprintAIO
+    FingerprintAIO,
+    ImagePicker
   ],
   bootstrap: [AppComponent],
 })

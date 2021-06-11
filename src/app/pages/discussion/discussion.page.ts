@@ -28,10 +28,9 @@ export class DiscussionPage implements OnInit {
   }
 
   sendMessage() {
-    this.chatService.addChatMessage(this.newMsg).then(() => {
+    this.chatService.addChatMessage(this.newMsg, this.nomGroupe).then(() => {
       this.newMsg = '';
       this.content.scrollToBottom;
     });
-    // ajouter message dans listeMessage du groupe
   }
 }

@@ -80,6 +80,11 @@ const routes: Routes = [
     path: 'question-secrete',
     loadChildren: () => import('./pages/question-secrete/question-secrete.module').then( m => m.QuestionSecretePageModule)
   },
+  {
+    path: 'add-groupe',
+    loadChildren: () => import('./pages/add-groupe/add-groupe.module').then( m => m.AddGroupePageModule)
+  },
+
 
 
 ];

@@ -23,6 +23,7 @@ export interface Message {
   id: string;
   from: string;
   msg: string;
+  nom: string;
   fromName: string;
   myMsg: boolean;
 }
@@ -38,12 +39,14 @@ export class ChatService {
     private authService: AuthService
   ) {}
 
-  addChatMessage(msg) {
+  addChatMessage(msg, nomGrp) {
     return this.afs.collection('messages').add({
       msg: msg,
       from: this.authService.currentUser.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      nom: nomGrp,
     });
+    // actualiser page groupes
   }
 
   getChatMessages() {
@@ -74,7 +77,7 @@ export class ChatService {
       switchMap((res) => {
         users = res;
         return this.afs
-          .collection('messages', (ref) => ref.where('nom', '==', nomGroupe))
+          .collection('messages', (ref) => ref.where('nom', '==', nomGroupe).orderBy('createdAt'))
           .valueChanges({ idField: 'id' }) as Observable<Message[]>;
       }),
       map((messages) => {
