@@ -63,6 +63,7 @@ export class DrawerComponent implements AfterViewInit {
         console.log(ev);
         if (ev.deltaY < -this.openHeight) return;
         drawer.style.transform = `translateY(${ev.deltaY}px)`;
+        //redicretion sur l'authentification
         if (ev.deltaY > 200) this.router.navigateByUrl('fin-alerte');
       },
       onEnd: (ev) => {
@@ -82,6 +83,9 @@ export class DrawerComponent implements AfterViewInit {
     gesture.enable(true);
   }
 
+  /**
+  * Gestion des actions de swipe opérés sur le drawer
+  */
   toggleDrawer() {
     const drawer = this.drawer.nativeElement;
     this.openState.emit(!this.isOpen);
@@ -96,6 +100,9 @@ export class DrawerComponent implements AfterViewInit {
     }
   }
 
+  /**
+  * Pousser l'alerte en bd
+  */
   emettreAlerte() {
     this.firestore.collection('trajet-alerte').add({
       user: this.authService.currentUser.uid,
@@ -104,12 +111,18 @@ export class DrawerComponent implements AfterViewInit {
     });
   }
 
+  /**
+  * Gestion d'une alerte de type "Appeler la police"
+  */
   appelerNumero(){
     this.emettreAlerte();
     console.log('appel');
     window.open(`tel:${this.phoneNumber}`, '_system');
   }
 
+  /**
+  * Gestion d'une alerte de type "Enregistrer un audio"
+  */
   enregistrerAudio(){
     this.emettreAlerte();
     window.AudioContext = window.AudioContext;
@@ -123,6 +136,9 @@ export class DrawerComponent implements AfterViewInit {
       filter.connect(context.destination)})}, 500);
   }
   
+  /**
+  * Gestion d'une alerte de type "Mettre une alarme"
+  */
   emettreSonAlerte(){
     this.emettreAlerte();
     let audio = new Audio('assets/phone-ringtone.mp3');
@@ -131,6 +147,9 @@ export class DrawerComponent implements AfterViewInit {
     }, 500);
   }
 
+  /**
+  * Gestion d'une alerte de type "M'enregistrer"
+  */
   async ouvrirCamera() {
     this.emettreAlerte();
     const image = await Plugins.Camera.getPhoto({

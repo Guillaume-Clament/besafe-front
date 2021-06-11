@@ -61,9 +61,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/discussion/discussion.module').then( m => m.DiscussionPageModule)
   },
   {
+    path: 'discussion/:id',
+    loadChildren: () => import('./pages/discussion/discussion.module').then( m => m.DiscussionPageModule)
+  },
+  {
     path: 'fin-alerte',
     loadChildren: () => import('./pages/fin-alerte/fin-alerte.module').then( m => m.FinAlertePageModule)
-  },  {
+  },
+  {
     path: 'validation-trajet',
     loadChildren: () => import('./pages/validation-trajet/validation-trajet.module').then( m => m.ValidationTrajetPageModule)
   },

@@ -66,6 +66,27 @@ export class ChatService {
     );
   }
 
+  
+  getChatMessagesByGroupe(nomGroupe) {
+    let users = [];
+
+    return this.getUsers().pipe(
+      switchMap((res) => {
+        users = res;
+        return this.afs
+          .collection('messages', (ref) => ref.where('nom', '==', nomGroupe))
+          .valueChanges({ idField: 'id' }) as Observable<Message[]>;
+      }),
+      map((messages) => {
+        for (let m of messages) {
+          m.fromName = this.getUserForMsg(m.from, users);
+          m.myMsg = this.authService.currentUser.uid == m.from;
+        }
+        return messages;
+      })
+    );
+  }
+  
   getUsers() {
     return this.afs
       .collection('utilisateurs')

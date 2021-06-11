@@ -28,7 +28,7 @@ export class GroupePage implements OnInit {
   ngOnInit() {}
 
   onClick() {
-    this.router.navigate(['/discussion']);
+    this.router.navigate(['/discussion/:id']);
   }
 
   getGroupes() {
@@ -86,8 +86,7 @@ export class GroupePage implements OnInit {
       });
   }
 
-  goToDiscussion(idgroupe: any) {
-    //this.router.navigate(['/discussion/']);
-    //this.router.navigateByUrl('discussion/'+idgroupe.id);
+  goToDiscussion(nomGroupe: String) {
+    this.router.navigateByUrl('discussion/:'+nomGroupe);
   }
 }

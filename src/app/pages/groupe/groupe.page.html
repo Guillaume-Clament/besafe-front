@@ -11,7 +11,7 @@
   <ion-card
     color="darkblue"
     *ngFor="let groupe of groupes"
-    (click)="goToDiscussion(groupe)"
+    (click)="goToDiscussion(groupe.nom)"
   >
     <ion-card-header>
       <ion-grid>
