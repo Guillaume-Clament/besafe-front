@@ -1,5 +1,9 @@
 <ion-content [fullscreen]="true">
-  <div class="options" style="text-align: center; height: 100%; background-color: navy;">
+  <div class="options" style="text-align: center; height: 100%; background-color: #102754;">
+    <p>
+      Vous tentez de retourner au menu principal.
+    </p>
+      <h3>Etes-vous en sécurité ?</h3>
     <ion-button
       size="default"
       shape="round"
@@ -9,6 +13,7 @@
       id="button1"
       (click) = "goToCarte()"
       >Reprendre mon trajet</ion-button>
+      <br>
     <ion-button
       size="default"
       shape="round"
@@ -18,6 +23,7 @@
       id="button2"
       (click) = "goToValidation()"
       >Valider mon arrivée</ion-button>
+      <br>
       <ion-button
       size="default"
       shape="round"

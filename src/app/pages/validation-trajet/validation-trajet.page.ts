@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-validation-trajet',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ValidationTrajetPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  goToQuestion(){
+    this.router.navigateByUrl('question-secrete');
+  }
+
+  goToCode(){
+    this.router.navigateByUrl('code-secret');
   }
 
 }
