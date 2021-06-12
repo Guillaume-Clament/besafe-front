@@ -8,7 +8,7 @@
   <div class="padding">
     <form #form="ngForm" (ngSubmit)="signUp(form)">
       <ion-button
-        href="/pickImages"
+        (click) ="pickImages()"
         expand="block"
         shape="round"
         fill="clear"
@@ -32,13 +32,20 @@
           >Membres du groupe</ion-label
         >
         <ion-input
-          name="nom"
+          name="membreGroupe"
           type="text"
           color="medium"
-          ngModel
+          [(ngModel)]="membreGroupe"
           required
         ></ion-input>
+        <ion-button (click)="addMembre()" slot="end"><ion-icon name="add-outline"></ion-icon></ion-button>
       </ion-item>
+
+      <ion-list class="listeMembres" lines="none">
+        <ion-item *ngFor="let membre of membres;">
+          <p>{{ membre }}</p>
+        </ion-item>
+      </ion-list>
 
       
     </form>

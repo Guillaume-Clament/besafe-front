@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -9,6 +9,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
   styleUrls: ['./add-groupe.page.scss'],
 })
 export class AddGroupePage implements OnInit {
+  public membres = [];
+  @Input() membreGroupe: string;
 
   constructor(public afDB: AngularFireDatabase,
     public afSG: AngularFireStorage, public imagePicker: ImagePicker) { }
@@ -29,6 +31,12 @@ export class AddGroupePage implements OnInit {
 
   signUp(form){
     // TODO
+  }
+
+  addMembre(){
+    console.log(this.membreGroupe);
+    this.membres.push(this.membreGroupe);
+    this.membreGroupe = '';
   }
 
 }
