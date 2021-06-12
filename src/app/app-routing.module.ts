@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { HomePageModule } from './home/home.module';
 
 const routes: Routes = [
   {
@@ -84,8 +83,10 @@ const routes: Routes = [
     path: 'add-groupe',
     loadChildren: () => import('./pages/add-groupe/add-groupe.module').then( m => m.AddGroupePageModule)
   },
-
-
+  {
+    path: 'partager-trajet',
+    loadChildren: () => import('./pages/partager-trajet/partager-trajet.module').then( m => m.PartagerTrajetPageModule)
+  },
 
 ];
 @NgModule({

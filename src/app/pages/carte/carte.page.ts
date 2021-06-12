@@ -7,6 +7,7 @@ import { NavParamService } from 'src/app/services/navparam.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { GoogleMap } from '@ionic-native/google-maps';
+import { Router } from '@angular/router';
 
 declare var google: any;
 const image = {
@@ -58,7 +59,8 @@ export class CartePage implements OnInit {
     private modalCtrl: ModalController,
     private navService: NavParamService,
     private firestore: AngularFirestore,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.getGeoLocation();
   }
@@ -113,6 +115,7 @@ export class CartePage implements OnInit {
     await modal.present();
     const { data } = await modal.onDidDismiss();
     this.calculateAndDisplayRoute(data);
+    this.router.navigateByUrl('partager-trajet');
   }
 
   /**

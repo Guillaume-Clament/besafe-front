@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Vos contacts de confiance</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)='close()'>
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <br/>
+  <p style="font-style: italic; padding-left: 6%;">Les anges et/ou groupes que vous sélectionnerez pourront suivre votre géolocalisation en temps réel lors de votre trajet.</p>
+  <br/><br/>
+  <div class="affichage-anges">
+    <ion-toolbar>
+      <ion-title>Mes Anges</ion-title>
+    </ion-toolbar>
+    <ion-list>
+      <ion-item *ngFor="let ange of anges">
+        <ion-label>{{ange.prenom}} {{ange.nom}} - @{{ange.pseudo}}</ion-label>
+        <ion-checkbox slot="start"></ion-checkbox>
+      </ion-item>
+    </ion-list> 
+  </div>
+  <br/><br/>
+  <div class="affichage-groupes">
+    <ion-toolbar>
+    <ion-title>Mes Groupes</ion-title>
+  </ion-toolbar>
+  <ion-list>
+    <ion-item *ngFor="let groupe of groupes">
+      <ion-label>{{groupe.nom}}</ion-label>
+      <ion-checkbox slot="start"></ion-checkbox>
+    </ion-item>
+  </ion-list>  
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="partage-trajet">
+    <ion-button expand="block" 
+    shape="round" 
+    color="success"
+    (click)="close()">
+      Lancer le trajet
+    </ion-button>
+  </div>
+</ion-footer>
+

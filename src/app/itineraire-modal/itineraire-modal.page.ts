@@ -23,6 +23,7 @@ export class ItineraireModalPage implements OnInit {
 
   onDidDismiss() {
     const {destination} = this.selectedAdress;
+    this.router.navigateByUrl('partager-trajet');
   }
 
   close(){

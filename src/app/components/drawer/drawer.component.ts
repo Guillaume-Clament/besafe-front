@@ -63,7 +63,7 @@ export class DrawerComponent implements AfterViewInit {
         console.log(ev);
         if (ev.deltaY < -this.openHeight) return;
         drawer.style.transform = `translateY(${ev.deltaY}px)`;
-        //redicretion sur l'authentification
+        //redirection sur l'authentification
         if (ev.deltaY > 200) this.router.navigateByUrl('fin-alerte');
       },
       onEnd: (ev) => {
@@ -106,8 +106,17 @@ export class DrawerComponent implements AfterViewInit {
   emettreAlerte() {
     this.firestore.collection('trajet-alerte').add({
       user: this.authService.currentUser.uid,
-      heure: '' + new Date().toISOString(),
+      heure: new Date().toISOString(),
       localisation: '' + this.navService.geoNavGeo(),
+    });
+    //récupérer id de l'user connecté
+    this.currentUid = this.authService.currentUser.uid;
+    let user = this.firestore.collection('utilisateurs', (ref) =>
+      ref.where('uid', '==', this.currentUid));
+    this.firestore.collection('messages').add({
+      nom: 'carre',
+      createdAd: new Date().toISOString,
+      msg: 'ATTENTION ! Alerte levée par ' + user
     });
   }
 

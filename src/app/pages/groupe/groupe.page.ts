@@ -19,7 +19,6 @@ export class GroupePage implements OnInit {
   constructor(
     private router: Router,
     public firestore: AngularFirestore,
-    private afs: AngularFirestore,
     private chatService: ChatService
   ) {
     this.getGroupes();
