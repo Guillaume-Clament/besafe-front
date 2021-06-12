@@ -38,6 +38,7 @@ export class DrawerComponent implements AfterViewInit {
   //num à changer
   phoneNumber = '0649279659';
   estEnregistre: boolean = false;
+  users: [];
 
   constructor(
     private plt: Platform,
@@ -110,14 +111,20 @@ export class DrawerComponent implements AfterViewInit {
       localisation: '' + this.navService.geoNavGeo(),
     });
     //récupérer id de l'user connecté
-    this.currentUid = this.authService.currentUser.uid;
-    let user = this.firestore.collection('utilisateurs', (ref) =>
-      ref.where('uid', '==', this.currentUid));
-    this.firestore.collection('messages').add({
-      nom: 'carre',
-      createdAd: new Date().toISOString,
-      msg: 'ATTENTION ! Alerte levée par ' + user
-    });
+    /*this.firestore
+      .collection('utilisateurs')
+      .snapshotChanges(['added', 'removed', 'modified'])
+      .subscribe((utilisateurs) => {
+        utilisateurs.forEach((user) => {
+          this.users.push({
+            id: user.payload.doc.id,
+            nom: user.payload.doc.data()['nom'],
+            prenom: user.payload.doc.data()['prenom'],
+            pseudo: user.payload.doc.data()['pseudo'],
+          });
+        });
+      });*/
+      
   }
 
   /**

@@ -38,13 +38,13 @@ export class PartagerTrajetPage implements OnInit {
     this.firestore
       .collection('anges')
       .snapshotChanges(['added', 'removed', 'modified'])
-      .subscribe((groupes) => {
-        groupes.forEach((groupe) => {
+      .subscribe((anges) => {
+        anges.forEach((ange) => {
           this.anges.push({
-            id: groupe.payload.doc.id,
-            nom: groupe.payload.doc.data()['nom'],
-            prenom: groupe.payload.doc.data()['prenom'],
-            pseudo: groupe.payload.doc.data()['pseudo'],
+            id: ange.payload.doc.id,
+            nom: ange.payload.doc.data()['nom'],
+            prenom: ange.payload.doc.data()['prenom'],
+            pseudo: ange.payload.doc.data()['pseudo'],
           });
         });
       });
