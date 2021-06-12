@@ -28,7 +28,7 @@ export class GroupePage implements OnInit {
   ngOnInit() {}
 
   onClick() {
-    this.router.navigate(['/discussion']);
+    this.router.navigate(['/discussion/:id']);
   }
 
   getGroupes() {
@@ -38,56 +38,35 @@ export class GroupePage implements OnInit {
       .subscribe((groupes) => {
         groupes.forEach((groupe) => {
           // récupération du dernier message
-          var listeMessages = groupe.payload.doc.data()['listeMessages'];
+          var nomGroupe = groupe.payload.doc.data()['nom'];
           var dernierMessage = 'Nouveau groupe !';
-          if (listeMessages) {
-            /*console.log(listeMessages[listeMessages.length-1].id);
-          var refMessage = this.firestore.collection('messages').doc(listeMessages[listeMessages.length-1].id);
-          
-          var docRef = this.firestore.collection("messages").doc(refMessage.toString());
-          docRef.get().then((doc) => {
-              if (doc.exists) {
-                  console.log("Document data:", doc.data());
-              } else {
-                  // doc.data() will be undefined in this case
-                  console.log("No such document!");
+          var dateDernierMessage = 0;
+          this.messages = this.chatService.getChatMessages();
+          this.messages.forEach((message) => {
+            message.forEach((m) => {
+              if (m.nom == nomGroupe && m.createdAt['seconds'] * 1000>dateDernierMessage) {
+                dateDernierMessage = m.createdAt['seconds'] * 1000;
+                dernierMessage = m.msg;
               }
-          }).catch((error) => {
-              console.log("Error getting document:", error);
-          });
-
-          console.log(refMessage2);*/
-            dernierMessage = listeMessages[listeMessages.length - 1].id;
-            this.messages = this.chatService.getChatMessages();
-            this.messages.forEach((message) => {
-              message.forEach((m) => {
-                if (m.id == dernierMessage) {
-                  this.date = new Date(m.createdAt['seconds'] * 1000);
-                  dernierMessage = m.msg;
-                  this.groupes.push({
-                    id: groupe.payload.doc.id,
-                    photo: groupe.payload.doc.data()['photo'],
-                    nom: groupe.payload.doc.data()['nom'],
-                    derniermessage: dernierMessage,
-                    dateEnvoie: this.date.toLocaleString(),
-                  });
-                }
-              });
+              this.date = new Date(m.createdAt['seconds'] * 1000);
             });
-          } else {
             this.groupes.push({
               id: groupe.payload.doc.id,
               photo: groupe.payload.doc.data()['photo'],
               nom: groupe.payload.doc.data()['nom'],
               derniermessage: dernierMessage,
+              dateEnvoie: this.date.toLocaleString(),
             });
-          }
+          });
         });
       });
   }
 
-  goToDiscussion(idgroupe: any) {
-    //this.router.navigate(['/discussion/']);
-    //this.router.navigateByUrl('discussion/'+idgroupe.id);
+  goToDiscussion(nomGroupe: String) {
+    this.router.navigateByUrl('discussion/:'+nomGroupe);
+  }
+
+  creerGroupe() {
+    this.router.navigateByUrl('add-groupe');
   }
 }

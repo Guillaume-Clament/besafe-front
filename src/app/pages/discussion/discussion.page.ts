@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 import { Observable } from 'rxjs';
@@ -11,20 +12,25 @@ import { ChatService, Message } from 'src/app/services/chat.service';
 })
 export class DiscussionPage implements OnInit {
   @ViewChild(IonContent) content: IonContent;
-
+  test: Observable<any>;
   messages: Observable<Message[]>;
   newMsg = '';
-  constructor(private router: Router, private chatService: ChatService) {}
+  nomGroupe = '';
+  constructor(private router: Router, 
+    private chatService: ChatService, 
+    private firestore: AngularFirestore) {
+      this.nomGroupe = router.url.replace("/discussion/:", "");
+
+  }
 
   ngOnInit() {
-    this.messages = this.chatService.getChatMessages();
+    this.messages = this.chatService.getChatMessagesByGroupe(this.nomGroupe);
   }
 
   sendMessage() {
-    this.chatService.addChatMessage(this.newMsg).then(() => {
+    this.chatService.addChatMessage(this.newMsg, this.nomGroupe).then(() => {
       this.newMsg = '';
       this.content.scrollToBottom;
     });
-    // ajouter message dans listeMessage du groupe
   }
 }

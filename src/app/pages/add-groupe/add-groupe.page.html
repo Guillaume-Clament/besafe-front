@@ -1,0 +1,68 @@
+<ion-content>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+  <div class="padding">
+    <form #form="ngForm" (ngSubmit)="signUp(form)">
+      <ion-button
+        (click) ="pickImages()"
+        expand="block"
+        shape="round"
+        fill="clear"
+        color="darkblue"
+        class="importPhoto"
+        ><ion-icon name="image-outline"></ion-icon></ion-button
+      >
+      <ion-item>
+        <ion-label color="darkblue" position="floating">Nom du groupe</ion-label>
+        <ion-input
+          name="nomGroupe"
+          type="text"
+          color="medium"
+          ngModel
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="darkblue" position="floating"
+          >Membres du groupe</ion-label
+        >
+        <ion-input
+          name="membreGroupe"
+          type="text"
+          color="medium"
+          [(ngModel)]="membreGroupe"
+          required
+        ></ion-input>
+        <ion-button (click)="addMembre()" slot="end"><ion-icon name="add-outline"></ion-icon></ion-button>
+      </ion-item>
+
+      <ion-list class="listeMembres" lines="none">
+        <ion-item *ngFor="let membre of membres;">
+          <p>{{ membre }}</p>
+        </ion-item>
+      </ion-list>
+
+      
+    </form>
+
+    <br />
+    <br />
+
+    <div class="signup-options">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="darkblue"
+        type="submit"
+        [disabled]="form.invalid"
+        (click)="signUp(form)"
+        >Valider</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

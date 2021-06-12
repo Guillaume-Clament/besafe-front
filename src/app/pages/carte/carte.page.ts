@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { IonSearchbar, ModalController, NavController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ItineraireModalPage } from 'src/app/itineraire-modal/itineraire-modal.page';
 import { NavParamService } from 'src/app/services/navparam.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { GoogleMap, GoogleMapsEvent } from '@ionic-native/google-maps';
+import { GoogleMap } from '@ionic-native/google-maps';
+
 declare var google: any;
 const image = {
   url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
@@ -21,18 +22,20 @@ const photo = {
   templateUrl: './carte.page.html',
   styleUrls: ['./carte.page.scss'],
 })
-export class CartePage implements AfterViewInit {
+export class CartePage implements OnInit {
   map: GoogleMap;
   @ViewChild('map', {read: ElementRef, static:false}) mapElement: ElementRef;
   Geocoder;
   backdropVisible = false;
-  destination: any = '';
   MyLocation: any;
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
-
+  estEnTrajet = false;
+  afficherAlerte = false;
   positionSuscription: Subscription;
   infoWindows = [];
+
+  //Repères affichés sur la carte
   markers = [
     [
       "Place du Capitole",
@@ -57,7 +60,20 @@ export class CartePage implements AfterViewInit {
     private firestore: AngularFirestore,
     private authService: AuthService
   ) {
+    this.getGeoLocation();
+  }
+
+  ngOnInit() {
+    //implémenter version sombre sur carte
+    this.getGeoLocation();
+  }
+
+  /**
+   * Récupérer géolocalisation
+   */
+  getGeoLocation(){
     const geocoder = new google.maps.Geocoder();
+    //récupérer la géolocalisation
     this.geo.getCurrentPosition().then((res) => {
       this.map = new google.maps.Map(document.getElementById('map'), {
         MyLocation: new google.maps.LatLng(
@@ -68,32 +84,43 @@ export class CartePage implements AfterViewInit {
       const latlng = {
         lat: res.coords.latitude,
         lng: res.coords.longitude,
-      };/*
+      };
+      //Encodage des données (lat,lng) en une adresse précise
       geocoder.geocode(
         { location: latlng },
         (results: google.maps.GeocoderResult[]) => {
           this.navService.setGeo(results[0].formatted_address);
         }
-      );*/
-      this.navService.setGeo('(' + res.coords.latitude + ', ' + res.coords.longitude + ')');
+      );
+      //this.navService.setGeo('(' + res.coords.latitude + ', ' + res.coords.longitude + ')');
     });
   }
 
-  ngAfterViewInit() {}
-
+  /**
+   * Effet de style quand le drawer est tiré
+   */
   toggleBackdrop(isVisible) {
     this.backdropVisible = isVisible;
   }
 
+  /**
+   * Lien vers le modal pour rechercher un itinéraire
+   */
   async showModal() {
     const modal = await this.modalCtrl.create({
       component: ItineraireModalPage,
     });
     await modal.present();
-    modal.onDidDismiss();
+    const { data } = await modal.onDidDismiss();
+    this.calculateAndDisplayRoute(data);
   }
 
-  calculateAndDisplayRoute() {
+  /**
+   * Récupérer la géolocalisation et la date de destination
+   * Affichage de l'itinéraire
+   * Alimentation en bd du trajet effectué
+   */
+  calculateAndDisplayRoute(data) {
     let that = this;
     var post;
     var latitude: number;
@@ -104,6 +131,7 @@ export class CartePage implements AfterViewInit {
     });
     this.directionsDisplay.setMap(map);
 
+    //récupération de la géolocalisation pour centrer la map
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         function (position) {
@@ -123,12 +151,13 @@ export class CartePage implements AfterViewInit {
       // Browser doesn't support Geolocation
     }
 
-    console.log('source ' + that.MyLocation);
+    console.log('source ' + this.navService.geoNavGeo());
     console.log('destination ' + this.navService.getNavData());
 
+    //création de l'itinéraire
     this.directionsService.route(
       {
-        origin: that.MyLocation,
+        origin: this.navService.geoNavGeo(),
         destination: this.navService.getNavData(),
         travelMode: 'DRIVING',
       },
@@ -146,20 +175,25 @@ export class CartePage implements AfterViewInit {
           window.alert('Directions request failed due to ' + status);
           console.log(
             'source : ' +
-              this.MyLocation +
+              this.navService.geoNavGeo() +
               ' / destination : ' +
-              this.destination
+              this.navService.getNavData()
           );
         }
       }
     );
+    //ajout du trajet en bd
     this.firestore.collection('trajet').add({
       user: this.authService.currentUser.uid,
       start: this.navService.geoNavGeo(),
-      destination: this.navService.getNavData(),
+      destination: this.navService.getNavData()
     });
+    this.estEnTrajet = true;
   }
 
+  /**
+   * Load de la map (avec les markers)
+   */
   ionViewDidEnter() {
     this.geo
       .getCurrentPosition()
@@ -175,6 +209,9 @@ export class CartePage implements AfterViewInit {
       });
   }
 
+  /**
+   * Lecture des markers sur la carte et display de la fiche d'informations
+   */
   addMarkersToMap(markers){
     var i;
     for (i = 0; i < markers.length; i++){
@@ -193,5 +230,13 @@ export class CartePage implements AfterViewInit {
         infoWindow.open(this.map, mapMarker);
       });
     }
+  }
+
+  /**
+   * Afficher le drawer pour lever une alerte
+   */
+  displayAlerts(){
+    this.estEnTrajet = false;
+    this.afficherAlerte = true;
   }
 }

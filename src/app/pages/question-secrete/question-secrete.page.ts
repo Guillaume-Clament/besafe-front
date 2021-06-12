@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-fin-alerte',
-  templateUrl: './fin-alerte.page.html',
-  styleUrls: ['./fin-alerte.page.scss'],
+  selector: 'app-question-secrete',
+  templateUrl: './question-secrete.page.html',
+  styleUrls: ['./question-secrete.page.scss'],
 })
-export class FinAlertePage implements OnInit {
+export class QuestionSecretePage implements OnInit {
 
   constructor(private router: Router) { }
 
@@ -16,9 +16,4 @@ export class FinAlertePage implements OnInit {
   goToCarte(){
     this.router.navigateByUrl('home/carte');
   }
-
-  goToValidation(){
-    this.router.navigateByUrl('validation-trajet');
-  }
-
 }

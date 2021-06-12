@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
 import { Feature, MapboxService } from '../services/mapbox.service';
 import { NavParamService } from '../services/navparam.service';
@@ -17,12 +18,15 @@ export class ItineraireModalPage implements OnInit {
     private mapBoxService: MapboxService,
     private navCtrl: NavController,
     private navService: NavParamService,
+    private router: Router
   ) {}
 
-  async close() {
-    await this.modalCtrl.dismiss({
-      destination: 'Marseille',
-    });
+  onDidDismiss() {
+    const {destination} = this.selectedAdress;
+  }
+
+  close(){
+    this.modalCtrl.dismiss();
   }
 
   ngOnInit() {}

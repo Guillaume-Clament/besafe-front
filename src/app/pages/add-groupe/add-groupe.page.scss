@@ -1,0 +1,50 @@
+ion-content {
+    //--ion-background-color: linear-gradient(180deg, #51baeba6, #ffffff);
+}
+
+ion-item {
+    --ion-background-color: transparent !important;
+  }
+
+.padding {
+  padding: 5%;
+}
+
+.signup-options{
+    text-align: center;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+
+
+ion-button {
+  font-family: SF UI Display Light !important;
+  font-size: 0.9em;
+}
+
+ion-label {
+  --color: white;
+  font-family: SF UI Display Light !important;
+  font-size: 0.8em;
+}
+
+ion-input {
+  font-family: SF UI Display Light !important;
+  font-size: 0.9em;
+}
+
+.importPhoto {
+  margin: auto;
+  height: 5em;
+  width: 5em;
+  text-decoration: underline;
+  border: 1px solid darkgray;
+  border-radius: 100%;
+}
+
+.listeMembres{
+  text-decoration: none;
+}

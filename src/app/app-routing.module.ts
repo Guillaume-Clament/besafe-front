@@ -61,12 +61,30 @@ const routes: Routes = [
     loadChildren: () => import('./pages/discussion/discussion.module').then( m => m.DiscussionPageModule)
   },
   {
+    path: 'discussion/:id',
+    loadChildren: () => import('./pages/discussion/discussion.module').then( m => m.DiscussionPageModule)
+  },
+  {
     path: 'fin-alerte',
     loadChildren: () => import('./pages/fin-alerte/fin-alerte.module').then( m => m.FinAlertePageModule)
-  },  {
+  },
+  {
     path: 'validation-trajet',
     loadChildren: () => import('./pages/validation-trajet/validation-trajet.module').then( m => m.ValidationTrajetPageModule)
   },
+  {
+    path: 'code-secret',
+    loadChildren: () => import('./pages/code-secret/code-secret.module').then( m => m.CodeSecretPageModule)
+  },
+  {
+    path: 'question-secrete',
+    loadChildren: () => import('./pages/question-secrete/question-secrete.module').then( m => m.QuestionSecretePageModule)
+  },
+  {
+    path: 'add-groupe',
+    loadChildren: () => import('./pages/add-groupe/add-groupe.module').then( m => m.AddGroupePageModule)
+  },
+
 
 
 ];
