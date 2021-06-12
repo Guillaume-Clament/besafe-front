@@ -19,10 +19,8 @@ export class ItineraireModalPage implements OnInit {
     private navService: NavParamService,
   ) {}
 
-  async close() {
-    await this.modalCtrl.dismiss({
-      destination: 'Marseille',
-    });
+  onDidDismiss() {
+    const {destination} = this.selectedAdress;
   }
 
   ngOnInit() {}

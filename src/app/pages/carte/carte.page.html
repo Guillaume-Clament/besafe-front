@@ -8,15 +8,14 @@
         <ion-icon name="search-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="calculateAndDisplayRoute()" color="success">
-        <ion-icon name="checkmark-outline"></ion-icon>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="estEnTrajet">
+      <ion-fab-button (click)="displayAlerts()" color="danger">
+        <ion-icon name="alert-circle-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   
-    <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click)="drawer.toggleDrawer()"></div>
-    <ion-button (click)="drawer.toggleDrawer()" expand="full"></ion-button>
-    <app-drawer (openStateChanged)="toggleBackdrop($event)" #drawer></app-drawer>
+    <ion-button (click)="displayAlerts()" expand="full"></ion-button>
+    <app-drawer *ngIf="afficherAlerte" (openStateChanged)="toggleBackdrop($event)" #drawer></app-drawer>
   
   </ion-content>
   
