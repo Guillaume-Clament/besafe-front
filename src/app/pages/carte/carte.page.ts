@@ -27,11 +27,11 @@ export class CartePage implements OnInit {
   @ViewChild('map', {read: ElementRef, static:false}) mapElement: ElementRef;
   Geocoder;
   backdropVisible = false;
-  destination: any = '';
   MyLocation: any;
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
-
+  estEnTrajet = false;
+  afficherAlerte = false;
   positionSuscription: Subscription;
   infoWindows = [];
 
@@ -60,6 +60,18 @@ export class CartePage implements OnInit {
     private firestore: AngularFirestore,
     private authService: AuthService
   ) {
+    this.getGeoLocation();
+  }
+
+  ngOnInit() {
+    //implémenter version sombre sur carte
+    this.getGeoLocation();
+  }
+
+  /**
+   * Récupérer géolocalisation
+   */
+  getGeoLocation(){
     const geocoder = new google.maps.Geocoder();
     //récupérer la géolocalisation
     this.geo.getCurrentPosition().then((res) => {
@@ -74,18 +86,14 @@ export class CartePage implements OnInit {
         lng: res.coords.longitude,
       };
       //Encodage des données (lat,lng) en une adresse précise
-      /*geocoder.geocode(
+      geocoder.geocode(
         { location: latlng },
         (results: google.maps.GeocoderResult[]) => {
           this.navService.setGeo(results[0].formatted_address);
         }
-      );*/
-      this.navService.setGeo('(' + res.coords.latitude + ', ' + res.coords.longitude + ')');
+      );
+      //this.navService.setGeo('(' + res.coords.latitude + ', ' + res.coords.longitude + ')');
     });
-  }
-
-  ngOnInit() {
-    //implémenter version sombre sur carte
   }
 
   /**
@@ -103,7 +111,8 @@ export class CartePage implements OnInit {
       component: ItineraireModalPage,
     });
     await modal.present();
-    modal.onDidDismiss();
+    const { data } = await modal.onDidDismiss();
+    this.calculateAndDisplayRoute(data);
   }
 
   /**
@@ -111,7 +120,7 @@ export class CartePage implements OnInit {
    * Affichage de l'itinéraire
    * Alimentation en bd du trajet effectué
    */
-  calculateAndDisplayRoute() {
+  calculateAndDisplayRoute(data) {
     let that = this;
     var post;
     var latitude: number;
@@ -122,7 +131,7 @@ export class CartePage implements OnInit {
     });
     this.directionsDisplay.setMap(map);
 
-    //récupération de la géolocalisation
+    //récupération de la géolocalisation pour centrer la map
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         function (position) {
@@ -142,13 +151,13 @@ export class CartePage implements OnInit {
       // Browser doesn't support Geolocation
     }
 
-    console.log('source ' + that.MyLocation);
+    console.log('source ' + this.navService.geoNavGeo());
     console.log('destination ' + this.navService.getNavData());
 
     //création de l'itinéraire
     this.directionsService.route(
       {
-        origin: that.MyLocation,
+        origin: this.navService.geoNavGeo(),
         destination: this.navService.getNavData(),
         travelMode: 'DRIVING',
       },
@@ -166,9 +175,9 @@ export class CartePage implements OnInit {
           window.alert('Directions request failed due to ' + status);
           console.log(
             'source : ' +
-              this.MyLocation +
+              this.navService.geoNavGeo() +
               ' / destination : ' +
-              this.destination
+              this.navService.getNavData()
           );
         }
       }
@@ -177,8 +186,9 @@ export class CartePage implements OnInit {
     this.firestore.collection('trajet').add({
       user: this.authService.currentUser.uid,
       start: this.navService.geoNavGeo(),
-      destination: this.navService.getNavData(),
+      destination: this.navService.getNavData()
     });
+    this.estEnTrajet = true;
   }
 
   /**
@@ -220,5 +230,13 @@ export class CartePage implements OnInit {
         infoWindow.open(this.map, mapMarker);
       });
     }
+  }
+
+  /**
+   * Afficher le drawer pour lever une alerte
+   */
+  displayAlerts(){
+    this.estEnTrajet = false;
+    this.afficherAlerte = true;
   }
 }
