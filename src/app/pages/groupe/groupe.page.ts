@@ -23,10 +23,11 @@ export class GroupePage implements OnInit {
   ) {
     this.groupes.length = 0;
     this.getGroupes();
+    this.groupes=[];
   }
 
-  ngOnInit() {
-    
+  ngOnInit(){
+
   }
 
   onClick() {

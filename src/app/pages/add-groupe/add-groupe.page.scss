@@ -6,6 +6,13 @@ ion-item {
     --ion-background-color: transparent !important;
   }
 
+.add-groupe{
+  position: fixed;
+  left: 0;
+  bottom: 10px;
+  right: 0;
+}
+
 .padding {
   padding: 5%;
 }
@@ -23,6 +30,9 @@ ion-item {
 ion-button {
   font-family: SF UI Display Light !important;
   font-size: 0.9em;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
 }
 
 ion-label {

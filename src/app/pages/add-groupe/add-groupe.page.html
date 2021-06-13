@@ -1,8 +1,10 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-title>Créer un nouveau groupe</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+    <ion-buttons slot="end">
+      <ion-button (click)='close()'>
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -17,60 +19,36 @@
 
   <div class="padding">
     <form #form="ngForm" (ngSubmit)="creerGroupe(form)">
-      <ion-button
-        (click) ="openImagePicker()"
-        expand="block"
-        shape="round"
-        fill="clear"
-        color="darkblue"
-        class="importPhoto"
-        ><ion-icon name="image-outline"></ion-icon></ion-button
-      >
+      <ion-button (click)="openImagePicker()" expand="block" shape="round" fill="clear" color="darkblue"
+        class="importPhoto">
+        <ion-icon name="image-outline"></ion-icon>
+      </ion-button>
+      <br />
+      <br />
+      <br />
+
       <ion-item>
         <ion-label color="darkblue" position="floating">Nom du groupe</ion-label>
-        <ion-input
-          name="nomGroupe"
-          type="text"
-          color="medium"
-          ngModel
-          required
-        ></ion-input>
+        <ion-input name="nomGroupe" type="text" color="medium" ngModel required></ion-input>
       </ion-item>
 
+      <br />
+      <br />
       <ion-item>
-        <ion-label color="darkblue" position="floating"
-          >Membres du groupe</ion-label
-        >
-        <ion-input
-          name="membreGroupe"
-          type="text"
-          color="medium"
-          [(ngModel)]="membreGroupe"
-        ></ion-input>
-        <ion-button (click)="addMembre()" slot="end"><ion-icon name="add-outline"></ion-icon></ion-button>
+        <ion-label color="darkblue" position="floating">Membres du groupe</ion-label>
+        <ion-select [(ngModel)]="membreGroupe" name="membreGroupe" lines="none" multiple="true" okText="Valider"
+          cancelText="Annuler" (ionChange)=addMembre();>
+          <ion-select-option *ngFor="let user of users">
+            {{user.prenom + ' ' + user.nom + ' - ' + user.pseudo}}
+          </ion-select-option>
+        </ion-select>
       </ion-item>
-      <ion-list class="tailleListeMembres" >
-          <ion-item required *ngFor="let membre of membres" class="listeMembres" lines="none" >
-            <ion-label>{{ membre }}</ion-label>
-          </ion-item>
-      </ion-list>
-
-      
+      <ion-button class="add-groupe" expand="block" shape="round" color="darkblue" type="submit"
+        [disabled]="form.invalid" (click)="creerGroupe(form)">
+        Valider
+      </ion-button>
     </form>
-
-    <br />
-    <br />
-
-    <div class="signup-options">
-      <ion-button
-        expand="block"
-        shape="round"
-        color="darkblue"
-        type="submit"
-        [disabled]="form.invalid"
-        (click)="creerGroupe(form)"
-        >Valider</ion-button
-      >
-    </div>
   </div>
 </ion-content>
+<br />
+<br />

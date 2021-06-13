@@ -1,22 +1,25 @@
-<ion-app>
-  <ion-content [fullscreen]="true" scrollY="false">
-  
-    <div id="map" style="height: 100%;"></div>
-  
-    <ion-fab vertical="top" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="showModal()">
-        <ion-icon name="search-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="estEnTrajet">
-      <ion-fab-button (click)="displayAlerts()" color="danger">
-        <ion-icon name="alert-circle-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  
-    <ion-button (click)="displayAlerts()" expand="full"></ion-button>
-    <app-drawer *ngIf="afficherAlerte" (openStateChanged)="toggleBackdrop($event)" #drawer></app-drawer>
-  
-  </ion-content>
-  
-</ion-app>
+<ion-header *ngIf="afficherHeader">
+  <ion-button color="medium" *ngFor="let user of users" (click)=findUser(user)>
+    {{user.title}}
+  </ion-button>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollY="false">
+
+  <div id="map" style="height: 100%;"></div>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="showModal()">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="estEnTrajet">
+    <ion-fab-button (click)="displayAlerts()" color="danger">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-button (click)="displayAlerts()" expand="full"></ion-button>
+  <app-drawer *ngIf="afficherAlerte" (openStateChanged)="toggleBackdrop($event)" #drawer></app-drawer>
+
+</ion-content>

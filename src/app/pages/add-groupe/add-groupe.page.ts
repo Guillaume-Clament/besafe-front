@@ -3,10 +3,17 @@ import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx'
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Platform, ToastController } from '@ionic/angular';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
 import firebase from 'firebase/app';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
+
+interface Utilisateur {
+  pseudo: string;
+  prenom: string;
+  nom: string;
+}
 
 @Component({
   selector: 'app-add-groupe',
@@ -14,7 +21,30 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./add-groupe.page.scss'],
 })
 export class AddGroupePage implements OnInit {
-  public membres = [];
+  membres = [];
+  users: Utilisateur[] =[
+    {
+      prenom: 'Lucie',
+      nom: 'Matthias', 
+      pseudo: '@lulu31'
+    },
+    {
+      prenom: 'Matthias',
+      nom: 'Laurent', 
+      pseudo: '@matha'
+    },
+    {
+      prenom: 'Maxence',
+      nom: 'Mirens', 
+      pseudo: '@maxsens'
+    },
+    {
+      prenom: 'Mélissa',
+      nom: 'Carillon', 
+      pseudo: '@melcarillon'
+    }
+  ];
+  groupe = [];
   @Input() membreGroupe: string;
 
   constructor(
@@ -23,23 +53,29 @@ export class AddGroupePage implements OnInit {
     public afSG: AngularFireStorage,
     public imagePicker: ImagePicker,
     public toastCtrl: ToastController,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private router: Router
+    ) { 
+      this.groupe = [];
+    }
 
   ngOnInit() {
   }
 
   addMembre(){
     this.membres.push(this.membreGroupe);
-    this.membreGroupe = '';
+    console.log(this.membres);
   }
 
   creerGroupe(form){
+    console.log(this.membres);
     if (this.membres.length == 0){
-      console.log("aucun membre");
+      window.alert("Erreur. Vous ne pouvez créer un groupe sans en avoir saisi les membres.")
     } else {
+      this.groupe.push[form.value.nomGroupe];
       this.firestore.collection('groupes').add({
         nom: form.value.nomGroupe,
-        listeGroupe: this.membres
+        listeGroupe: this.membres[0]
       });
       this.firestore.collection('messages').add({
         msg: "Création d'un nouveau groupe !",
@@ -47,7 +83,7 @@ export class AddGroupePage implements OnInit {
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         nom: form.value.nomGroupe,
       });
-      console.log("Groupe ajouté !")
+      this.close();
     }    
   }
 
@@ -55,6 +91,9 @@ export class AddGroupePage implements OnInit {
     console.log("Je souhaite ajouter une image");
   }
 
+  close(){
+    this.router.navigateByUrl('home/groupe');
+  }
   /*
   
   imports à faire :
