@@ -1,0 +1,60 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home/compte"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="ajouterAnge()"
+          ><ion-icon name="add-outline"></ion-icon
+        ></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <div class="padding">
+    <ion-list>
+      <ion-list-header> Mes anges </ion-list-header>
+      <br />
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="http://placekitten.com/200/300" />
+        </ion-avatar>
+        <ion-label>
+          <h2>Ali</h2>
+          <p>@alyRady</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="http://placekitten.com/300/300" />
+        </ion-avatar>
+        <ion-label>
+          <h2>Camille</h2>
+          <p>@Cam</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="http://placekitten.com/300/200" />
+        </ion-avatar>
+        <ion-label>
+          <h2>Flore</h2>
+          <p>@Flo</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="http://placekitten.com/200/200" />
+        </ion-avatar>
+        <ion-label>
+          <h2>Guillaume</h2>
+          <p>@Gigi</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

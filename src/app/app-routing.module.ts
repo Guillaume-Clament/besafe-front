@@ -57,35 +57,71 @@ const routes: Routes = [
   },
   {
     path: 'discussion',
-    loadChildren: () => import('./pages/discussion/discussion.module').then( m => m.DiscussionPageModule)
+    loadChildren: () =>
+      import('./pages/discussion/discussion.module').then(
+        (m) => m.DiscussionPageModule
+      ),
   },
   {
     path: 'discussion/:id',
-    loadChildren: () => import('./pages/discussion/discussion.module').then( m => m.DiscussionPageModule)
+    loadChildren: () =>
+      import('./pages/discussion/discussion.module').then(
+        (m) => m.DiscussionPageModule
+      ),
   },
   {
     path: 'fin-alerte',
-    loadChildren: () => import('./pages/fin-alerte/fin-alerte.module').then( m => m.FinAlertePageModule)
+    loadChildren: () =>
+      import('./pages/fin-alerte/fin-alerte.module').then(
+        (m) => m.FinAlertePageModule
+      ),
   },
   {
     path: 'validation-trajet',
-    loadChildren: () => import('./pages/validation-trajet/validation-trajet.module').then( m => m.ValidationTrajetPageModule)
+    loadChildren: () =>
+      import('./pages/validation-trajet/validation-trajet.module').then(
+        (m) => m.ValidationTrajetPageModule
+      ),
   },
   {
     path: 'code-secret',
-    loadChildren: () => import('./pages/code-secret/code-secret.module').then( m => m.CodeSecretPageModule)
+    loadChildren: () =>
+      import('./pages/code-secret/code-secret.module').then(
+        (m) => m.CodeSecretPageModule
+      ),
   },
   {
     path: 'question-secrete',
-    loadChildren: () => import('./pages/question-secrete/question-secrete.module').then( m => m.QuestionSecretePageModule)
+    loadChildren: () =>
+      import('./pages/question-secrete/question-secrete.module').then(
+        (m) => m.QuestionSecretePageModule
+      ),
   },
   {
     path: 'add-groupe',
-    loadChildren: () => import('./pages/add-groupe/add-groupe.module').then( m => m.AddGroupePageModule)
+    loadChildren: () =>
+      import('./pages/add-groupe/add-groupe.module').then(
+        (m) => m.AddGroupePageModule
+      ),
   },
   {
     path: 'partager-trajet',
-    loadChildren: () => import('./pages/partager-trajet/partager-trajet.module').then( m => m.PartagerTrajetPageModule)
+    loadChildren: () =>
+      import('./pages/partager-trajet/partager-trajet.module').then(
+        (m) => m.PartagerTrajetPageModule
+      ),
+  },
+  {
+    path: 'alerte',
+    loadChildren: () =>
+      import('./pages/alerte/alerte.module').then((m) => m.AlertePageModule),
+  },  {
+    path: 'anges',
+    loadChildren: () => import('./pages/anges/anges.module').then( m => m.AngesPageModule)
+  },
+  {
+    path: 'domicile',
+    loadChildren: () => import('./pages/domicile/domicile.module').then( m => m.DomicilePageModule)
   },
 
 ];
