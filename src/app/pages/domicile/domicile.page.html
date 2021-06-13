@@ -1,1 +1,24 @@
-<ion-content> </ion-content>
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home/compte"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" scrollY="false">
+    <ion-card color="darkblue">
+        <ion-item>
+            <ion-label>
+                <h1>Mon adresse</h1>
+            </ion-label>
+            <ion-button fill="outline" slot="end" (click)=modifierAdresse()>Modifier</ion-button>
+        </ion-item>
+
+        <ion-card-content>
+            <p>Lorem ipsum</p>
+            <p>31000 Toulouse</p>
+        </ion-card-content>
+    </ion-card>
+
+    <app-edit *ngIf="afficherDrawer" (openStateChanged)="toggleBackdrop($event)" #edit></app-edit>
+</ion-content>

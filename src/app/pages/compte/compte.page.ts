@@ -44,14 +44,20 @@ export class ComptePage implements OnInit {
   }
 
   alerte() {
-    this.router.navigate(['/alerte']);
+    this.router.navigate(['home/compte/alerte']);
   }
 
   anges() {
-    this.router.navigate(['/anges']);
+    this.router.navigate(['home/compte/anges']);
   }
 
   domicile() {
-    this.router.navigate(['/domicile']);
+    this.router.navigate(['home/compte/domicile']);
   }
+
+  raccourcis(){
+    this.router.navigate(['home/compte/raccourcis']);
+  }
+
+  
 }

@@ -112,17 +112,24 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'alerte',
+    path: 'home/compte/alerte',
     loadChildren: () =>
       import('./pages/alerte/alerte.module').then((m) => m.AlertePageModule),
-  },  {
-    path: 'anges',
+  },
+  {
+    path: 'home/compte/anges',
     loadChildren: () => import('./pages/anges/anges.module').then( m => m.AngesPageModule)
   },
   {
-    path: 'domicile',
+    path: 'home/compte/domicile',
     loadChildren: () => import('./pages/domicile/domicile.module').then( m => m.DomicilePageModule)
   },
+  {
+    path: 'home/compte/raccourcis',
+    loadChildren: () => import('./pages/raccourcis/raccourcis.module').then( m => m.RaccourcisPageModule)
+  }
+
+
 
 ];
 @NgModule({

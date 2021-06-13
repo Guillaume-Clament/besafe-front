@@ -18,9 +18,6 @@ import {
   CameraDirection,
 } from '@capacitor/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { File, FileEntry } from '@ionic-native/file';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-import { Media, MediaObject } from '@ionic-native/media';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
