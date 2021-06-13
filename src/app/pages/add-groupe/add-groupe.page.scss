@@ -48,3 +48,8 @@ ion-input {
 .listeMembres{
   text-decoration: none;
 }
+
+.tailleListeMembres{
+  max-height: 15em;
+  overflow:scroll;
+}
