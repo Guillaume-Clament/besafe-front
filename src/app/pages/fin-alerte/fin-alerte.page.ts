@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  Plugins,
+  CameraResultType,
+  CameraSource,
+  CameraDirection,
+} from '@capacitor/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-fin-alerte',
@@ -7,18 +16,90 @@ import { Router } from '@angular/router';
   styleUrls: ['./fin-alerte.page.scss'],
 })
 export class FinAlertePage implements OnInit {
+  photo: SafeResourceUrl;
 
-  constructor(private router: Router) { }
+  constructor(public alertController: AlertController,
+    private sanitizer: DomSanitizer,
+    private router: Router,
+    private navCtrl: NavController
+
+  ) { }
 
   ngOnInit() {
   }
 
-  goToCarte(){
-    this.router.navigateByUrl('home/carte');
+  goToCarte() {
+    this.navCtrl.navigateBack('home/carte');
   }
 
-  goToValidation(){
+  /*goToValidation(){
     this.router.navigateByUrl('validation-trajet');
+  }*/
+
+  async repondreQuestion() {
+    let alert = this.alertController.create({
+      //title: 'Confirm purchase',
+      message: 'Quel est votre chiffre préféré ?',
+      inputs: [
+        {
+          name: 'reponse'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel'
+        },
+        {
+          text: 'Valider',
+          handler: data => {
+            this.navCtrl.navigateBack('home/carte');
+          }
+        }
+      ]
+    });
+    (await alert).present();
+  }
+
+  /**
+  * Gestion d'une alerte de type "M'enregistrer"
+  */
+  async ouvrirCamera() {
+    const image = await Plugins.Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera,
+      direction: CameraDirection.Front,
+    });
+    this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(
+      image && image.dataUrl
+    );
+  }
+
+  async saisirCode() {
+    let alert = this.alertController.create({
+      //title: 'Confirm purchase',
+      message: 'Quel est votre code ?',
+      inputs: [
+        {
+          name: 'reponse',
+        }
+      ],
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel'
+        },
+        {
+          text: 'Valider',
+          handler: data => {
+            this.navCtrl.navigateBack('home/carte');
+          }
+        }
+      ]
+    });
+    (await alert).present();
   }
 
 }

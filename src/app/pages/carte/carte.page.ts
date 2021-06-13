@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -17,6 +17,10 @@ const photo = {
   url: 'assets/marker-1.jpg',
   scaledSize: new google.maps.Size(50, 50),
 }
+const photoMaxence = {
+  url: 'assets/little-boy-marker.jpg',
+  scaledSize: new google.maps.Size(50, 50),
+}
 
 @Component({
   selector: 'app-carte',
@@ -25,7 +29,7 @@ const photo = {
 })
 export class CartePage implements OnInit {
   map: GoogleMap;
-  @ViewChild('map', {read: ElementRef, static:false}) mapElement: ElementRef;
+  @ViewChild('map', { read: ElementRef, static: false }) mapElement: ElementRef;
   Geocoder;
   backdropVisible = false;
   MyLocation: any;
@@ -35,6 +39,7 @@ export class CartePage implements OnInit {
   afficherAlerte = false;
   positionSuscription: Subscription;
   infoWindows = [];
+  markerLocalisation: any;
 
   //Repères affichés sur la carte
   markers = [
@@ -44,13 +49,23 @@ export class CartePage implements OnInit {
       1.444209,
       photo,
       "Lucie",
-    ], 
+      "green"
+    ],
     [
       "Chupitos",
-      43.6008071, 
+      43.6008071,
       1.4436933,
       image,
       "Matthias",
+      "grey"
+    ],
+    [
+      "Zénith Toulouse Métropole",
+      43.5982185, 
+      1.4092514,
+      photoMaxence, 
+      "Maxence",
+      "red"
     ]
   ];
 
@@ -73,7 +88,7 @@ export class CartePage implements OnInit {
   /**
    * Récupérer géolocalisation
    */
-  getGeoLocation(){
+  getGeoLocation() {
     const geocoder = new google.maps.Geocoder();
     //récupérer la géolocalisation
     this.geo.getCurrentPosition().then((res) => {
@@ -147,7 +162,7 @@ export class CartePage implements OnInit {
           map.setCenter(pos);
           that.MyLocation = new google.maps.LatLng(latitude, longitude);
         },
-        function () {}
+        function () { }
       );
     } else {
       // Browser doesn't support Geolocation
@@ -167,9 +182,9 @@ export class CartePage implements OnInit {
         if (status === 'OK') {
           console.log(
             'source : ' +
-              response +
-              ' / destination : ' +
-              response.request.destination
+            response +
+            ' / destination : ' +
+            response.request.destination
           );
           console.log(response.request.destination);
           that.directionsDisplay.setDirections(response);
@@ -177,9 +192,9 @@ export class CartePage implements OnInit {
           window.alert('Directions request failed due to ' + status);
           console.log(
             'source : ' +
-              this.navService.geoNavGeo() +
-              ' / destination : ' +
-              this.navService.getNavData()
+            this.navService.geoNavGeo() +
+            ' / destination : ' +
+            this.navService.getNavData()
           );
         }
       }
@@ -204,7 +219,7 @@ export class CartePage implements OnInit {
           center: { lat: res.coords.latitude, lng: res.coords.longitude },
           zoom: 17,
         });
-      this.addMarkersToMap(this.markers); 
+        this.addMarkersToMap(this.markers);
       })
       .catch((e) => {
         console.log(e);
@@ -214,30 +229,79 @@ export class CartePage implements OnInit {
   /**
    * Lecture des markers sur la carte et display de la fiche d'informations
    */
-  addMarkersToMap(markers){
+  addMarkersToMap(markers) {
     var i;
-    for (i = 0; i < markers.length; i++){
+    //pour chaque marker
+    for (i = 0; i < markers.length; i++) {
+      //créer le marker
       let mapMarker = new google.maps.Marker({
         position: new google.maps.LatLng(markers[i][1], markers[i][2]),
         title: markers[i][4],
-        latitude: markers[i][1], 
+        latitude: markers[i][1],
         longitude: markers[i][2],
         icon: markers[i][3],
+        color: markers[i][5],
         map: this.map,
       });
-      var infoWindow = new google.maps.InfoWindow({
-        content: "Ceci est la position de " + markers[i][4],
+      this.addInfoWindow(mapMarker, mapMarker.position);
+    }
+  }
+
+  //afficher un marker
+  addInfoWindow(mapMarker, markerLoc) {
+    //html du marker
+    let window = '<div id="content">'+
+      '<div style="text-align: center;"><img src="' + mapMarker.icon.url + '" width="75"></img></div>'+
+        '<ion-row"><h3 id="firstHeading" class="firstHeading" style="text-align:left;">' +
+          mapMarker.title + 
+        '</h3>'+
+        '<div style="width: 30px; height: 30px; border-radius: 20px; text-align:right; background:'+ mapMarker.color+';">'+
+        '</div>'+
+      '</div>' 
+      +'</ion-row>'
+      +'<p>'+
+        'Localisation : ' + markerLoc + 
+      '</p>'+
+      '<p>'+
+        '<div style="text-align: center;"><ion-button id="tap">'+
+          'Contacter'+
+        '</ion-button></div>'+
+      '</p>'
+    var infoWindow = new google.maps.InfoWindow({
+      content: window,
+    });
+    //on click d'un marker
+    mapMarker.addListener('click', () => {
+      //fermer un marker déjà ouvert
+      this.closeAllWindow();
+      //ouvrir le marker
+      infoWindow.open(this.map, mapMarker);
+    });
+    //action quand on clique sur Contacter
+    google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+      document.getElementById('tap').addEventListener('click', () => {
+        console.log('touch');
+        //redirection vers les groupes de l'utilisateur
+        this.router.navigateByUrl('home/groupe');
       });
-      mapMarker.addListener('click', () => {
-        infoWindow.open(this.map, mapMarker);
-      });
+    });
+    //ajouter la description à la liste des markers
+    this.infoWindows.push(infoWindow);
+  }
+
+  /**
+   * Fermer toutes les markers
+   */
+  closeAllWindow(){
+    for (let window of this.infoWindows){
+      window.close();
     }
   }
 
   /**
    * Afficher le drawer pour lever une alerte
    */
-  displayAlerts(){
+  displayAlerts() {
     this.estEnTrajet = false;
     this.afficherAlerte = true;
   }
