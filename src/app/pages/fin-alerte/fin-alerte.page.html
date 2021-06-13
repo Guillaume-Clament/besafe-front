@@ -1,36 +1,24 @@
-<ion-content [fullscreen]="true">
-  <div class="options" style="text-align: center; height: 100%; background-color: #102754;">
-    <p>
-      Vous tentez de retourner au menu principal.
-    </p>
-      <h3>Etes-vous en sécurité ?</h3>
-    <ion-button
-      size="default"
-      shape="round"
-      color="white"
-      text="darkblue"
-      type="submit"
-      id="button1"
-      (click) = "goToCarte()"
-      >Reprendre mon trajet</ion-button>
-      <br>
-    <ion-button
-      size="default"
-      shape="round"
-      color="white"
-      text="darkblue"
-      type="submit"
-      id="button2"
-      (click) = "goToValidation()"
-      >Valider mon arrivée</ion-button>
-      <br>
-      <ion-button
-      size="default"
-      shape="round"
-      color="white"
-      text="darkblue"
-      type="submit"
-      (click) = "goToCarte()"
-      >Ignorer</ion-button>
+<ion-content>
+  <div class="options" style="text-align: center; height: 100%; background-color: #1D0F2F;">
+    <br /><br /><br /><br /><br />
+    <p> Vous tentez de retourner au menu <br /> principal. </p><br />
+    <h3>Etes-vous en sécurité ?</h3><br /><br />
+    <br /><br /><br />
+    <ion-button size="default" shape="round" color="white" text="darkblue" expand="block" type="submit" id="button1"
+      (click)="repondreQuestion()">
+      Répondre à une question
+    </ion-button><br />
+    <ion-button size="default" shape="round" color="white" text="darkblue" expand="block" type="submit" id="button2"
+      (click)="ouvrirCamera()">
+      Ouvrir ma caméra
+    </ion-button><br />
+    <ion-button size="default" shape="round" color="white" text="darkblue" expand="block" type="submit"
+      (click)="saisirCode()">
+      Code secret
+    </ion-button><br /><br /><br /><br /><br /><br /><br />
+    <div class="underline">
+      <ion-button (click)="goToCarte()" expand="block" shape="round" fill="clear" color="darkblue" class="lien-href">
+        Passer</ion-button>
+    </div>
   </div>
 </ion-content>

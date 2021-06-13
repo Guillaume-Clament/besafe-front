@@ -21,10 +21,13 @@ export class GroupePage implements OnInit {
     public firestore: AngularFirestore,
     private chatService: ChatService
   ) {
+    this.groupes.length = 0;
     this.getGroupes();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   onClick() {
     this.router.navigate(['/discussion/:id']);
@@ -43,11 +46,12 @@ export class GroupePage implements OnInit {
           this.messages = this.chatService.getChatMessages();
           this.messages.forEach((message) => {
             message.forEach((m) => {
-              if (m.nom == nomGroupe && m.createdAt['seconds'] * 1000>dateDernierMessage) {
-                dateDernierMessage = m.createdAt['seconds'] * 1000;
+              //console.log(m.createdAt);
+              if (m.createdAt!=null && m.nom == encodeURI(nomGroupe) && m.createdAt['seconds']>dateDernierMessage) {
+                dateDernierMessage = m.createdAt['seconds'];
                 dernierMessage = m.msg;
+                this.date = new Date(m.createdAt['seconds'] * 1000);
               }
-              this.date = new Date(m.createdAt['seconds'] * 1000);
             });
             this.groupes.push({
               id: groupe.payload.doc.id,

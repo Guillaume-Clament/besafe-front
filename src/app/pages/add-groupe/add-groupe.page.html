@@ -1,3 +1,13 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Créer un nouveau groupe</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
 <ion-content>
   <br />
   <br />
@@ -6,9 +16,9 @@
   <br />
 
   <div class="padding">
-    <form #form="ngForm" (ngSubmit)="signUp(form)">
+    <form #form="ngForm" (ngSubmit)="creerGroupe(form)">
       <ion-button
-        (click) ="pickImages()"
+        (click) ="openImagePicker()"
         expand="block"
         shape="round"
         fill="clear"
@@ -36,15 +46,13 @@
           type="text"
           color="medium"
           [(ngModel)]="membreGroupe"
-          required
         ></ion-input>
         <ion-button (click)="addMembre()" slot="end"><ion-icon name="add-outline"></ion-icon></ion-button>
       </ion-item>
-
-      <ion-list class="listeMembres" lines="none">
-        <ion-item *ngFor="let membre of membres;">
-          <p>{{ membre }}</p>
-        </ion-item>
+      <ion-list class="tailleListeMembres" >
+          <ion-item required *ngFor="let membre of membres" class="listeMembres" lines="none" >
+            <ion-label>{{ membre }}</ion-label>
+          </ion-item>
       </ion-list>
 
       
@@ -60,7 +68,7 @@
         color="darkblue"
         type="submit"
         [disabled]="form.invalid"
-        (click)="signUp(form)"
+        (click)="creerGroupe(form)"
         >Valider</ion-button
       >
     </div>
