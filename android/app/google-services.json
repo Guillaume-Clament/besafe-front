@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "123282540277",
+    "project_id": "besafe-bdd6b",
+    "storage_bucket": "besafe-bdd6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123282540277:android:249eefb72770f75bb2a7bc",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123282540277-sheqv4nkqjvbogv5ckgs3k6hdbcfp0hh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX5kfhm2EHMt7RRNEe7Gof734bYfKjNz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123282540277-sheqv4nkqjvbogv5ckgs3k6hdbcfp0hh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
