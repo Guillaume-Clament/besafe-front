@@ -91,8 +91,6 @@ export class AngesPage implements OnInit {
   }
 
   supprimer(user){
-    console.log("je rentre");
-    console.log(user);
     this.anges.forEach((data, index)=>{
       if (data == user){
         this.anges.splice(index, 1);

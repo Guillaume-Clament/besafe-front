@@ -20,7 +20,6 @@ export class FinAlertePage implements OnInit {
 
   constructor(public alertController: AlertController,
     private sanitizer: DomSanitizer,
-    private router: Router,
     private navCtrl: NavController
 
   ) { }
@@ -53,7 +52,11 @@ export class FinAlertePage implements OnInit {
         {
           text: 'Valider',
           handler: data => {
-            this.navCtrl.navigateBack('home/carte');
+            if (data.name == null){
+              window.alert('Erreur : Le champ est vide.');
+            } else {
+              this.navCtrl.navigateBack('home/carte');
+            }
           }
         }
       ]
@@ -80,7 +83,7 @@ export class FinAlertePage implements OnInit {
   async saisirCode() {
     let alert = this.alertController.create({
       //title: 'Confirm purchase',
-      message: 'Quel est votre code ?',
+      message: 'Quel est votre code secret ?',
       inputs: [
         {
           name: 'reponse',
@@ -94,7 +97,11 @@ export class FinAlertePage implements OnInit {
         {
           text: 'Valider',
           handler: data => {
-            this.navCtrl.navigateBack('home/carte');
+            if (data.name == null){
+              window.alert('Erreur : Le champ est vide.');
+            } else {
+              this.navCtrl.navigateBack('home/carte');
+            }
           }
         }
       ]
