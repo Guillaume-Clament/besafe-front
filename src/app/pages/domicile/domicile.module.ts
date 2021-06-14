@@ -14,8 +14,7 @@ import { SharedComponentsModule } from 'src/app/components/shared-components.mod
     CommonModule,
     FormsModule,
     IonicModule,
-    DomicilePageRoutingModule,
-    SharedComponentsModule
+    DomicilePageRoutingModule
   ],
   declarations: [DomicilePage]
 })

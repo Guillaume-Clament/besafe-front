@@ -5,20 +5,27 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true" scrollY="false">
+<ion-content>
     <ion-card color="darkblue">
         <ion-item>
             <ion-label>
                 <h1>Mon adresse</h1>
             </ion-label>
-            <ion-button fill="outline" slot="end" (click)=modifierAdresse()>Modifier</ion-button>
+            <ion-button fill="outline" slot="end" (click)=modifierAdresse() *ngIf="!veutModifier">Modifier</ion-button>
+            <ion-button fill="outline" slot="end" (click)=modifierAdresse() *ngIf="veutModifier">Retour</ion-button>
         </ion-item>
 
-        <ion-card-content>
-            <p>Lorem ipsum</p>
-            <p>31000 Toulouse</p>
-        </ion-card-content>
-    </ion-card>
+        <div *ngFor="let user of adresseActuelle">
+            <ion-input readonly *ngIf="!veutModifier">{{user.adresse}}</ion-input>
+            <ion-input readonly *ngIf="!veutModifier">{{user.cp}}</ion-input>
+            <ion-input readonly *ngIf="!veutModifier">{{user.ville}}</ion-input>
 
-    <app-edit *ngIf="afficherDrawer" (openStateChanged)="toggleBackdrop($event)" #edit></app-edit>
+            <ion-input clearInput [(ngModel)]="adresse" placeholder="Adresse" *ngIf="veutModifier"></ion-input>
+            <ion-input clearInput [(ngModel)]="cp" placeholder="CP" *ngIf="veutModifier"></ion-input>
+            <ion-input clearInput [(ngModel)]="ville" placeholder="Ville" *ngIf="veutModifier"></ion-input>
+            <p></p><p></p>
+            <ion-button expand="block" *ngIf="veutModifier" color="light" (click)=opererChgt()>Valider</ion-button>
+        </div>
+        <br />
+    </ion-card>
 </ion-content>
