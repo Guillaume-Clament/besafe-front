@@ -22,10 +22,11 @@ export class GroupePage implements OnInit {
     private chatService: ChatService
   ) {
     this.getGroupes();
+    this.groupes=[];
   }
 
-  ngOnInit() {
-    
+  ngOnInit(){
+
   }
 
   onClick() {

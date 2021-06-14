@@ -13,13 +13,17 @@ declare var google: any;
 const image = {
   url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
 }
-const photo = {
-  url: 'assets/marker-1.jpg',
-  scaledSize: new google.maps.Size(50, 50),
+const photoLucie = {
+  url: 'assets/girl-marker.png',
+  scaledSize: new google.maps.Size(70, 70),
+}
+const photoMatthias = {
+  url: 'assets/little-boy-marker.png',
+  scaledSize: new google.maps.Size(70, 70),
 }
 const photoMaxence = {
-  url: 'assets/little-boy-marker.jpg',
-  scaledSize: new google.maps.Size(50, 50),
+  url: 'assets/man-marker.png',
+  scaledSize: new google.maps.Size(70, 70),
 }
 
 @Component({
@@ -40,6 +44,8 @@ export class CartePage implements OnInit {
   positionSuscription: Subscription;
   infoWindows = [];
   markerLocalisation: any;
+  users=[];
+  afficherHeader = true;
 
   //Repères affichés sur la carte
   markers = [
@@ -47,7 +53,7 @@ export class CartePage implements OnInit {
       "Place du Capitole",
       43.604652,
       1.444209,
-      photo,
+      photoLucie,
       "Lucie",
       "green"
     ],
@@ -55,7 +61,7 @@ export class CartePage implements OnInit {
       "Chupitos",
       43.6008071,
       1.4436933,
-      image,
+      photoMatthias,
       "Matthias",
       "grey"
     ],
@@ -78,6 +84,7 @@ export class CartePage implements OnInit {
     private router: Router
   ) {
     this.getGeoLocation();
+    this.afficherHeader = true;
   }
 
   ngOnInit() {
@@ -139,6 +146,7 @@ export class CartePage implements OnInit {
    * Alimentation en bd du trajet effectué
    */
   calculateAndDisplayRoute(data) {
+    this.afficherHeader = false;
     let that = this;
     var post;
     var latitude: number;
@@ -177,6 +185,11 @@ export class CartePage implements OnInit {
         origin: this.navService.geoNavGeo(),
         destination: this.navService.getNavData(),
         travelMode: 'DRIVING',
+        drivingOptions: {
+          departureTime: new Date(),  // for the time N milliseconds from now.
+          trafficModel: 'optimistic'
+        }
+
       },
       function (response, status) {
         if (status === 'OK') {
@@ -224,6 +237,7 @@ export class CartePage implements OnInit {
       .catch((e) => {
         console.log(e);
       });
+    this.users = [];
   }
 
   /**
@@ -243,12 +257,13 @@ export class CartePage implements OnInit {
         color: markers[i][5],
         map: this.map,
       });
-      this.addInfoWindow(mapMarker, mapMarker.position);
+      this.users.push(mapMarker);
+      this.addInfoWindow(mapMarker);
     }
   }
 
   //afficher un marker
-  addInfoWindow(mapMarker, markerLoc) {
+  addInfoWindow(mapMarker) {
     //html du marker
     let window = '<div id="content">'+
       '<div style="text-align: center;"><img src="' + mapMarker.icon.url + '" width="75"></img></div>'+
@@ -260,7 +275,7 @@ export class CartePage implements OnInit {
       '</div>' 
       +'</ion-row>'
       +'<p>'+
-        'Localisation : ' + markerLoc + 
+        'Localisation : ' + mapMarker.position + 
       '</p>'+
       '<p>'+
         '<div style="text-align: center;"><ion-button id="tap">'+
@@ -268,6 +283,7 @@ export class CartePage implements OnInit {
         '</ion-button></div>'+
       '</p>'
     var infoWindow = new google.maps.InfoWindow({
+      title: mapMarker.title,
       content: window,
     });
     //on click d'un marker
@@ -280,7 +296,6 @@ export class CartePage implements OnInit {
     //action quand on clique sur Contacter
     google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
       document.getElementById('tap').addEventListener('click', () => {
-        console.log('touch');
         //redirection vers les groupes de l'utilisateur
         this.router.navigateByUrl('home/groupe');
       });
@@ -302,7 +317,21 @@ export class CartePage implements OnInit {
    * Afficher le drawer pour lever une alerte
    */
   displayAlerts() {
+    this.afficherHeader = false;
     this.estEnTrajet = false;
     this.afficherAlerte = true;
+  }
+
+  findUser(user){
+    this.users.forEach((data) => {
+      if (data == user){
+        this.infoWindows.forEach((info) => {
+          if (info.title == user.title){
+            this.closeAllWindow();
+            info.open(this.map, data);
+          }
+        })
+      }
+    })
   }
 }

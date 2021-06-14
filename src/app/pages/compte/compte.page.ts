@@ -17,7 +17,7 @@ export class ComptePage implements OnInit {
   constructor(
     private chatService: ChatService,
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {
     this.currentUid = this.authService.currentUser.uid;
     this.currentEmail = this.authService.getEmail();
@@ -38,8 +38,26 @@ export class ComptePage implements OnInit {
     }
   }
 
-  logOut(){
+  logOut() {
     this.authService.logOutUser();
     this.router.navigate(['/login']);
   }
+
+  alerte() {
+    this.router.navigate(['home/compte/alerte']);
+  }
+
+  anges() {
+    this.router.navigate(['home/compte/anges']);
+  }
+
+  domicile() {
+    this.router.navigate(['home/compte/domicile']);
+  }
+
+  raccourcis(){
+    this.router.navigate(['home/compte/raccourcis']);
+  }
+
+  
 }

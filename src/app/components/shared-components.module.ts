@@ -4,11 +4,15 @@ import { DrawerComponent } from './drawer/drawer.component';
 import { IonicModule } from '@ionic/angular';
 
 @NgModule({
-  declarations: [DrawerComponent],
+  declarations: [
+    DrawerComponent
+  ],
   imports: [
     CommonModule,
     IonicModule
   ],
-  exports: [DrawerComponent]
+  exports: [
+    DrawerComponent
+  ]
 })
 export class SharedComponentsModule { }

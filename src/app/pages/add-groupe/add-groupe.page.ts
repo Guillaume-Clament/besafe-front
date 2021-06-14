@@ -5,9 +5,16 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController } from '@ionic/angular';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
 import firebase from 'firebase/app';
 import { AuthService } from 'src/app/services/auth.service';
 
+
+interface Utilisateur {
+  pseudo: string;
+  prenom: string;
+  nom: string;
+}
 
 @Component({
   selector: 'app-add-groupe',
@@ -15,30 +22,61 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./add-groupe.page.scss'],
 })
 export class AddGroupePage implements OnInit {
-  public membres = [];
+  membres = [];
+  users: Utilisateur[] =[
+    {
+      prenom: 'Lucie',
+      nom: 'Matthias', 
+      pseudo: '@lulu31'
+    },
+    {
+      prenom: 'Matthias',
+      nom: 'Laurent', 
+      pseudo: '@matha'
+    },
+    {
+      prenom: 'Maxence',
+      nom: 'Mirens', 
+      pseudo: '@maxsens'
+    },
+    {
+      prenom: 'Mélissa',
+      nom: 'Carillon', 
+      pseudo: '@melcarillon'
+    }
+  ];
+  groupe = [];
   @Input() membreGroupe: string;
 
   constructor(
     private router: Router,
     public firestore: AngularFirestore,
     public alertController: AlertController,
-    private authService: AuthService) { }
+    public afDB: AngularFireDatabase,
+    public afSG: AngularFireStorage,
+    public imagePicker: ImagePicker,
+    private authService: AuthService
+    ) { 
+      this.groupe = [];
+    }
 
   ngOnInit() {
   }
 
   addMembre(){
     this.membres.push(this.membreGroupe);
-    this.membreGroupe = '';
+    console.log(this.membres);
   }
 
   creerGroupe(form){
+    console.log(this.membres);
     if (this.membres.length == 0){
-      this.presentAlert('Vous devez ajouter au moins un membre avant de créer un groupe.');
+      window.alert("Erreur. Vous ne pouvez créer un groupe sans en avoir saisi les membres.")
     } else {
+      this.groupe.push[form.value.nomGroupe];
       this.firestore.collection('groupes').add({
         nom: form.value.nomGroupe,
-        listeGroupe: this.membres
+        listeGroupe: this.membres[0]
       });
       this.firestore.collection('messages').add({
         msg: "Création d'un nouveau groupe !",
@@ -65,6 +103,7 @@ export class AddGroupePage implements OnInit {
     const { role } = await alert.onDidDismiss();
   }
 
+  
   /*
   
   imports à faire :

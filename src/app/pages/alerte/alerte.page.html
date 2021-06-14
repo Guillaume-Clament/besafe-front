@@ -1,4 +1,11 @@
 <ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home/compte"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   <div class="padding">
     <ion-card color="darkblue">
       <ion-card-header>
@@ -30,85 +37,133 @@
     <div>
       <ion-label
         color="dark"
-        style="font-size: 0.9em !important; font-weight: bolder !important"
-        >Mes informations</ion-label
+        style="font-size: 1.2em !important; font-weight: bolder !important"
+        >Authentication</ion-label
       >
-      <ion-item>
-        <ion-label color="darkblue" position="floating"
-          >Adresse email</ion-label
+      <br />
+      <br />
+      <ion-label color="dark" style="font-size: 0.9em !important"
+        >Question secrète</ion-label
+      >
+      <ion-card style="background-color: #c4c4c4 !important">
+        <ion-card-content style="color: black !important; display: flex">
+          Quel est votre chiffre préféré ?
+        </ion-card-content>
+        <ion-icon
+          name="chevron-forward-outline"
+          style="
+            margin-left: 88%;
+            zoom: 2;
+            color: black !important;
+            display: flex;
+          "
+        ></ion-icon>
+      </ion-card>
+      <ion-label color="dark" style="font-size: 0.9em !important"
+        >Code secret</ion-label
+      >
+      <div class="flex">
+        <ion-avatar
+          style="
+            background-color: #c4c4c4 !important;
+            height: 35px;
+            width: 35px;
+          "
         >
-        <ion-input color="medium"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label color="darkblue" position="floating">Mot de passe</ion-label>
-        <ion-input color="medium" type="password"></ion-input>
-      </ion-item>
-    </div>
-    <br />
-    <div>
-      <ion-button expand="block" shape="round" color="darkblue"
-        >Ajouter un ami</ion-button
-      >
-    </div>
-    <ion-card style="background-color: #c4c4c4 !important">
-      <ion-card-header>
-        <ion-card-subtitle color="dark">Mes anges</ion-card-subtitle>
-        <div class="cardText">
-          <ion-card-title>Aly RADY</ion-card-title>
-        </div>
-      </ion-card-header>
-      <div class="cardText">
-        <ion-card-content>@arady</ion-card-content>
+        </ion-avatar>
+        <ion-avatar
+          style="
+            background-color: #c4c4c4 !important;
+            height: 35px;
+            width: 35px;
+          "
+        >
+        </ion-avatar>
+        <ion-avatar
+          style="
+            background-color: #c4c4c4 !important;
+            height: 35px;
+            width: 35px;
+          "
+        >
+        </ion-avatar>
+        <ion-avatar
+          style="
+            background-color: #c4c4c4 !important;
+            height: 35px;
+            width: 35px;
+          "
+        >
+        </ion-avatar>
+        <ion-icon
+          name="chevron-forward-outline"
+          style="
+            zoom: 2;
+            color: black !important;
+            margin-top: 10px;
+            margin-left: 15px;
+          "
+        ></ion-icon>
       </div>
-    </ion-card>
-    <div class="reglages">
+      <br />
+      <br />
       <ion-label
         color="dark"
-        style="font-size: 0.9em !important; font-weight: bolder !important"
-        >Réglages</ion-label
+        style="font-size: 1.2em !important; font-weight: bolder !important"
+        >Urgence</ion-label
       >
-      <ion-list>
-        <ion-item lines="none">
-          <ion-icon slot="start" name="mic"></ion-icon>
-          <ion-label> Accès au microphone </ion-label>
-          <ion-toggle
-            color="lightblue"
-            (ionChange)="micToggle($event)"
-            id="micToggle"
-            slot="end"
-          ></ion-toggle>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-icon slot="start" name="camera"></ion-icon>
-          <ion-label> Accès au microphone </ion-label>
-          <ion-toggle
-            color="lightblue"
-            (ionChange)="camToggle($event)"
-            id="camToggle"
-            slot="end"
-          ></ion-toggle>
-        </ion-item>
-      </ion-list>
-    </div>
-    <ion-card style="background-color: #c4c4c4 !important">
-      <ion-card-header>
-        <ion-card-subtitle color="dark">Mon domicile</ion-card-subtitle>
-        <div class="cardText">
-          <ion-card-title>Aly RADY</ion-card-title>
-        </div>
-      </ion-card-header>
-      <div class="cardText">
-        <ion-card-content>@arady</ion-card-content>
+      <br />
+      <br />
+      <ion-label
+        color="dark"
+        style="
+          font-size: 0.9em !important;
+          font-family: SF UI Display Light !important;
+        "
+        >Alarme</ion-label
+      >
+      <ion-card style="background-color: #c4c4c4 !important; display: flex">
+        <img
+          src="../../../assets/sound.png"
+          style="height: 70px; width: 250px"
+        />
+        <ion-icon
+          name="chevron-forward-outline"
+          style="
+            zoom: 2;
+            color: black !important;
+            margin-top: 11px;
+            margin-left: 5px;
+          "
+        ></ion-icon>
+      </ion-card>
+      <br />
+      <div class="flex">
+        <ion-label
+          color="dark"
+          style="
+            font-size: 0.9em !important;
+            font-family: SF UI Display Light !important;
+          "
+          >Appel</ion-label
+        >
+        <ion-card
+          style="
+            background-color: #c4c4c4 !important;
+            width: 10%;
+            margin-top: -0px;
+            margin-left: 70px;
+          "
+          ><ion-label
+            style="
+              margin-left: 11px;
+              color: black !important;
+              font-size: 0.9em !important;
+            "
+            >17</ion-label
+          >
+        </ion-card>
       </div>
-    </ion-card>
-    <div class="details">
-      <ion-button expand="block" shape="round" color="darkblue" fill="outline"
-        >Mes raccourcis</ion-button
-      >
-      <ion-button expand="block" shape="round" color="darkblue" fill="outline"
-        >Demander infos compte</ion-button
-      >
     </div>
   </div>
 </ion-content>

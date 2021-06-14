@@ -27,13 +27,6 @@ const routes: Routes = [
             (m) => m.GroupePageModule
           ),
       },
-      {
-        path: 'alerte',
-        loadChildren: () =>
-          import('../pages/alerte/alerte.module').then(
-            (m) => m.AlertePageModule
-          ),
-      },
     ],
   },
 ];

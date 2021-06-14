@@ -18,9 +18,7 @@ import {
   CameraDirection,
 } from '@capacitor/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { File, FileEntry } from '@ionic-native/file';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-import { Media, MediaObject } from '@ionic-native/media';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-drawer',
@@ -47,7 +45,8 @@ export class DrawerComponent implements AfterViewInit {
     private firestore: AngularFirestore,
     private navService: NavParamService,
     private authService: AuthService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private chatService: ChatService
   ) {
     this.currentUid = this.authService.currentUser.uid;
   }
@@ -110,21 +109,9 @@ export class DrawerComponent implements AfterViewInit {
       heure: new Date().toISOString(),
       localisation: '' + this.navService.geoNavGeo(),
     });
-    //récupérer id de l'user connecté
-    /*this.firestore
-      .collection('utilisateurs')
-      .snapshotChanges(['added', 'removed', 'modified'])
-      .subscribe((utilisateurs) => {
-        utilisateurs.forEach((user) => {
-          this.users.push({
-            id: user.payload.doc.id,
-            nom: user.payload.doc.data()['nom'],
-            prenom: user.payload.doc.data()['prenom'],
-            pseudo: user.payload.doc.data()['pseudo'],
-          });
-        });
-      });*/
-      
+    let newMsg = '[ALERTE] Je viens de déclencher une alerte. Suivez mon trajet.';
+    let nomGroupe = 'AL3C Party';
+    this.chatService.addChatMessage(newMsg, nomGroupe);  
   }
 
   /**
