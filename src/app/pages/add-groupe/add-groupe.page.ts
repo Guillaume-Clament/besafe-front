@@ -89,6 +89,10 @@ export class AddGroupePage implements OnInit {
     }    
   }
 
+  close(){
+    this.router.navigateByUrl('home/groupe');
+  }
+
   openImagePicker(){
     console.log("Je souhaite ajouter une image");
   }
