@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonContent } from '@ionic/angular';
+import { GestureController, IonContent } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -21,7 +21,6 @@ export class GroupePage implements OnInit {
     public firestore: AngularFirestore,
     private chatService: ChatService
   ) {
-    this.groupes.length = 0;
     this.getGroupes();
   }
 

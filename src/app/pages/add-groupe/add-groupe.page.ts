@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Platform, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import firebase from 'firebase/app';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -18,11 +19,9 @@ export class AddGroupePage implements OnInit {
   @Input() membreGroupe: string;
 
   constructor(
+    private router: Router,
     public firestore: AngularFirestore,
-    public afDB: AngularFireDatabase,
-    public afSG: AngularFireStorage,
-    public imagePicker: ImagePicker,
-    public toastCtrl: ToastController,
+    public alertController: AlertController,
     private authService: AuthService) { }
 
   ngOnInit() {
@@ -35,7 +34,7 @@ export class AddGroupePage implements OnInit {
 
   creerGroupe(form){
     if (this.membres.length == 0){
-      console.log("aucun membre");
+      this.presentAlert('Vous devez ajouter au moins un membre avant de créer un groupe.');
     } else {
       this.firestore.collection('groupes').add({
         nom: form.value.nomGroupe,
@@ -45,14 +44,25 @@ export class AddGroupePage implements OnInit {
         msg: "Création d'un nouveau groupe !",
         from: this.authService.currentUser.uid,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        nom: form.value.nomGroupe,
+        nom: encodeURI(form.value.nomGroupe),
       });
-      console.log("Groupe ajouté !")
+      this.presentAlert('Vous venez de créer un nouveau groupe.');
+      this.router.navigateByUrl('discussion/:'+form.value.nomGroupe);
     }    
   }
 
   openImagePicker(){
     console.log("Je souhaite ajouter une image");
+  }
+
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
   }
 
   /*

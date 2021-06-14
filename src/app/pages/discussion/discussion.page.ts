@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { GroupedObservable, Observable } from 'rxjs';
 import { ChatService, Message } from 'src/app/services/chat.service';
 
 @Component({
@@ -32,5 +32,9 @@ export class DiscussionPage implements OnInit {
       this.newMsg = '';
       this.content.scrollToBottom;
     });
+  }
+
+  goToGroupes(){
+    this.router.navigateByUrl('home/groupe');
   }
 }

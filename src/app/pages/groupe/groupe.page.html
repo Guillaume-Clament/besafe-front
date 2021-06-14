@@ -12,6 +12,7 @@
 
 <ion-content padding>
   <ion-card
+    ion-long-press
     color="darkblue"
     *ngFor="let groupe of groupes"
     (click)="goToDiscussion(groupe.nom)"
