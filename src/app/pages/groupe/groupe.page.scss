@@ -1,3 +1,4 @@
+/*
 ion-card {
     height: 23%;
     max-height: 1000px !important;
@@ -30,4 +31,38 @@ ion-card-content{
 
 .heure-dernier-message{
     text-align: end;
+}
+*/
+
+//new csse
+ion-avatar {
+    height: 45px;
+    width: 45px;
+}
+h3 {
+    font-weight: 700;
+    font-size: 15px;
+}
+.flex_box {
+    display: flex;
+    justify-content: space-between;
+}
+ion-note {
+    font-size: 13px;
+}
+.text-icon {
+    font-size: 22px;
+    margin-bottom: -6px;
+}
+p {
+    color: grey;
+}
+
+.heure-dernier-message{
+    font-size: 90%;
+}
+
+.photo {
+    height: 100%;
+    width: 100%;
 }
