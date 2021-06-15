@@ -127,7 +127,12 @@ const routes: Routes = [
   {
     path: 'home/compte/raccourcis',
     loadChildren: () => import('./pages/raccourcis/raccourcis.module').then( m => m.RaccourcisPageModule)
+  },
+  {
+    path: 'details-groupe/:id',
+    loadChildren: () => import('./pages/details-groupe/details-groupe.module').then( m => m.DetailsGroupePageModule)
   }
+
 
 
 

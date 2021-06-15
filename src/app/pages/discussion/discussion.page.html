@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Messages</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button (click)="goToGroupes()"></ion-back-button>
+    <ion-buttons>
+      <ion-back-button slot="start"(click)="goToGroupes()"></ion-back-button>
+      <ion-button slot="end" (click)="goToInfosGroupe()"><ion-icon name="menu-outline"></ion-icon></ion-button>
     </ion-buttons>
+    
+
+
   </ion-toolbar>
 </ion-header>
 

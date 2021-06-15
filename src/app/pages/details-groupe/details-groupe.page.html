@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detail du groupe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="topGroupe">
+    <ion-card-content>
+
+      <div class="ion-float-left">
+        <ion-button fill="clear" (click)="close()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="ion-float-right">
+        <ion-button fill="clear" (click)="presentAlertChangementNomGroupePrompt()">
+          <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="nomGroupe">
+        <ion-avatar slot="start">
+          <img src="../../assets/avatar.jpg"/>
+        </ion-avatar>
+        <h1> {{ nomGroupe }} </h1>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <form>
+    <ion-item>
+    <ion-input class="italique">
+      @{{ admin }} &nbsp;&nbsp;&nbsp;&nbsp;Administrateur
+    </ion-input>
+  </ion-item>
+  </form>
+
+  <ion-card class="bottomGroupe">
+    <ion-card-header>
+      <div class="ion-float-left">
+        <h6 class="participantsTitre">Participants</h6>
+      </div>
+      <div class="ion-float-right">
+        <ion-button shape="round" fill="solid" color="white" slot="icon-only">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <h6 *ngIf="listeGroupe.length==0">
+        <br/><br/>Il n'y a pas d'autres participants dans le groupe.
+      </h6>
+      <ion-input disabled class="listeParticipants" *ngFor="let part of listeGroupe">
+        <ion-avatar>
+          <img src="../../assets/avatar.jpg"/>
+        </ion-avatar>
+        <h6> {{ part }} </h6>
+        <ion-button fill="clear" slot="end" (click)="supprimerParticipant(part)">
+          <ion-icon name="close">
+          </ion-icon>
+        </ion-button>
+      </ion-input>
+    </ion-card-content>
+  </ion-card>
+  <ion-button class="quitterGroupe" expand="block" shape="round" color="danger" (click)="quitterGroupe()">
+        Quitter le groupe
+  </ion-button>
+  <!-- QUITTER LE GROUPE + changement administrateur si on l'était --> 
+
+</ion-content>

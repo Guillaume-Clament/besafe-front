@@ -76,7 +76,8 @@ export class AddGroupePage implements OnInit {
       this.groupe.push[form.value.nomGroupe];
       this.firestore.collection('groupes').add({
         nom: form.value.nomGroupe,
-        listeGroupe: this.membres[0]
+        listeGroupe: this.membres[0],
+        admin: this.authService.currentUser.uid
       });
       this.firestore.collection('messages').add({
         msg: "Création d'un nouveau groupe !",

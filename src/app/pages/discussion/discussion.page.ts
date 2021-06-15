@@ -37,4 +37,8 @@ export class DiscussionPage implements OnInit {
   goToGroupes(){
     this.router.navigateByUrl('home/groupe');
   }
+
+  goToInfosGroupe(){
+    this.router.navigateByUrl('details-groupe/:'+this.nomGroupe);
+  }
 }
