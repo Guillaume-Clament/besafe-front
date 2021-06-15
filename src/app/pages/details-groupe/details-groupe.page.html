@@ -1,16 +1,10 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Detail du groupe</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <ion-card class="topGroupe">
     <ion-card-content>
 
       <div class="ion-float-left">
         <ion-button fill="clear" (click)="close()">
-          <ion-icon name="close"></ion-icon>
+          <ion-icon name="arrow-back-outline"></ion-icon>
         </ion-button>
       </div>
       <div class="ion-float-right">
@@ -48,9 +42,6 @@
       </div>
     </ion-card-header>
     <ion-card-content>
-      <h6 *ngIf="listeGroupe.length==0">
-        <br/><br/>Il n'y a pas d'autres participants dans le groupe.
-      </h6>
       <ion-input disabled class="listeParticipants" *ngFor="let part of listeGroupe">
         <ion-avatar>
           <img src="../../assets/avatar.jpg"/>

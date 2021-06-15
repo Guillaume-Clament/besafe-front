@@ -121,30 +121,84 @@ export class DetailsGroupePage implements OnInit {
     this.router.navigateByUrl('details-groupe/:'+this.nomGroupe);
   }
 
-  supprimerParticipant(part){
-    console.log("je souhaite supprimer un participant", part);
-    var pos = this.listeGroupe.indexOf(part);
-    this.listeGroupe.splice(pos, 1);
-    console.log(this.listeGroupe);
+  async presentAlertSuppressionParticipant() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: "Vous ne pouvez pas supprimer d'autres participants.",
+      subHeader: 'Il doit rester au minimum 2 participants dans la conversation.',
+      buttons: ['OK']
+    });
 
-    //udpate dans firebase
+    await alert.present();
+  }
+
+  supprimerParticipant(part){
+    if (this.listeGroupe.length==2){
+      this.presentAlertSuppressionParticipant();
+    } else {
+      console.log("je souhaite supprimer un participant", part);
+      var pos = this.listeGroupe.indexOf(part);
+      this.listeGroupe.splice(pos, 1);
+      console.log(this.listeGroupe);
+
+      //udpate dans firebase
+      /*this.firestore
+      .collection('groupes', (ref) => ref.where('nom', '==', this.nomGroupe))
+      .snapshotChanges(['added', 'removed', 'modified'])
+      .subscribe((groupes) => {
+        groupes.forEach((groupe) => {
+          // récupération des messages pour pouvoir les update
+          console.log(groupe.payload.doc.data())
+          var refGrp = groupe.payload.doc.ref;
+          refGrp.update({
+            listeGroupe: this.listeGroupe
+          });
+        });
+      });*/
+    }
+  }
+
+  async presentAlertQuitterGroupe() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Vous avez quitté le groupe.',
+      subHeader: 'Merci de rafraichir la page.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  quitterGroupe(){
+    // définir un nouvel administrateur
+    
+    // suppression du groupe car on gère par les groupes par participants
     this.firestore
     .collection('groupes', (ref) => ref.where('nom', '==', this.nomGroupe))
     .snapshotChanges(['added', 'removed', 'modified'])
     .subscribe((groupes) => {
       groupes.forEach((groupe) => {
-        // récupération des messages pour pouvoir les update
-        console.log(groupe.payload.doc.data())
+        // suppression groupe
         var refGrp = groupe.payload.doc.ref;
-        refGrp.update({
-          listeGroupe: this.listeGroupe
-        });
+        refGrp.delete();
       });
     });
-  }
 
-  quitterGroupe(){
-    // définir un nouvel administrateur
+    // suppression des messages associés au groupe sinon quand on recrée un groupe on a les anciens messages
+    this.firestore
+    .collection('messages', (ref) => ref.where('nom', '==', encodeURI(this.nomGroupe)))
+    .snapshotChanges(['added', 'removed', 'modified'])
+    .subscribe((messages) => {
+      messages.forEach((message) => {
+        // récupération des messages pour pouvoir les update
+        var refMsg = message.payload.doc.ref;
+        refMsg.delete();
+      });
+    });
+
+    // alerte pour l'utilisateur
+    this.presentAlertQuitterGroupe();
+
     // supprimer l'utilisateur de la liste des participants du groupe
     this.router.navigateByUrl('home/groupe');
   }
