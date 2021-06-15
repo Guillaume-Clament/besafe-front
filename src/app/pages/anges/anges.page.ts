@@ -1,12 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { AlertController, NavController } from "@ionic/angular";
 
-
-export interface Anges {
-  prenom: String,
-  pseudo: String,
-  image: String
-}
 @Component({
   selector: "app-anges",
   templateUrl: "./anges.page.html",
@@ -15,40 +10,18 @@ export interface Anges {
 
 export class AngesPage implements OnInit {
   veutModifier = false;
-  anges: Anges[] = [
-    {
-      prenom: "Sirine",
-      pseudo: "sisi",
-      image: "http://placekitten.com/200/300"
-    },{
-      prenom: "Camille",
-      pseudo: "cam",
-      image: "http://placekitten.com/300/300"
-    },{
-      prenom: "Valentin",
-      pseudo: "valou",
-      image: "http://placekitten.com/400/300"
-    },{
-      prenom: "Guillaume",
-      pseudo: "guigui",
-      image: "http://placekitten.com/300/300"
-    },{
-      prenom: "Flore",
-      pseudo: "flo",
-      image: "http://placekitten.com/300/200"
-    },{
-      prenom: "Ali",
-      pseudo: "ali",
-      image: "http://placekitten.com/200/200"
-    }
-  ]
   newPseudo: String;
-  
-  constructor(
-    private alertController: AlertController
-  ) {}
+  anges = [];
 
-  ngOnInit() {}
+  constructor(
+    private alertController: AlertController,
+    private firestore: AngularFirestore
+  ) {
+    this.getAnges();
+    this.anges = [];
+  }
+
+  ngOnInit() { }
 
   async ajouterAnge() {
     let alert = this.alertController.create({
@@ -67,34 +40,57 @@ export class AngesPage implements OnInit {
         {
           text: 'Valider',
           handler: data => {
-            var newUser: Anges;
-            newUser = {
+            this.firestore.collection('anges').add({
               pseudo: data.reponse,
               prenom: "Test",
               image: "http://placekitten.com/500/300"
-            }
-            this.anges.push(newUser);
+            })
           }
         }
       ]
     });
     (await alert).present();
-    
+
   }
 
-  modifier(){
-    if (this.veutModifier == false){
+  getAnges() {
+    this.firestore
+      .collection('anges')
+      .snapshotChanges(['added', 'removed', 'modified'])
+      .subscribe((anges) => {
+        anges.forEach((ange) => {
+          this.anges.push({
+            id: ange.payload.doc.id,
+            prenom: ange.payload.doc.data()['prenom'],
+            photo: ange.payload.doc.data()['photo'],
+            pseudo: ange.payload.doc.data()['pseudo'],
+          });
+        });
+      });
+    console.log(this.anges[0]);
+  }
+
+  modifier() {
+    if (this.veutModifier == false) {
       this.veutModifier = true;
     } else {
       this.veutModifier = false;
     }
   }
 
-  supprimer(user){
-    this.anges.forEach((data, index)=>{
-      if (data == user){
+  supprimer(user) {
+    /*    //supprimer en bd
+        if (this.firestore.collection('anges').doc(user) == user) {
+          this.firestore
+            .collection('anges').doc(user).delete().then((res) => {
+              console.log("RESULTAT : " + res);
+            }).catch((er
+          //supprimer dans le tab d'affichage 
+          */
+    this.anges.forEach((data, index) => {
+      if (data == user) {
         this.anges.splice(index, 1);
       }
-    })
+    });
   }
 }

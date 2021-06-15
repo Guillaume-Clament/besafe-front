@@ -133,12 +133,12 @@ export class DetailsGroupePage implements OnInit {
     .snapshotChanges(['added', 'removed', 'modified'])
     .subscribe((groupes) => {
       groupes.forEach((groupe) => {
-        // récupération des messages pour pouvoir les update
+        // récupération des groupes pour pouvoir les update
         console.log(groupe.payload.doc.data())
-        var refGrp = groupe.payload.doc.ref;
-        refGrp.update({
+        groupe.payload.doc.ref.set({
           listeGroupe: this.listeGroupe
-        });
+        })
+        return true;
       });
     });
   }

@@ -41,7 +41,8 @@ export class FinAlertePage implements OnInit {
       message: 'Quel est votre chiffre préféré ?',
       inputs: [
         {
-          name: 'reponse'
+          name: 'reponse',
+          type: 'textarea'
         },
       ],
       buttons: [
@@ -87,6 +88,7 @@ export class FinAlertePage implements OnInit {
       inputs: [
         {
           name: 'reponse',
+          type: 'textarea'
         }
       ],
       buttons: [
