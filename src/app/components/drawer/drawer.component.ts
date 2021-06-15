@@ -110,7 +110,7 @@ export class DrawerComponent implements AfterViewInit {
       localisation: '' + this.navService.geoNavGeo(),
     });
     let newMsg = '[ALERTE] Je viens de déclencher une alerte. Suivez mon trajet.';
-    let nomGroupe = 'AL3C Party';
+    let nomGroupe = 'AL3C%20Party';
     this.chatService.addChatMessage(newMsg, nomGroupe);  
   }
 
