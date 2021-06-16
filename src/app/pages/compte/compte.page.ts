@@ -65,7 +65,7 @@ export class ComptePage implements OnInit {
   async afficherInfos() {
     let alert = this.alertController.create({
       //title: 'Confirm purchase',
-      message: 'Vos informations :',
+      message: '<h3> Vos informations : </h3> <br> Nom : XXX <br> Prénom : XXX  <br> Adresse mail : XXX ',
       buttons: [
         {
           text: 'Retour',
