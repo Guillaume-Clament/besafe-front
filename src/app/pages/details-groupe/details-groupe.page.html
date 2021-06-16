@@ -35,13 +35,15 @@
       <div class="ion-float-left">
         <h6 class="participantsTitre">Participants</h6>
       </div>
+      
+    </ion-card-header>
+    <ion-card-content>
       <div class="ion-float-right">
-        <ion-button shape="round" fill="solid" color="white" slot="icon-only">
+        <ion-button shape="round" fill="solid" color="white" slot="icon-only" (click)="presentAlertCheckboxAjouterParticipant()">
           <ion-icon name="add-outline"></ion-icon>
         </ion-button>
       </div>
-    </ion-card-header>
-    <ion-card-content>
+
       <ion-input disabled class="listeParticipants" *ngFor="let part of listeGroupe">
         <ion-avatar>
           <img src="../../assets/avatar.jpg"/>

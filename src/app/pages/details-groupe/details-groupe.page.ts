@@ -207,4 +207,77 @@ export class DetailsGroupePage implements OnInit {
     this.router.navigateByUrl('home/groupe');
   }
 
+  async presentAlertCheckboxAjouterParticipant() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Checkbox',
+      inputs: [
+        {
+          name: 'checkbox1',
+          type: 'checkbox',
+          label: 'Lucie Matthias - @lulu31',
+          value: 'Lucie Matthias - @lulu31',
+          checked: false,
+          handler: (alertData) => {
+            if (alertData.checked){
+              this.listeGroupe.push("Lucie Matthias - @lulu31");
+            }
+          }
+        },
+
+        {
+          name: 'checkbox2',
+          type: 'checkbox',
+          label: 'Matthias Laurent - @matha',
+          value: 'Matthias Laurent - @matha',
+          checked: true,
+          handler: (alertData) => {
+            if (alertData.checked){
+              this.listeGroupe.push("Matthias Laurent - @matha");
+            }
+          }
+        },
+
+        {
+          name: 'checkbox3',
+          type: 'checkbox',
+          label: 'Maxence Mirens - @maxsens',
+          value: 'Maxence Mirens - @maxsens',
+          checked: true,
+          handler: (alertData) => {
+            if (alertData.checked){
+              this.listeGroupe.push("Maxence Mirens - @maxsens");
+            }
+          }
+        },
+
+        {
+          name: 'checkbox4',
+          type: 'checkbox',
+          label: 'Mélissa Carillon - @melcarillon',
+          value: 'Mélissa Carillon - @melcarillon',
+          checked: false,
+          handler: (alertData) => {
+            if (alertData.checked){
+              this.listeGroupe.push("Mélissa Carillon - @melcarillon");
+            }
+          }
+        }
+      ],
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Valider'
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }
