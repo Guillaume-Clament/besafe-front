@@ -14,7 +14,6 @@ export class DetailsGroupePage implements OnInit {
   listeGroupe = [];
   listeMessages = [];
 
-
   constructor(
     private router: Router,
     public firestore: AngularFirestore,

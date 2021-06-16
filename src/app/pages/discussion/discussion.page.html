@@ -1,12 +1,14 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Messages</ion-title>
-    <ion-buttons>
-      <ion-back-button slot="start"(click)="goToGroupes()"></ion-back-button>
-      <ion-button slot="end" (click)="goToInfosGroupe()"><ion-icon name="menu-outline"></ion-icon></ion-button>
+    <ion-title>{{nomGroupe}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home/groupe"></ion-back-button>
     </ion-buttons>
-    
-
+    <ion-buttons slot="end">
+      <ion-button (click)="goToInfosGroupe()">
+        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
 
   </ion-toolbar>
 </ion-header>
@@ -14,12 +16,8 @@
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row *ngFor="let message of messages | async">
-      <ion-col
-        size="9"
-        class="message"
-        [offset]="message.myMsg ? 3 : 0"
-        [ngClass]="{ 'my-message': message.myMsg, 'other-message': !message.myMsg}"
-      >
+      <ion-col size="9" class="message" [offset]="message.myMsg ? 3 : 0"
+        [ngClass]="{ 'my-message': message.myMsg, 'other-message': !message.myMsg}">
         <b>{{ message.fromName }}</b><br />
         <span>{{ message.msg }}</span>
         <div class="time ion-text-right">
@@ -35,23 +33,12 @@
   <ion-toolbar color="light">
     <ion-row class="ion-align-items-center">
       <ion-col size="10">
-        <ion-textarea
-          autoGrow="true"
-          class="message-input"
-          rows="1"
-          maxLength="500"
-          [(ngModel)]="newMsg"
-        ></ion-textarea>
+        <ion-textarea autoGrow="true" class="message-input" rows="1" maxLength="500" [(ngModel)]="newMsg">
+        </ion-textarea>
       </ion-col>
       <ion-col size="2">
-        <ion-button
-          expand="block"
-          fill="clear"
-          color="primary"
-          [disabled]="newMsg === ''"
-          class="msg-btn"
-          (click)="sendMessage()"
-        >
+        <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''" class="msg-btn"
+          (click)="sendMessage()">
           <ion-icon slot="icon-only" name="send"></ion-icon>
         </ion-button>
       </ion-col>
