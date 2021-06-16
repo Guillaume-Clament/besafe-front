@@ -166,6 +166,9 @@ export class DetailsGroupePage implements OnInit {
           handler: (alertData) => {
             if (alertData.checked){
               this.listeGroupe.push("Lucie Matthias - @lulu31");
+            } else {
+              var pos = this.listeGroupe.indexOf("Lucie Matthias - @lulu31");
+              this.listeGroupe.splice(pos, 1);
             }
           }
         },
@@ -179,6 +182,9 @@ export class DetailsGroupePage implements OnInit {
           handler: (alertData) => {
             if (alertData.checked){
               this.listeGroupe.push("Matthias Laurent - @matha");
+            } else {
+              var pos = this.listeGroupe.indexOf("Matthias Laurent - @matha");
+              this.listeGroupe.splice(pos, 1);
             }
           }
         },
@@ -192,6 +198,9 @@ export class DetailsGroupePage implements OnInit {
           handler: (alertData) => {
             if (alertData.checked){
               this.listeGroupe.push("Maxence Mirens - @maxsens");
+            } else {
+              var pos = this.listeGroupe.indexOf("Maxence Mirens - @maxsens");
+              this.listeGroupe.splice(pos, 1);
             }
           }
         },
@@ -205,6 +214,9 @@ export class DetailsGroupePage implements OnInit {
           handler: (alertData) => {
             if (alertData.checked){
               this.listeGroupe.push("Mélissa Carillon - @melcarillon");
+            } else {
+              var pos = this.listeGroupe.indexOf("Mélissa Carillon - @melcarillon");
+              this.listeGroupe.splice(pos, 1);
             }
           }
         }
