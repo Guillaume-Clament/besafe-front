@@ -42,7 +42,6 @@ export class PartagerTrajetPage implements OnInit {
         anges.forEach((ange) => {
           this.anges.push({
             id: ange.payload.doc.id,
-            nom: ange.payload.doc.data()['nom'],
             prenom: ange.payload.doc.data()['prenom'],
             pseudo: ange.payload.doc.data()['pseudo'],
           });

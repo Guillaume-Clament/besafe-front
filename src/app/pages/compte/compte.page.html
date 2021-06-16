@@ -6,11 +6,11 @@
         <div *ngFor="let u of users | async">
           <h1 *ngIf="u.uid == currentUid">{{u.prenom}} {{u.nom}}</h1>
           <h2 *ngIf="u.uid == currentUid">@{{u.pseudo}}</h2>
+          <h3 *ngIf="u.uid == currentUid">{{currentEmail}}</h3>
         </div>
       </div>
     </div>
     <div class="main">
-      <p>{{currentEmail}}</p>
       <a href="../modify-compte">Modifier mon profil</a>
       <ion-list>
         <ion-item>
@@ -45,11 +45,13 @@
           <ion-label class="ion-text-nowrap">Mes Raccourcis</ion-label>
         </ion-item>
       </ion-list>
-      <br /><br />
+    <br>
       <div style="text-align: center;">
-        <a href>Demander mes informations</a>
+        <ion-button color="dark" slot="end" fill="clear" color="darkblue" (click)="afficherInfos()"
+          >Voir les informations collectées</ion-button
+        >
       </div>
-      <br /><br />
+      <br>
       <div class="deconnexion">
         <ion-button expand="block" shape="round" color="danger" type="submit" (click)="logOut()">Déconnexion
         </ion-button>

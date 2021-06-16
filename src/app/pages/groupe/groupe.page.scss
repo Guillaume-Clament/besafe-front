@@ -1,3 +1,4 @@
+/*
 ion-card {
     height: 23%;
     max-height: 1000px !important;
@@ -11,7 +12,7 @@ ion-card {
       border-radius: 50px;
       margin-top: 15%;
     }
-    // --background: darkBlue;
+    // --background: #102754;
 }
 
 ion-col{
@@ -30,4 +31,47 @@ ion-card-content{
 
 .heure-dernier-message{
     text-align: end;
+}
+*/
+
+//new csse
+ion-avatar {
+    height: 45px;
+    width: 45px;
+    color: white;
+}
+h3 {
+    font-weight: 700;
+    font-size: 15px;
+}
+h4 {
+    color: white;
+}
+.flex_box {
+    display: flex;
+    justify-content: space-between;
+}
+ion-note {
+    font-size: 13px;
+}
+.text-icon {
+    font-size: 22px;
+    margin-bottom: -6px;
+}
+p {
+    color: white;
+}
+
+.heure-dernier-message{
+    font-size: 90%;
+}
+
+.photo {
+    height: 100%;
+    width: 100%;
+}
+
+ion-card {
+    border-radius: 25px;
+    background: #102754;
 }

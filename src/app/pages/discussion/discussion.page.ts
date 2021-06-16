@@ -19,8 +19,7 @@ export class DiscussionPage implements OnInit {
   constructor(private router: Router, 
     private chatService: ChatService, 
     private firestore: AngularFirestore) {
-      this.nomGroupe = router.url.replace("/discussion/:", "");
-
+      this.nomGroupe = decodeURI(router.url.replace("/discussion/:", ""));
   }
 
   ngOnInit() {
