@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService, Message } from 'src/app/services/chat.service';
 import { AuthService, User, FirebaseUser } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +18,9 @@ export class ComptePage implements OnInit {
   constructor(
     private chatService: ChatService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public alertController: AlertController,
+    private navCtrl: NavController
   ) {
     this.currentUid = this.authService.currentUser.uid;
     this.currentEmail = this.authService.getEmail();
@@ -57,6 +60,20 @@ export class ComptePage implements OnInit {
 
   raccourcis(){
     this.router.navigate(['home/compte/raccourcis']);
+  }
+
+  async afficherInfos() {
+    let alert = this.alertController.create({
+      //title: 'Confirm purchase',
+      message: 'Vos informations :',
+      buttons: [
+        {
+          text: 'Retour',
+          role: 'cancel'
+        },
+      ]
+    });
+    (await alert).present();
   }
 
   

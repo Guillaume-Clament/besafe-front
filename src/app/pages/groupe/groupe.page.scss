@@ -12,7 +12,7 @@ ion-card {
       border-radius: 50px;
       margin-top: 15%;
     }
-    // --background: darkBlue;
+    // --background: #102754;
 }
 
 ion-col{
@@ -38,10 +38,14 @@ ion-card-content{
 ion-avatar {
     height: 45px;
     width: 45px;
+    color: white;
 }
 h3 {
     font-weight: 700;
     font-size: 15px;
+}
+h4 {
+    color: white;
 }
 .flex_box {
     display: flex;
@@ -55,7 +59,7 @@ ion-note {
     margin-bottom: -6px;
 }
 p {
-    color: grey;
+    color: white;
 }
 
 .heure-dernier-message{
@@ -65,4 +69,9 @@ p {
 .photo {
     height: 100%;
     width: 100%;
+}
+
+ion-card {
+    border-radius: 25px;
+    background: #102754;
 }

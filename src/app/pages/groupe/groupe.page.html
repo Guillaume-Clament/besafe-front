@@ -12,20 +12,17 @@
 
 <ion-header>
   <ion-toolbar>
-    
-  </ion-toolbar>
-  <ion-toolbar>
-      <ion-title size="large">Groupes</ion-title>
+      <ion-title size="large">Mes groupes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="creerGroupe()">
-      <ion-icon name="create-outline"></ion-icon>
+      <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-card ion-long-press color="paleblue" *ngFor="let groupe of groupes" (click)="goToDiscussion(groupe.nom)">
+  <ion-card ion-long-press *ngFor="let groupe of groupes" (click)="goToDiscussion(groupe.nom)">
     <ion-card-header>
       <ion-grid>
         <ion-row>
